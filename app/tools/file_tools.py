@@ -302,6 +302,9 @@ async def create_docx_file(file_name: str, content: str) -> str:
         
         # Clean up file name
         base_name = re.sub(r"\.(docx|html|txt|md)$", "", file_name, flags=re.IGNORECASE)
+        # Sanitize filename: remove invalid chars < > : " / \ | ? *
+        base_name = re.sub(r'[<>:"/\\|?*]', '_', base_name)
+        
         docx_path = output_path / f"{base_name}.docx"
         html_path = output_path / f"{base_name}.docx.html"
         

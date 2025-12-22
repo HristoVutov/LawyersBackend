@@ -107,6 +107,9 @@ async def create_template(template_name: str, content: str) -> str:
         
         # Clean up file name
         base_name = re.sub(r"\.(docx|html|txt|md)$", "", template_name, flags=re.IGNORECASE)
+        # Sanitize filename: remove invalid chars < > : " / \ | ? *
+        base_name = re.sub(r'[<>:"/\\|?*]', '_', base_name)
+        
         docx_path = templates_path / f"{base_name}.docx"
         html_path = templates_path / f"{base_name}.docx.html"
         
