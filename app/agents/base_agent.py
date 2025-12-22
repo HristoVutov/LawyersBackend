@@ -20,6 +20,8 @@ from langgraph.checkpoint.memory import MemorySaver
 from app.config import get_settings
 from app.tracing import get_run_callbacks, get_current_run_id
 from app.services.conversation_logger import print_and_log
+from app.services.context_manager import ContextManager
+
 
 
 @dataclass
@@ -57,6 +59,18 @@ class BaseAgent:
         self.checkpointer = MemorySaver()
         self._graph = None
         self._llm = None
+        self._context_manager = None
+    
+    @property
+    def context_manager(self) -> ContextManager:
+        """Lazy-initialize the Context Manager."""
+        if self._context_manager is None:
+            self._context_manager = ContextManager(
+                model=self.llm,
+                max_messages=self.max_messages
+            )
+        return self._context_manager
+
     
     @property
     def llm(self) -> ChatGoogleGenerativeAI:
@@ -101,7 +115,8 @@ class BaseAgent:
                 }
             
             # Trim messages to manage context window
-            messages = self._trim_messages(state["messages"])
+            # Use ContextManager to summarize if needed
+            messages = await self.context_manager.manage_context(state["messages"])
             
             # Add system prompt as first message if not present
             if messages and not any(hasattr(m, 'type') and m.type == 'system' for m in messages):

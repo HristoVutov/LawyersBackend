@@ -109,7 +109,7 @@ class OrchestratorAgent(BaseAgent):
         options = members + ["FINISH"]
         
         # 1. The Supervisor Node
-        def supervisor_node(state: AgentState) -> dict:
+        async def supervisor_node(state: AgentState) -> dict:
             # --- Autonomy Guard & Finish Check ---
             # If the last message was from a worker and said "FINISH", we might want to stop.
             # But in the Command pattern, the supervisor decides based on the plan.
@@ -127,8 +127,12 @@ class OrchestratorAgent(BaseAgent):
             llm_with_tools = self.llm.bind_tools(tools)
             chain = prompt | llm_with_tools
             
+            # Manage Context
+            messages = await self.context_manager.manage_context(state["messages"])
+            chain_input = {**state, "messages": messages}
+            
             try:
-                response = chain.invoke(state)
+                response = await chain.ainvoke(chain_input)
             except Exception as e:
                 print_and_log(f"[Orchestrator] ❌ LLM Error: {e}")
                 return {"next": "FINISH"}
