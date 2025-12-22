@@ -20,6 +20,8 @@ from app.agents.base_agent import BaseAgent, AgentConfig
 from app.tools.research_tools import get_legal_references, search_documents
 from app.middleware import TodoListMiddleware
 from app.services.conversation_logger import print_and_log
+from app.agents.document_agent import DocumentAgent
+from langchain_core.tools import tool
 
 # --- Structured State Definition ---
 class ResearchState(TypedDict):
@@ -51,6 +53,7 @@ from app.agents.prompts.research_prompt import (
 )
 
 # Research tools for gather_info node
+# We will add consult_document_agent dynamically in __init__
 RESEARCH_GATHER_TOOLS = [get_legal_references, search_documents]
 
 
@@ -77,6 +80,30 @@ class ResearchAgent(BaseAgent):
         )
         super().__init__(config)
         
+        # Initialize Document Agent as a sub-agent
+        self.document_agent = DocumentAgent()
+        
+        # Create a tool to consult the document agent
+        @tool
+        async def consult_document_agent(query: str) -> str:
+            """
+            Consult the Document Agent to find, read, or analyze local files.
+            Use this for ANY request involving local project files, searching, or reading documents.
+            """
+            print_and_log(f"[{self.name}] 📞 Calling Document Agent with: {query}")
+            # Identify the current thread from some context if possible, or pass "default"
+            # In a real scenario, we'd want to propagate the thread_id.
+            # BaseAgent.invoke doesn't easily accept thread_id from here unless we bind it.
+            # For now, we'll rely on the fact that DocumentAgent uses 'default' or we can update invoke.
+            
+            # Since we are inside an async tool, we can await
+            result = await self.document_agent.invoke(query)
+            return result
+
+        # Update tools list
+        self.tools = [*RESEARCH_GATHER_TOOLS, consult_document_agent]
+        self.llm_with_tools = self.llm.bind_tools(self.tools)
+        
         # Override the graph with our custom one
         self._graph = self._build_graph()
 
@@ -84,10 +111,11 @@ class ResearchAgent(BaseAgent):
         """Builds the explicit Structured State graph with tool-calling gather_info node."""
         
         # LLM with tools bound for gather_info
-        llm_with_tools = self.llm.bind_tools(RESEARCH_GATHER_TOOLS)
+        # Use self.tools which now includes consult_document_agent
+        llm_with_tools = self.llm.bind_tools(self.tools)
         
         # Tool node for executing research tools
-        tool_node = ToolNode(RESEARCH_GATHER_TOOLS)
+        tool_node = ToolNode(self.tools)
         
         # --- Node Definitions ---
         
@@ -143,7 +171,8 @@ class ResearchAgent(BaseAgent):
             
             This is a tool-calling node - the LLM can call:
             - get_legal_references: For laws, articles, case law from LLM knowledge
-            - search_documents: For local document content via DocumentAgent
+            - search_documents: For local document content (legacy tool, prefer consult_document_agent)
+            - consult_document_agent: DELEGATE identifying/reading files to the specialist agent
             """
             gather_msgs = state.get("gather_messages", [])
             iterations = state.get("gather_iterations", 0) + 1
@@ -212,6 +241,26 @@ class ResearchAgent(BaseAgent):
                     elif tool_name == "search_documents":
                         result = await search_documents.ainvoke(tool_args)
                         found_docs += f"\n{result}"
+                    elif tool_name == "consult_document_agent":
+                        # This tool is defined dynamically in __init__
+                        # We need to find it in self.tools to invoke it, 
+                        # OR since we bound it to the LLM, LangGraph's ToolNode can handle it 
+                        # IF we used the standard ToolNode. 
+                        # But here we are manually executing in 'tools_node'.
+                        
+                        # We need to execute the wrapper function we created.
+                        # It's a local function closure in __init__, so we can't easily access it here 
+                        # UNLESS we stored it or use the tool instance from self.tools.
+                        
+                        target_tool = next((t for t in self.tools if t.name == "consult_document_agent"), None)
+                        if target_tool:
+                             # Tool invocation
+                             result = await target_tool.ainvoke(tool_args)
+                        else:
+                             result = "Error: consult_document_agent tool not found."
+                             
+                        found_docs += f"\n{result}"
+
                     else:
                         result = f"Unknown tool: {tool_name}"
                     

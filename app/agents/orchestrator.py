@@ -91,7 +91,10 @@ class OrchestratorAgent(BaseAgent):
 
     def _build_supervisor_graph(self):
         """Build the Supervisor StateGraph."""
-        members = list_agent_names()
+        all_agents = list_agent_names()
+        # Filter out document_agent from top-level orchestration
+        members = [name for name in all_agents if name != "document_agent"]
+        
         # Ensure we have members
         if not members:
             # Fallback if accessed before initialization
