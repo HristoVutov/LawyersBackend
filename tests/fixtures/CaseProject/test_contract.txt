@@ -1,0 +1,1 @@
+This is a test legal contract for verify_custom_indexing.py.

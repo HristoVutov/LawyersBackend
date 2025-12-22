@@ -1,0 +1,33 @@
+﻿============================================================
+python : Traceback (most recent call last):
+At line:1 char:1
++ python tests/test_vfs_query.py 2>&1 | Out-File -FilePath 
+test_output. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent ca 
+   ll last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\vutov\Documents\PersonalProjects\Lawyers\LawyersDashbo
+ard\python\tests\test_vfs_query.py", line 145, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "C:\Python313\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 725, in 
+run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\vutov\Documents\PersonalProjects\Lawyers\LawyersDashbo
+ard\python\tests\test_vfs_query.py", line 24, in main
+    print("\U0001f9ea Virtual File System Test")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character 
+'\U0001f9ea' in position 0: character maps to <undefined>
