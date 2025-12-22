@@ -1,17 +1,43 @@
 # Agents package - LangGraph agents
-from app.agents.base_agent import BaseAgent, AgentConfig
-from app.agents.document_agent import DocumentAgent
-from app.agents.research_agent import ResearchAgent
-from app.agents.drafting_agent import DraftingAgent
-from app.agents.template_agent import TemplateAgent
-from app.agents.analysis_agent import AnalysisAgent
-from app.agents.orchestrator import (
-    OrchestratorAgent,
-    initialize_agent_registry,
-    register_agent,
-    get_agent,
-    list_agent_names,
-)
+#
+# Uses lazy imports via __getattr__ to avoid circular dependencies.
+# The circular chain was: tools.research_tools -> agents.__init__ -> research_agent -> tools.research_tools
+
+import importlib
+
+def __getattr__(name):
+    """Lazy import agents to avoid circular dependencies."""
+    
+    if name in ("BaseAgent", "AgentConfig"):
+        module = importlib.import_module("app.agents.base_agent")
+        return getattr(module, name)
+    
+    if name == "DocumentAgent":
+        module = importlib.import_module("app.agents.document_agent")
+        return module.DocumentAgent
+    
+    if name == "ResearchAgent":
+        module = importlib.import_module("app.agents.research_agent")
+        return module.ResearchAgent
+    
+    if name == "DraftingAgent":
+        module = importlib.import_module("app.agents.drafting_agent")
+        return module.DraftingAgent
+    
+    if name == "TemplateAgent":
+        module = importlib.import_module("app.agents.template_agent")
+        return module.TemplateAgent
+    
+    if name == "AnalysisAgent":
+        module = importlib.import_module("app.agents.analysis_agent")
+        return module.AnalysisAgent
+    
+    if name in ("OrchestratorAgent", "initialize_agent_registry", "register_agent", "get_agent", "list_agent_names"):
+        module = importlib.import_module("app.agents.orchestrator")
+        return getattr(module, name)
+    
+    raise AttributeError(f"module 'app.agents' has no attribute '{name}'")
+
 
 __all__ = [
     "BaseAgent",
@@ -27,4 +53,3 @@ __all__ = [
     "get_agent",
     "list_agent_names",
 ]
-

@@ -22,7 +22,11 @@ from app.agents.prompts.document_prompt import (
     DOCUMENT_SYSTEM_PROMPT,
     ANALYZE_PROMPT
 )
-from app.tools import read_file, list_directory, glob, grep, read_document, search_indexed
+from app.services.conversation_logger import print_and_log
+# Direct imports to avoid circular import via app.tools.__init__
+from app.tools.file_tools import read_file, list_directory, glob, grep
+from app.tools.legal_tools import read_document
+from app.tools.search_tools import search_indexed
 from app.tools.context_tools import add_to_context
 
 # --- Structured State ---
@@ -86,7 +90,7 @@ class DocumentAgent(BaseAgent):
             if not task_desc and messages:
                 task_desc = messages[-1].content
             
-            print(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
+            print_and_log(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
             
             # Use ainvoke - the streaming happens through astream_events in orchestrator
             response = await self.llm.ainvoke(
@@ -123,7 +127,7 @@ class DocumentAgent(BaseAgent):
             query = search_data.get("query", "")
             
             found = []
-            print(f"[{self.name}] 🕵️ Strategy: {strategy}, Query: {query}")
+            print_and_log(f"[{self.name}] 🕵️ Strategy: {strategy}, Query: {query}")
             
             # Handle list queries (if LLM returns array)
             if isinstance(query, list):
@@ -183,7 +187,7 @@ class DocumentAgent(BaseAgent):
                                 found.append(path) 
 
             except Exception as e:
-                print(f"[{self.name}] ❌ Search error: {e}")
+                print_and_log(f"[{self.name}] ❌ Search error: {e}")
 
             # Fallback/Normalization
             # If search_indexed was used, we might not have 'paths'.
@@ -211,7 +215,7 @@ class DocumentAgent(BaseAgent):
                 path = path.strip()
                 if path and path not in cache_read:
                     try:
-                        print(f"[{self.name}] 📖 Reading: {path} (CID: {thread_id})")
+                        print_and_log(f"[{self.name}] 📖 Reading: {path} (CID: {thread_id})")
                         
                         # ALways use read_document which now supports caching and all file types
                         content = await read_document.ainvoke({
@@ -225,7 +229,7 @@ class DocumentAgent(BaseAgent):
                         cache_read[path] = f"Error reading: {e}"
             
             if new_reads == 0 and not paths:
-                 print(f"[{self.name}] ⚠️ No new files to read.")
+                 print_and_log(f"[{self.name}] ⚠️ No new files to read.")
             
             return Command(
                 update={"read_cache": cache_read},
@@ -244,7 +248,7 @@ class DocumentAgent(BaseAgent):
             task = state.get("task_description")
             
             if not cache:
-                print(f"[{self.name}] ⚠️ No files to add to context.")
+                print_and_log(f"[{self.name}] ⚠️ No files to add to context.")
                 return Command(
                     update={
                         "final_response": "Не бяха намерени релевантни файлове.",
@@ -261,7 +265,7 @@ class DocumentAgent(BaseAgent):
             for path, content in cache.items():
                 raw_content += f"\n=== {path} ===\n{content}\n"
             
-            print(f"[{self.name}] 📎 Adding {len(file_paths)} files to context...")
+            print_and_log(f"[{self.name}] 📎 Adding {len(file_paths)} files to context...")
             
             # Directly invoke add_to_context tool (no LLM decision needed)
             try:
@@ -269,16 +273,16 @@ class DocumentAgent(BaseAgent):
                     "files": file_paths,
                     "summary": f"Намерени документи по заявка: {task[:100]}"
                 })
-                print(f"[{self.name}] ✅ Context updated: {context_result}")
+                print_and_log(f"[{self.name}] ✅ Context updated: {context_result}")
             except Exception as e:
-                print(f"[{self.name}] ❌ Failed to add to context: {e}")
+                print_and_log(f"[{self.name}] ❌ Failed to add to context: {e}")
             
             # Return the raw content as the response (ResearchAgent will receive this)
             summary_msg = f"Намерени {len(file_paths)} документа:\n"
             summary_msg += "\n".join(f"- {p}" for p in file_paths)
             summary_msg += f"\n\n---\n{raw_content}"
             
-            print(f"[{self.name}] 📤 Returning {len(summary_msg)} chars to parent agent")
+            print_and_log(f"[{self.name}] 📤 Returning {len(summary_msg)} chars to parent agent")
             
             return Command(
                 update={

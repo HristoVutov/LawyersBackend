@@ -1,67 +1,61 @@
 # Tools package - LangChain tools for agents
-from app.tools.file_tools import (
-    read_file,
-    write_file,
-    list_directory,
-    glob,
-    grep,
-    create_docx_file,
-    FILE_TOOLS,
-)
+#
+# Uses importlib for lazy imports to avoid circular dependencies.
+# The circular chain was: tools.__init__ -> __getattr__ -> from app.tools.X -> re-loads tools
 
-from app.tools.legal_tools import (
-    read_document,
-    fill_template,
-    LEGAL_TOOLS,
-)
+import importlib
 
-from app.tools.search_tools import (
-    search_indexed,
-    SEARCH_TOOLS,
-)
+def __getattr__(name):
+    """Lazy import using importlib to avoid circular dependencies."""
+    
+    # File tools
+    if name in ("read_file", "write_file", "list_directory", "glob", "grep", "create_docx_file", "FILE_TOOLS"):
+        module = importlib.import_module("app.tools.file_tools")
+        return getattr(module, name)
+    
+    # Legal tools
+    if name in ("read_document", "fill_template", "LEGAL_TOOLS"):
+        module = importlib.import_module("app.tools.legal_tools")
+        return getattr(module, name)
+    
+    # Search tools
+    if name in ("search_indexed", "SEARCH_TOOLS"):
+        module = importlib.import_module("app.tools.search_tools")
+        return getattr(module, name)
+    
+    # Template tools
+    if name in ("list_templates", "read_template", "create_template", "TEMPLATE_TOOLS"):
+        module = importlib.import_module("app.tools.template_tools")
+        return getattr(module, name)
+    
+    # Research tools
+    if name in ("get_legal_references", "search_documents", "RESEARCH_TOOLS"):
+        module = importlib.import_module("app.tools.research_tools")
+        return getattr(module, name)
+    
+    # ALL_TOOLS
+    if name == "ALL_TOOLS":
+        file_tools = importlib.import_module("app.tools.file_tools")
+        legal_tools = importlib.import_module("app.tools.legal_tools")
+        search_tools = importlib.import_module("app.tools.search_tools")
+        template_tools = importlib.import_module("app.tools.template_tools")
+        research_tools = importlib.import_module("app.tools.research_tools")
+        return (
+            file_tools.FILE_TOOLS + 
+            legal_tools.LEGAL_TOOLS + 
+            search_tools.SEARCH_TOOLS + 
+            template_tools.TEMPLATE_TOOLS + 
+            research_tools.RESEARCH_TOOLS
+        )
+    
+    raise AttributeError(f"module 'app.tools' has no attribute '{name}'")
 
-from app.tools.template_tools import (
-    list_templates,
-    read_template,
-    create_template,
-    TEMPLATE_TOOLS,
-)
-
-from app.tools.research_tools import (
-    get_legal_references,
-    search_documents,
-    RESEARCH_TOOLS,
-)
-
-# Combined list of all tools
-ALL_TOOLS = FILE_TOOLS + LEGAL_TOOLS + SEARCH_TOOLS + TEMPLATE_TOOLS + RESEARCH_TOOLS
 
 __all__ = [
-    # File tools
-    "read_file",
-    "write_file",
-    "list_directory",
-    "glob",
-    "grep",
-    "create_docx_file",
-    "FILE_TOOLS",
-    # Legal tools
-    "read_document",
-    "fill_template",
-    "LEGAL_TOOLS",
-    # Search tools
-    "search_indexed",
-    "SEARCH_TOOLS",
-    # Template tools
-    "list_templates",
-    "read_template",
-    "create_template",
-    "TEMPLATE_TOOLS",
-    # Research tools
-    "get_legal_references",
-    "search_documents",
-    "RESEARCH_TOOLS",
-    # All tools
+    "read_file", "write_file", "list_directory", "glob", "grep", "create_docx_file", "FILE_TOOLS",
+    "read_document", "fill_template", "LEGAL_TOOLS",
+    "search_indexed", "SEARCH_TOOLS",
+    "list_templates", "read_template", "create_template", "TEMPLATE_TOOLS",
+    "get_legal_references", "search_documents", "RESEARCH_TOOLS",
     "ALL_TOOLS",
 ]
-

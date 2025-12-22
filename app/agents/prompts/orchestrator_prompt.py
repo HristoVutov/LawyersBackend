@@ -75,7 +75,7 @@ ORCHESTRATOR_SYSTEM_PROMPT = """Ти си Оркестратор на систе
 
 Потребител: "Намери имоти Galaxy и анализирай наема"
 
-Стъпка 1: PlanTask(goal="...", tasks=[{"id":"t1",...}, {"id":"t2",...}])
+Стъпка 1: PlanTask(goal="...", tasks=[{{"id":"t1",...}}, {{"id":"t2",...}}])
 Стъпка 2: DelegateTask(agent_name="document_agent", task="...", task_id="t1")
 Стъпка 3: DelegateTask(agent_name="research_agent", task="...", task_id="t2")
 Стъпка 4: Върни синтезиран отговор"""

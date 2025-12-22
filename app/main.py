@@ -14,6 +14,7 @@ from app.api.routes import router as api_router
 from app.api.websocket import router as ws_router
 from app.api import indexing, feedback
 from app.agents import initialize_agent_registry
+from app.services.conversation_logger import get_conversation_logger
 
 
 @asynccontextmanager
@@ -21,13 +22,18 @@ async def lifespan(app: FastAPI):
     """Application lifespan manager for startup/shutdown."""
     settings = get_settings()
     
+    # Initialize conversation logger early
+    logger = get_conversation_logger()
+    
     # Startup
     print("🚀 Starting Lawyers Dashboard Agent Backend...")
+    logger.log_terminal("🚀 Starting Lawyers Dashboard Agent Backend...")
     print(f"   📁 Project root: {settings.project_root}")
     print(f"   📂 Indexed files: {settings.indexed_files_dir}")
 
     # Initialize agents
     initialize_agent_registry()
+    logger.log_terminal("✅ Agent registry initialized")
     
     
     if settings.langsmith_enabled:
@@ -76,16 +82,20 @@ from starlette.requests import Request
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         start_time = time.time()
+        logger = get_conversation_logger()
         
         # Log incoming request
         print(f"📥 {request.method} {request.url.path}")
+        logger.log_terminal(f"📥 {request.method} {request.url.path}")
         
         response = await call_next(request)
         
         # Log response with timing
         duration_ms = (time.time() - start_time) * 1000
         status_emoji = "✅" if response.status_code < 400 else "❌"
-        print(f"{status_emoji} {request.method} {request.url.path} → {response.status_code} ({duration_ms:.1f}ms)")
+        log_msg = f"{status_emoji} {request.method} {request.url.path} → {response.status_code} ({duration_ms:.1f}ms)"
+        print(log_msg)
+        logger.log_terminal(log_msg)
         
         return response
 

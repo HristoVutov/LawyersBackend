@@ -15,7 +15,10 @@ from langgraph.types import Command
 
 from app.agents.base_agent import BaseAgent, AgentConfig
 from app.agents.template_agent import TemplateAgent
-from app.tools import create_docx_file, fill_template
+from app.services.conversation_logger import print_and_log
+# Direct imports to avoid circular import
+from app.tools.file_tools import create_docx_file
+from app.tools.legal_tools import fill_template
 from app.agents.prompts.drafting_prompt import (
     DRAFTING_SYSTEM_PROMPT,
     ANALYZE_PROMPT,
@@ -75,7 +78,7 @@ class DraftingAgent(BaseAgent):
             if not task_desc and messages:
                 task_desc = messages[-1].content
             
-            print(f"[{self.name}] 🔍 Analyzing drafting request: {task_desc[:50]}...")
+            print_and_log(f"[{self.name}] 🔍 Analyzing drafting request: {task_desc[:50]}...")
             
             response = await self.llm.ainvoke(
                 [HumanMessage(content=ANALYZE_PROMPT.format(task_description=task_desc))]
@@ -91,7 +94,7 @@ class DraftingAgent(BaseAgent):
             except Exception:
                 pass
                 
-            print(f"[{self.name}] 📋 Intent: {intent}")
+            print_and_log(f"[{self.name}] 📋 Intent: {intent}")
             
             return Command(
                 update={
@@ -104,7 +107,7 @@ class DraftingAgent(BaseAgent):
 
         async def check_template_node(state: DraftingState) -> Command[Literal["draft"]]:
             intent = state.get("intent", "")
-            print(f"[{self.name}] 📂 Asking TemplateAgent for '{intent}'...")
+            print_and_log(f"[{self.name}] 📂 Asking TemplateAgent for '{intent}'...")
             
             # Delegate to TemplateAgent
             sub_inputs = {"messages": [HumanMessage(content=f"Find a template for: {intent}")]}
@@ -128,7 +131,7 @@ class DraftingAgent(BaseAgent):
             # and we don't have a real file, we normally draft from scratch.
             # If we had a file at "templates/poa.txt", we'd pick it.
             
-            print(f"[{self.name}] 📂 TemplateAgent said: {last_msg_content[:50]}...")
+            print_and_log(f"[{self.name}] 📂 TemplateAgent said: {last_msg_content[:50]}...")
             
             return Command(
                 update={"selected_template": found_template}, # None for now unless we enforce strict structure on TemplateAgent
@@ -141,7 +144,7 @@ class DraftingAgent(BaseAgent):
             intent = state.get("intent")
             task = state.get("task_description")
             
-            print(f"[{self.name}] ✍️ Drafting document...")
+            print_and_log(f"[{self.name}] ✍️ Drafting document...")
             
             if template:
                 # Fill Template Mode
@@ -170,7 +173,7 @@ class DraftingAgent(BaseAgent):
             intent = state.get("intent", "document").replace(" ", "_")
             filename = f"{intent}_draft.docx"
             
-            print(f"[{self.name}] 💾 Saving to {filename}...")
+            print_and_log(f"[{self.name}] 💾 Saving to {filename}...")
             
             # Call the tool directly
             # create_docx_file takes (file_name, content)
@@ -180,7 +183,7 @@ class DraftingAgent(BaseAgent):
                 await create_docx_file.ainvoke({"file_name": filename, "content": content})
                 final_path = filename # In current dir
             except Exception as e:
-                print(f"[{self.name}] ❌ Save failed: {e}")
+                print_and_log(f"[{self.name}] ❌ Save failed: {e}")
                 final_path = "error_saving.txt"
 
             return Command(

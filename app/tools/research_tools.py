@@ -8,6 +8,7 @@ Provides tools for:
 from typing import Optional
 from langchain_core.tools import tool
 from langchain_core.messages import HumanMessage
+from pydantic import BaseModel, Field
 
 from app.config import get_settings
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -40,6 +41,22 @@ def _get_document_agent():
     return _document_agent
 
 
+# --- Pydantic Models for Structured Output ---
+
+class ApplicableLaw(BaseModel):
+    law_name: str = Field(..., description="Full name of the law (e.g., 'Закон за задълженията и договорите')")
+    abbreviation: str = Field(..., description="Common abbreviation (e.g., 'ЗЗД')")
+    articles: list[str] = Field(..., description="List of specific articles/provisions (e.g., ['чл. 26', 'чл. 27'])")
+    summary: str = Field(..., description="Brief summary of why this law is applicable")
+    source_url: Optional[str] = Field(None, description="URL to the official text of the law (e.g., lex.bg link)")
+
+class LegalResearchResponse(BaseModel):
+    applicable_laws: list[ApplicableLaw] = Field(..., description="List of laws found relevant to the query")
+    relevant_case_law: list[str] = Field(..., description="List of relevant court decisions (e.g., 'ТР 1/2020 ОСГТК на ВКС')")
+    key_provisions: str = Field(..., description="Synthesis of the key legal provisions and how they apply")
+    search_terms: list[str] = Field(..., description="Suggested search terms for further research")
+
+
 @tool
 async def get_legal_references(query: str) -> str:
     """
@@ -59,6 +76,7 @@ async def get_legal_references(query: str) -> str:
     """
     try:
         llm = _get_llm()
+        structured_llm = llm.with_structured_output(LegalResearchResponse)
         
         prompt = f"""{LEGAL_REFERENCE_TOOL_PROMPT}
 
@@ -66,10 +84,12 @@ async def get_legal_references(query: str) -> str:
 {query}
 """
         
-        response = await llm.ainvoke([HumanMessage(content=prompt)])
+        response = await structured_llm.ainvoke([HumanMessage(content=prompt)])
         
         print(f"[get_legal_references] ⚖️ Got legal references for: {query[:50]}...")
-        return response.content
+        
+        # Return as JSON string for tool output compatibility
+        return response.model_dump_json(indent=2)
         
     except Exception as e:
         print(f"[get_legal_references] ❌ Error: {e}")

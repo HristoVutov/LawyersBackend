@@ -10,6 +10,8 @@ import json
 import traceback
 import uuid
 
+from app.services.conversation_logger import get_conversation_logger, log_ws_event, print_and_log
+
 router = APIRouter()
 
 
@@ -36,7 +38,7 @@ class ConnectionManager:
             del self.active_connections[client_id]
             print(f"🔌 Client disconnected: {client_id}")
     
-    async def send_json(self, client_id: str, data: dict):
+    async def send_json(self, client_id: str, data: dict, thread_id: str | None = None):
         if client_id in self.active_connections:
             try:
                 # Use a custom generic default for serializing non-standard objects
@@ -51,6 +53,9 @@ class ConnectionManager:
                 # We use send_text because send_json doesn't support custom encoders
                 json_str = json.dumps(data, default=custom_serializer, ensure_ascii=False)
                 await self.active_connections[client_id].send_text(json_str)
+                
+                # Log outgoing WebSocket event
+                log_ws_event(client_id, data, direction="OUT", thread_id=thread_id)
             except RuntimeError as e:
                 # Client disconnected mid-stream - silently clean up
                 if "close message" in str(e):
@@ -106,6 +111,7 @@ async def chat_websocket(websocket: WebSocket, client_id: str):
         while True:
             # Receive message from client
             data = await websocket.receive_json()
+            
             message = data.get("message", "")
             context_files = data.get("context_files", [])
             
@@ -119,13 +125,16 @@ async def chat_websocket(websocket: WebSocket, client_id: str):
                 await manager.send_json(client_id, {
                     "type": "thread_started",
                     "thread_id": thread_id,
-                })
-                print(f"🆕 [{client_id}] New conversation started: {thread_id}")
+                }, thread_id=thread_id)
+                print_and_log(f"🆕 [{client_id}] New conversation started: {thread_id}", thread_id)
             else:
                 thread_id = provided_thread_id
             
+            # Log incoming message now that we have thread_id
+            log_ws_event(client_id, data, direction="IN", thread_id=thread_id)
+            
             msg_preview = message[:50] + "..." if len(message) > 50 else message
-            print(f"📨 [{client_id}] Received: {msg_preview} (thread: {thread_id[:8]}...)")
+            print_and_log(f"📨 [{client_id}] Received: {msg_preview} (thread: {thread_id[:8]}...)", thread_id)
             
             try:
                 # Get orchestrator (lazy init)
@@ -137,31 +146,31 @@ async def chat_websocket(websocket: WebSocket, client_id: str):
                     thread_id=thread_id,
                     context_files=context_files
                 ):
-                    # Forward chunk to client
-                    await manager.send_json(client_id, chunk)
+                    # Forward chunk to client with thread_id for logging
+                    await manager.send_json(client_id, chunk, thread_id=thread_id)
                     
                     # Log important events
                     if chunk.get("type") == "tool-call":
                         tools = [tc.get("name") for tc in chunk.get("toolCalls", [])]
-                        print(f"🔧 [{client_id}] Tool calls: {tools}")
+                        print_and_log(f"🔧 [{client_id}] Tool calls: {tools}", thread_id)
                     elif chunk.get("type") == "error":
-                        print(f"❌ [{client_id}] Agent error: {chunk.get('error')}")
+                        print_and_log(f"❌ [{client_id}] Agent error: {chunk.get('error')}", thread_id)
                 
                 # Send done signal (agent also sends this, but ensure it's sent)
-                await manager.send_json(client_id, {"type": "done"})
+                await manager.send_json(client_id, {"type": "done"}, thread_id=thread_id)
                 
             except Exception as agent_error:
                 # Handle agent errors gracefully
                 error_msg = str(agent_error)
-                print(f"❌ [{client_id}] Agent error: {error_msg}")
+                print_and_log(f"❌ [{client_id}] Agent error: {error_msg}", thread_id)
                 traceback.print_exc()
                 
                 await manager.send_json(client_id, {
                     "type": "error",
                     "error": error_msg,
                     "agent": "orchestrator",
-                })
-                await manager.send_json(client_id, {"type": "done"})
+                }, thread_id=thread_id)
+                await manager.send_json(client_id, {"type": "done"}, thread_id=thread_id)
     
     except WebSocketDisconnect:
         manager.disconnect(client_id)

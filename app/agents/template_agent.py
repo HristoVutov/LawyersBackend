@@ -8,7 +8,8 @@ Capabilities:
 """
 from app.agents.base_agent import BaseAgent, AgentConfig
 from app.agents.prompts.template_prompt import TEMPLATE_SYSTEM_PROMPT
-from app.tools import read_file, list_directory, glob
+# Direct imports to avoid circular import
+from app.tools.file_tools import read_file, list_directory, glob
 
 
 class TemplateAgent(BaseAgent):

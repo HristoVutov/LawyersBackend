@@ -27,6 +27,7 @@ from app.agents.prompts.orchestrator_prompt import ORCHESTRATOR_SYSTEM_PROMPT
 from app.api.websocket import manager
 from app.config import get_settings
 from app.services.event_emitter import EventEmitter, EventType
+from app.services.conversation_logger import print_and_log
 from app.tracing import get_run_callbacks, get_current_run_id
 
 # --- State Definition ---
@@ -36,6 +37,7 @@ class AgentState(TypedDict):
     next: str
     task_list: list[dict]  # List of {id, description, status}
     current_task_id: str | None  # Currently executing task
+    guard_trigger_count: int  # Track Autonomy Guard triggers to prevent loops
 
 # --- Agent Registry Helper ---
 # We use this to retrieve specialized agents dynamically
@@ -95,18 +97,11 @@ class OrchestratorAgent(BaseAgent):
             # Fallback if accessed before initialization
             members = ["research_agent"] 
 
-        system_prompt = (
-            "You are a legal team supervisor managing the following workers: "
-            f"{members}.\n"
-            "Your job is to breakdown the user request and delegate tasks to the appropriate worker.\n"
-            "WORKER ROLES:\n"
-            "- research_agent: Finds information, statutes, and property data.\n"
-            "- document_agent: Reads and analyzes PDF/Docx files.\n"
-            "- drafting_agent: Writes legal documents and clauses.\n"
-            "- template_agent: Fills standardized legal templates.\n\n"
-            "Given the conversation, decide who should act next.\n"
-            "If the task is fully completed, respond with 'FINISH'."
-        )
+
+        # Use the imported system prompt which contains specific routing instructions (in Bulgarian)
+        # Note: The prompt defines static roles, so we don't need to inject 'members' dynamically 
+        # unless we want to enforce strictness, but the prompt is robust enough.
+        system_prompt = ORCHESTRATOR_SYSTEM_PROMPT
 
         options = members + ["FINISH"]
         
@@ -132,7 +127,7 @@ class OrchestratorAgent(BaseAgent):
             try:
                 response = chain.invoke(state)
             except Exception as e:
-                print(f"[Orchestrator] ❌ LLM Error: {e}")
+                print_and_log(f"[Orchestrator] ❌ LLM Error: {e}")
                 return {"next": "FINISH"}
 
             # Analyze response
@@ -150,8 +145,20 @@ class OrchestratorAgent(BaseAgent):
                 
                 # AUTONOMY GUARD: Block FINISH if pending tasks exist
                 if pending_tasks:
+                    # check loop counter
+                    current_triggers = state.get("guard_trigger_count", 0)
+                    if current_triggers >= 3:
+                         print_and_log(f"[Orchestrator] 🚨 Autonomy Guard Loop Detected ({current_triggers} retries). Forcing FINISH to prevent crash.")
+                         return {
+                             "next": "FINISH", 
+                             "messages": [
+                                 response,
+                                 AIMessage(content="Error: Unable to proceed. Orchestrator stuck in delegation loop. Stopping.")
+                             ]
+                         }
+
                     next_task = pending_tasks[0]  # Get first pending task
-                    print(f"[Orchestrator] ⚠️ Autonomy Guard: {len(pending_tasks)} pending tasks, forcing delegation of {next_task['id']}")
+                    print_and_log(f"[Orchestrator] ⚠️ Autonomy Guard: {len(pending_tasks)} pending tasks, forcing delegation of {next_task['id']} (Attempt {current_triggers + 1}/3)")
                     
                     # Build explicit delegation instruction
                     delegation_instruction = (
@@ -168,7 +175,8 @@ class OrchestratorAgent(BaseAgent):
                         "messages": [
                             response,
                             HumanMessage(content=delegation_instruction, name="system")
-                        ]
+                        ],
+                        "guard_trigger_count": current_triggers + 1
                     }
                 
                 if "FINISH" in content:
@@ -181,6 +189,9 @@ class OrchestratorAgent(BaseAgent):
             # We only process the FIRST valid Delegation tool call effectively in one turn for now,
             # (Sequential), or PlanTask.
             
+            # Reset guard trigger count on valid tool use
+            extra_state_updates = {"guard_trigger_count": 0}
+
             next_step = "supervisor" # Default loop back if just planning
             messages_to_add = [response]
             
@@ -192,11 +203,11 @@ class OrchestratorAgent(BaseAgent):
                     # GUARD: Skip if we already have an active task list
                     existing_tasks = state.get("task_list", [])
                     if existing_tasks:
-                        print(f"[Orchestrator] ⏭️ Skipping PlanTask - already have {len(existing_tasks)} tasks")
+                        print_and_log(f"[Orchestrator] ⏭️ Skipping PlanTask - already have {len(existing_tasks)} tasks")
                         # Check if all tasks are done
                         all_done = all(t.get("status") == "done" for t in existing_tasks)
                         if all_done:
-                            print(f"[Orchestrator] ✅ All tasks complete, finishing")
+                            print_and_log(f"[Orchestrator] ✅ All tasks complete, finishing")
                             messages_to_add.append(
                                 ToolMessage(
                                     content="All tasks completed. Finishing.",
@@ -215,12 +226,12 @@ class OrchestratorAgent(BaseAgent):
                             return {"next": "supervisor", "messages": messages_to_add}
                     
                     # First time planning - store tasks in state
-                    print(f"[Orchestrator] 📋 Plan Update: {args.get('goal')}")
+                    print_and_log(f"[Orchestrator] 📋 Plan Update: {args.get('goal')}")
                     new_tasks = [
                         {"id": t.get("id", f"t{i}"), "description": t.get("description", ""), "status": "pending"}
                         for i, t in enumerate(args.get("tasks", []))
                     ]
-                    print(f"[Orchestrator] 📝 Created {len(new_tasks)} tasks: {[t['id'] for t in new_tasks]}")
+                    print_and_log(f"[Orchestrator] 📝 Created {len(new_tasks)} tasks: {[t['id'] for t in new_tasks]}")
                     messages_to_add.append(
                         ToolMessage(
                             content=f"Plan created. Tasks: {len(new_tasks)}",
@@ -228,7 +239,7 @@ class OrchestratorAgent(BaseAgent):
                         )
                     )
                     next_step = "supervisor"
-                    return {"next": next_step, "messages": messages_to_add, "task_list": new_tasks}
+                    return {"next": next_step, "messages": messages_to_add, "task_list": new_tasks, **extra_state_updates}
                     
                 elif tool_name == "DelegateTask":
                     agent_name = args.get("agent_name")
@@ -236,7 +247,7 @@ class OrchestratorAgent(BaseAgent):
                     task_id = args.get("task_id")
                     
                     if agent_name not in members:
-                        print(f"[Orchestrator] ⚠️ Invalid agent: {agent_name}")
+                        print_and_log(f"[Orchestrator] ⚠️ Invalid agent: {agent_name}")
                         messages_to_add.append(
                             ToolMessage(
                                 content=f"Error: Agent '{agent_name}' not found. Available: {members}",
@@ -245,7 +256,7 @@ class OrchestratorAgent(BaseAgent):
                         )
                         next_step = "supervisor"
                     else:
-                        print(f"[Orchestrator] 👉 Delegating to {agent_name}: {task_desc} (task: {task_id})")
+                        print_and_log(f"[Orchestrator] 👉 Delegating to {agent_name}: {task_desc} (task: {task_id})")
                         # Mark task as in_progress in task_list
                         updated_tasks = []
                         for t in state.get("task_list", []):
@@ -268,10 +279,11 @@ class OrchestratorAgent(BaseAgent):
                             "next": next_step,
                             "messages": messages_to_add,
                             "task_list": updated_tasks,
-                            "current_task_id": task_id
+                            "current_task_id": task_id,
+                            **extra_state_updates
                         } 
             
-            return {"next": next_step, "messages": messages_to_add}
+            return {"next": next_step, "messages": messages_to_add, **extra_state_updates}
 
         # 2. Worker Node Builder
         def make_worker_node(agent_name: str):
@@ -298,7 +310,7 @@ class OrchestratorAgent(BaseAgent):
                 for t in state.get("task_list", []):
                     if t["id"] == current_task_id:
                         updated_tasks.append({**t, "status": "done"})
-                        print(f"[Orchestrator] ✅ Task {current_task_id} completed by {agent_name}")
+                        print_and_log(f"[Orchestrator] ✅ Task {current_task_id} completed by {agent_name}")
                     else:
                         updated_tasks.append(t)
                      
@@ -351,6 +363,11 @@ class OrchestratorAgent(BaseAgent):
         
         Enhanced to emit thinking events as agents process requests.
         """
+        # Import here to avoid circular import
+        from app.services.conversation_logger import set_current_thread
+        
+        # Set thread context for logging - all print_and_log calls will use this
+        set_current_thread(thread_id)
         
         # Prepare initial state
         final_message = message
@@ -379,6 +396,8 @@ class OrchestratorAgent(BaseAgent):
         current_step = None
         current_run_id = None  # Will be populated for feedback
         current_task_id = None  # Track task for task-complete events
+        # Track task statuses across PlanTask calls to preserve done/in_progress
+        known_task_statuses: dict[str, str] = {}  # {task_id: status}
         
         try:
             # Stream events from the graph
@@ -439,6 +458,12 @@ class OrchestratorAgent(BaseAgent):
                             output_data = event.get("data", {}).get("output", {})
                             updated_task_list = output_data.get("task_list", [])
                             if updated_task_list:
+                                # Update our status tracking
+                                for t in updated_task_list:
+                                    tid = t.get("id", "")
+                                    if tid:
+                                        known_task_statuses[tid] = t.get("status", "pending")
+                                
                                 # Find the goal from existing plan (or use default)
                                 yield {
                                     "type": "task-plan",
@@ -500,15 +525,25 @@ class OrchestratorAgent(BaseAgent):
                             args = tc.get("args", {})
                             
                             if tool_name == "PlanTask":
-                                # Emit task-plan event
+                                # Emit task-plan event, merging with known statuses
+                                # This preserves done/in_progress for existing tasks
+                                # while allowing new tasks to be added
                                 tasks = args.get("tasks", [])
+                                merged_tasks = []
+                                for i, t in enumerate(tasks):
+                                    tid = t.get("id", f"t{i}")
+                                    desc = t.get("description", "")
+                                    # Preserve existing status if known, otherwise pending
+                                    status = known_task_statuses.get(tid, "pending")
+                                    merged_tasks.append({"id": tid, "description": desc, "status": status})
+                                    # Track new tasks as pending
+                                    if tid not in known_task_statuses:
+                                        known_task_statuses[tid] = "pending"
+                                
                                 yield {
                                     "type": "task-plan",
                                     "goal": args.get("goal", ""),
-                                    "tasks": [
-                                        {"id": t.get("id", f"t{i}"), "description": t.get("description", ""), "status": "pending"}
-                                        for i, t in enumerate(tasks)
-                                    ]
+                                    "tasks": merged_tasks
                                 }
                             
                             elif tool_name == "DelegateTask":
@@ -609,4 +644,4 @@ def initialize_agent_registry() -> None:
     register_agent("drafting_agent", DraftingAgent())
     register_agent("template_agent", TemplateAgent())
     
-    print(f"[Orchestrator] Registered agents: {list_agent_names()}")
+    print_and_log(f"[Orchestrator] Registered agents: {list_agent_names()}")

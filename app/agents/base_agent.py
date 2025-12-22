@@ -19,6 +19,7 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from app.config import get_settings
 from app.tracing import get_run_callbacks, get_current_run_id
+from app.services.conversation_logger import print_and_log
 
 
 @dataclass
@@ -93,7 +94,7 @@ class BaseAgent:
             iterations = state.get("iterations", 0) + 1
             
             if iterations > self.max_iterations:
-                print(f"[{self.name}] ⚠️ Max iterations ({self.max_iterations}) reached, forcing exit")
+                print_and_log(f"[{self.name}] ⚠️ Max iterations ({self.max_iterations}) reached, forcing exit")
                 return {
                     "messages": [AIMessage(content=f"[Agent forced exit after {self.max_iterations} iterations. Please simplify the task.]")],
                     "iterations": iterations,
@@ -114,15 +115,15 @@ class BaseAgent:
                     config={"configurable": {"system_instruction": self.system_prompt}}
                 )
                 
-                print(f"[{self.name}] Response: {str(response.content)[:100]}...")
+                print_and_log(f"[{self.name}] Response: {str(response.content)[:100]}...")
                 
                 if hasattr(response, 'tool_calls') and response.tool_calls:
-                    print(f"[{self.name}] Tool calls: {[tc['name'] for tc in response.tool_calls]}")
+                    print_and_log(f"[{self.name}] Tool calls: {[tc['name'] for tc in response.tool_calls]}")
                 
                 return {"messages": [response], "iterations": iterations}
                 
             except Exception as e:
-                print(f"[{self.name}] ❌ Error: {e}")
+                print_and_log(f"[{self.name}] ❌ Error: {e}")
                 return {
                     "messages": [AIMessage(content=f"Error in {self.name}: {str(e)}")],
                     "iterations": iterations,
@@ -300,5 +301,5 @@ class BaseAgent:
             return final_response
             
         except Exception as e:
-            print(f"[{self.name}] ❌ Error in invoke_with_messages: {e}")
+            print_and_log(f"[{self.name}] ❌ Error in invoke_with_messages: {e}")
             return f"Error executing {self.name}: {str(e)}"

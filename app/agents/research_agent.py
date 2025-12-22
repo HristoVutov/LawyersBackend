@@ -19,6 +19,7 @@ from langgraph.prebuilt import ToolNode
 from app.agents.base_agent import BaseAgent, AgentConfig
 from app.tools.research_tools import get_legal_references, search_documents
 from app.middleware import TodoListMiddleware
+from app.services.conversation_logger import print_and_log
 
 # --- Structured State Definition ---
 class ResearchState(TypedDict):
@@ -102,7 +103,7 @@ class ResearchAgent(BaseAgent):
             if not task_desc and messages:
                 task_desc = messages[-1].content
             
-            print(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
+            print_and_log(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
             
             # The LLM response will be streamed via astream_events in orchestrator
             response = await self.llm.ainvoke(
@@ -115,10 +116,10 @@ class ResearchAgent(BaseAgent):
                 data = json.loads(content)
                 queries = data.get("queries", [])
             except Exception as e:
-                print(f"[{self.name}] ⚠️ JSON parse failed, falling back to raw")
+                print_and_log(f"[{self.name}] ⚠️ JSON parse failed, falling back to raw")
                 queries = [task_desc]
             
-            print(f"[{self.name}] 📝 Generated {len(queries)} queries")
+            print_and_log(f"[{self.name}] 📝 Generated {len(queries)} queries")
             
             # Initialize gather_info with the prompt
             gather_prompt = GATHER_INFO_PROMPT.format(
@@ -149,13 +150,13 @@ class ResearchAgent(BaseAgent):
             
             # Loop guard
             if iterations > 5:
-                print(f"[{self.name}] ⚠️ Max gather iterations reached, moving to synthesize")
+                print_and_log(f"[{self.name}] ⚠️ Max gather iterations reached, moving to synthesize")
                 return Command(
                     update={"gather_iterations": iterations},
                     goto="synthesize"
                 )
             
-            print(f"[{self.name}] 🔄 Gather iteration {iterations}...")
+            print_and_log(f"[{self.name}] 🔄 Gather iteration {iterations}...")
             
             # Call LLM with tools
             response = await llm_with_tools.ainvoke(gather_msgs)
@@ -163,7 +164,7 @@ class ResearchAgent(BaseAgent):
             # Check if LLM wants to call tools
             if hasattr(response, "tool_calls") and response.tool_calls:
                 tool_names = [tc["name"] for tc in response.tool_calls]
-                print(f"[{self.name}] 🔧 Tool calls: {tool_names}")
+                print_and_log(f"[{self.name}] 🔧 Tool calls: {tool_names}")
                 
                 return Command(
                     update={
@@ -174,7 +175,7 @@ class ResearchAgent(BaseAgent):
                 )
             else:
                 # No more tool calls - extract any gathered info and proceed
-                print(f"[{self.name}] ✅ Gathering complete, moving to synthesize")
+                print_and_log(f"[{self.name}] ✅ Gathering complete, moving to synthesize")
                 return Command(
                     update={
                         "gather_messages": [response],
@@ -202,7 +203,7 @@ class ResearchAgent(BaseAgent):
                 tool_name = tool_call["name"]
                 tool_args = tool_call["args"]
                 
-                print(f"[{self.name}] ⚙️ Executing: {tool_name}")
+                print_and_log(f"[{self.name}] ⚙️ Executing: {tool_name}")
                 
                 try:
                     if tool_name == "get_legal_references":
@@ -220,7 +221,7 @@ class ResearchAgent(BaseAgent):
                         name=tool_name
                     ))
                 except Exception as e:
-                    print(f"[{self.name}] ❌ Tool error: {e}")
+                    print_and_log(f"[{self.name}] ❌ Tool error: {e}")
                     tool_results.append(ToolMessage(
                         content=f"Error: {str(e)}",
                         tool_call_id=tool_call["id"],
@@ -261,7 +262,7 @@ class ResearchAgent(BaseAgent):
             if not context_str.strip():
                 context_str = "Не беше намерена релевантна информация."
             
-            print(f"[{self.name}] ✍️ Synthesizing answer...")
+            print_and_log(f"[{self.name}] ✍️ Synthesizing answer...")
             
             # The LLM response will be streamed via astream_events in orchestrator
             response = await self.llm.ainvoke(
