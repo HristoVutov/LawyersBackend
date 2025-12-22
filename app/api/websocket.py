@@ -20,6 +20,7 @@ class ChatMessage(BaseModel):
     message: str
     thread_id: str = "default"
     context_files: list[str] = []
+    model: str | None = None
 
 
 class ConnectionManager:
@@ -144,7 +145,8 @@ async def chat_websocket(websocket: WebSocket, client_id: str):
                 async for chunk in orchestrator.stream(
                     message=message,
                     thread_id=thread_id,
-                    context_files=context_files
+                    context_files=context_files,
+                    model_name=data.get("model")
                 ):
                     # Forward chunk to client with thread_id for logging
                     await manager.send_json(client_id, chunk, thread_id=thread_id)

@@ -109,7 +109,7 @@ class OrchestratorAgent(BaseAgent):
         options = members + ["FINISH"]
         
         # 1. The Supervisor Node
-        async def supervisor_node(state: AgentState) -> dict:
+        async def supervisor_node(state: AgentState, config) -> dict:
             # --- Autonomy Guard & Finish Check ---
             # If the last message was from a worker and said "FINISH", we might want to stop.
             # But in the Command pattern, the supervisor decides based on the plan.
@@ -123,8 +123,16 @@ class OrchestratorAgent(BaseAgent):
                 MessagesPlaceholder(variable_name="messages"),
             ])
             
+            # Dynamic LLM Selection for Supervisor
+            model_name = config.get("configurable", {}).get("model_name")
+            if model_name:
+                 supervisor_llm = self._create_llm(model_name)
+                 print_and_log(f"[Orchestrator] 🔄 Supervisor using model: {model_name}")
+            else:
+                 supervisor_llm = self.llm
+
             # Bind tools to LLM
-            llm_with_tools = self.llm.bind_tools(tools)
+            llm_with_tools = supervisor_llm.bind_tools(tools)
             chain = prompt | llm_with_tools
             
             # Manage Context
@@ -132,7 +140,7 @@ class OrchestratorAgent(BaseAgent):
             chain_input = {**state, "messages": messages}
             
             try:
-                response = await chain.ainvoke(chain_input)
+                response = await chain.ainvoke(chain_input, config)
             except Exception as e:
                 print_and_log(f"[Orchestrator] ❌ LLM Error: {e}")
                 return {"next": "FINISH"}
@@ -363,7 +371,8 @@ class OrchestratorAgent(BaseAgent):
         self,
         message: str,
         thread_id: str = "default",
-        context_files: list[str] | None = None
+        context_files: list[str] | None = None,
+        model_name: str | None = None
     ) -> AsyncIterator[dict[str, Any]]:
         """
         Streaming handler for the Supervisor Graph.
@@ -392,7 +401,7 @@ class OrchestratorAgent(BaseAgent):
         )
         
         config = {
-            "configurable": {"thread_id": thread_id},
+            "configurable": {"thread_id": thread_id, "model_name": model_name},
             "callbacks": callbacks,
             "metadata": trace_metadata,
             "tags": ["orchestrator", "lawyers-dashboard"],

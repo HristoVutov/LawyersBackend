@@ -74,17 +74,21 @@ class BaseAgent:
     
     @property
     def llm(self) -> ChatGoogleGenerativeAI:
-        """Lazy-initialize the LLM."""
+        """Lazy-initialize the LLM (default configuration)."""
         if self._llm is None:
-            settings = get_settings()
-            if not settings.google_api_key:
-                raise ValueError("GOOGLE_API_KEY not configured")
-            
-            self._llm = ChatGoogleGenerativeAI(
-                model=self.model_name,
-                google_api_key=settings.google_api_key,
-            )
+            self._llm = self._create_llm(self.model_name)
         return self._llm
+    
+    def _create_llm(self, model_name: str) -> ChatGoogleGenerativeAI:
+        """Create an LLM instance with the specified model."""
+        settings = get_settings()
+        if not settings.google_api_key:
+            raise ValueError("GOOGLE_API_KEY not configured")
+        
+        return ChatGoogleGenerativeAI(
+            model=model_name,
+            google_api_key=settings.google_api_key,
+        )
     
     @property
     def graph(self):
@@ -97,12 +101,13 @@ class BaseAgent:
         """Build the LangGraph workflow."""
         tool_node = ToolNode(self.tools) if self.tools else None
         
-        # Bind tools to LLM
-        llm_with_tools = self.llm
+        # Bind tools to default LLM (used as fallback or for graph validation)
+        # Note: The actual runtime LLM will be determined in agent_node
+        default_llm_with_tools = self.llm
         if self.tools:
-            llm_with_tools = self.llm.bind_tools(self.tools)
+            default_llm_with_tools = self.llm.bind_tools(self.tools)
         
-        async def agent_node(state: MessagesState) -> dict:
+        async def agent_node(state: MessagesState, config) -> dict:
             """Main agent node that calls the LLM."""
             # Track iterations for loop guard
             iterations = state.get("iterations", 0) + 1
@@ -124,8 +129,31 @@ class BaseAgent:
                 pass  # Gemini handles system_instruction separately
             
             try:
+                # Dynamic LLM Selection
+                model_name = config.get("configurable", {}).get("model_name")
+                
+                if model_name:
+                    print_and_log(f"[{self.name}] 🔄 Switching to requested model: {model_name}")
+                    runtime_llm = self._create_llm(model_name)
+                else:
+                    runtime_llm = default_llm_with_tools  # Use the one bound at build time (or default)
+                
+                # If we created a new LLM, we must bind tools again!
+                if model_name and self.tools:
+                     runtime_llm = runtime_llm.bind_tools(self.tools)
+                elif not model_name:
+                     # If we are using default, it's already bound in 'default_llm_with_tools' check above? 
+                     # Wait, 'default_llm_with_tools' is self.llm bound.
+                     pass
+
+                # If no model override, use default_llm_with_tools 
+                # (which is self.llm possibly bound with tools)
+                llm_to_use = runtime_llm 
+                if not model_name:
+                    llm_to_use = default_llm_with_tools
+
                 # Invoke LLM
-                response = await llm_with_tools.ainvoke(
+                response = await llm_to_use.ainvoke(
                     messages,
                     config={"configurable": {"system_instruction": self.system_prompt}}
                 )
@@ -188,7 +216,8 @@ class BaseAgent:
         self,
         message: str,
         thread_id: str = "default",
-        context_files: list[str] | None = None
+        context_files: list[str] | None = None,
+        model_name: str | None = None
     ) -> AsyncIterator[dict[str, Any]]:
         """
         Process a message and stream the response.
@@ -212,7 +241,7 @@ class BaseAgent:
         )
         
         config = {
-            "configurable": {"thread_id": thread_id},
+            "configurable": {"thread_id": thread_id, "model_name": model_name},
             "callbacks": callbacks,
             "metadata": trace_metadata,
             "tags": [self.name, "lawyers-dashboard"],
