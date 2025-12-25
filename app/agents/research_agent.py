@@ -119,7 +119,7 @@ class ResearchAgent(BaseAgent):
         
         # --- Node Definitions ---
         
-        async def analyze_node(state: ResearchState) -> Command[Literal["gather_info"]]:
+        async def analyze_node(state: ResearchState, config) -> Command[Literal["gather_info"]]:
             """
             Step 1: Analyze request and generate search queries.
             
@@ -133,8 +133,16 @@ class ResearchAgent(BaseAgent):
             
             print_and_log(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
             
+            # Dynamic Model Selection
+            model_name = config.get("configurable", {}).get("model_name")
+            if model_name:
+                print_and_log(f"[{self.name}] 🔄 Switching to requested model: {model_name}")
+                llm = self._create_llm(model_name)
+            else:
+                llm = self.llm
+
             # The LLM response will be streamed via astream_events in orchestrator
-            response = await self.llm.ainvoke(
+            response = await llm.ainvoke(
                 [HumanMessage(content=ANALYZE_PROMPT.format(task_description=task_desc))]
             )
             
@@ -165,7 +173,7 @@ class ResearchAgent(BaseAgent):
                 goto="gather_info"
             )
 
-        async def gather_info_node(state: ResearchState) -> Command[Literal["tools", "synthesize"]]:
+        async def gather_info_node(state: ResearchState, config) -> Command[Literal["tools", "synthesize"]]:
             """
             Step 2: LLM decides which tools to use for gathering information.
             
@@ -187,8 +195,18 @@ class ResearchAgent(BaseAgent):
             
             print_and_log(f"[{self.name}] 🔄 Gather iteration {iterations}...")
             
+            # Dynamic Model Selection
+            model_name = config.get("configurable", {}).get("model_name")
+            if model_name:
+                # Must bind tools again!
+                llm = self._create_llm(model_name)
+                # Use self.tools which includes consult_document_agent
+                llm_node = llm.bind_tools(self.tools)
+            else:
+                llm_node = llm_with_tools
+            
             # Call LLM with tools
-            response = await llm_with_tools.ainvoke(gather_msgs)
+            response = await llm_node.ainvoke(gather_msgs)
             
             # Check if LLM wants to call tools
             if hasattr(response, "tool_calls") and response.tool_calls:
@@ -286,7 +304,7 @@ class ResearchAgent(BaseAgent):
                 goto="gather_info"
             )
 
-        async def synthesize_node(state: ResearchState) -> Command[Literal["__end__"]]:
+        async def synthesize_node(state: ResearchState, config) -> Command[Literal["__end__"]]:
             """
             Step 3: Synthesize findings into an answer.
             
@@ -313,8 +331,15 @@ class ResearchAgent(BaseAgent):
             
             print_and_log(f"[{self.name}] ✍️ Synthesizing answer...")
             
+            # Dynamic Model Selection
+            model_name = config.get("configurable", {}).get("model_name")
+            if model_name:
+                llm = self._create_llm(model_name)
+            else:
+                llm = self.llm
+
             # The LLM response will be streamed via astream_events in orchestrator
-            response = await self.llm.ainvoke(
+            response = await llm.ainvoke(
                 [HumanMessage(content=SYNTHESIZE_PROMPT.format(task_description=task, context=context_str))]
             )
             

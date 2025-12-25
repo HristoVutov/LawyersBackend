@@ -148,6 +148,12 @@ class OrchestratorAgent(BaseAgent):
             # Analyze response
             tool_calls = getattr(response, "tool_calls", [])
             
+            # Check if this is a user turn (HumanMessage triggered the graph)
+            is_user_turn = False
+            messages_list = state.get("messages", [])
+            if messages_list and isinstance(messages_list[-1], HumanMessage):
+                is_user_turn = True
+            
             # --- Autonomy Guard: Check for pending tasks ---
             task_list = state.get("task_list", [])
             pending_tasks = [t for t in task_list if t["status"] == "pending"]
@@ -158,8 +164,8 @@ class OrchestratorAgent(BaseAgent):
                 # Fallback: check text for FINISH
                 content = str(response.content)
                 
-                # AUTONOMY GUARD: Block FINISH if pending tasks exist
-                if pending_tasks:
+                # AUTONOMY GUARD: Block FINISH if pending tasks exist (unless user asked to stop/intervene)
+                if pending_tasks and not is_user_turn:
                     # check loop counter
                     current_triggers = state.get("guard_trigger_count", 0)
                     if current_triggers >= 3:
@@ -217,8 +223,12 @@ class OrchestratorAgent(BaseAgent):
                 if tool_name == "PlanTask":
                     # GUARD: Skip if we already have an active task list
                     existing_tasks = state.get("task_list", [])
-                    if existing_tasks:
-                        print_and_log(f"[Orchestrator] ⏭️ Skipping PlanTask - already have {len(existing_tasks)} tasks")
+                    # Check if there are any PENDING tasks. 
+                    # If all are done, we treat this as a new turn and allow re-planning.
+                    pending_tasks = [t for t in existing_tasks if t["status"] == "pending"]
+                    
+                    if pending_tasks and not is_user_turn:
+                        print_and_log(f"[Orchestrator] ⏭️ Skipping PlanTask - {len(pending_tasks)} tasks still pending (Autonomous Guard)")
                         # Check if all tasks are done
                         all_done = all(t.get("status") == "done" for t in existing_tasks)
                         if all_done:
@@ -242,19 +252,32 @@ class OrchestratorAgent(BaseAgent):
                     
                     # First time planning - store tasks in state
                     print_and_log(f"[Orchestrator] 📋 Plan Update: {args.get('goal')}")
-                    new_tasks = [
-                        {"id": t.get("id", f"t{i}"), "description": t.get("description", ""), "status": "pending"}
-                        for i, t in enumerate(args.get("tasks", []))
-                    ]
+                    # Merge with existing status to prevent loops
+                    existing_map = {t["id"]: t for t in existing_tasks}
+                    new_tasks = []
+                    for i, t in enumerate(args.get("tasks", [])):
+                        t_id = t.get("id", f"t{i}")
+                        # Preserve status if task already exists
+                        status = existing_map.get(t_id, {}).get("status", "pending")
+                        new_tasks.append({
+                            "id": t_id, 
+                            "description": t.get("description", ""), 
+                            "status": status
+                        })
                     print_and_log(f"[Orchestrator] 📝 Created {len(new_tasks)} tasks: {[t['id'] for t in new_tasks]}")
                     messages_to_add.append(
                         ToolMessage(
-                            content=f"Plan created. Tasks: {len(new_tasks)}",
+                            content=f"Plan created with {len(new_tasks)} tasks. stopping for user review.",
                             tool_call_id=tc["id"]
                         )
                     )
-                    next_step = "supervisor"
-                    return {"next": next_step, "messages": messages_to_add, "task_list": new_tasks, **extra_state_updates}
+                    # HITL Pattern: Stop after planning to allow user feedback
+                    # Add a visible message to the user so they know we are waiting
+                    messages_to_add.append(
+                        AIMessage(content="I have created a plan based on your request (see above). To proceed with execution, please type **'Proceed'**. If you'd like to make changes, just let me know.")
+                    )
+                    print_and_log(f"[Orchestrator] ⏸️ Pausing for user plan approval...")
+                    return {"next": "FINISH", "messages": messages_to_add, "task_list": new_tasks, **extra_state_updates}
                     
                 elif tool_name == "DelegateTask":
                     agent_name = args.get("agent_name")
@@ -308,7 +331,20 @@ class OrchestratorAgent(BaseAgent):
                 # The parent graph's astream_events will capture the child graph's events
                 # if they share the same trace context (which they should in LangGraph).
                 # Add recursion_limit to prevent infinite loops in sub-agents
-                worker_config = {**config, "recursion_limit": 50}
+                # Also propagate model_name to worker agents
+                parent_configurable = config.get("configurable", {})
+                model_name = parent_configurable.get("model_name")
+                
+                worker_configurable = {"model_name": model_name} if model_name else {}
+                
+                worker_config = {
+                    **config, 
+                    "recursion_limit": 50,
+                    "configurable": {
+                        **parent_configurable,
+                        **worker_configurable
+                    }
+                }
                 result_state = await agent.graph.ainvoke(state, worker_config)
                 
                 # Extract the final response from the agent

@@ -79,7 +79,7 @@ class DocumentAgent(BaseAgent):
         # by the parent graph's astream_events. The node names ("analyze", "search", etc.)
         # are used by the orchestrator to emit step events.
         
-        async def analyze_node(state: DocumentState) -> Command[Literal["search"]]:
+        async def analyze_node(state: DocumentState, config) -> Command[Literal["search"]]:
             """
             Step 1: Analyze request and determine search strategy.
             
@@ -92,8 +92,14 @@ class DocumentAgent(BaseAgent):
             
             print_and_log(f"[{self.name}] 🔍 Analyzing request: {task_desc[:50]}...")
             
+            model_name = config.get("configurable", {}).get("model_name")
+            if model_name:
+                llm = self._create_llm(model_name)
+            else:
+                llm = self.llm
+
             # Use ainvoke - the streaming happens through astream_events in orchestrator
-            response = await self.llm.ainvoke(
+            response = await llm.ainvoke(
                 [HumanMessage(content=ANALYZE_PROMPT.format(task_description=task_desc))]
             )
             

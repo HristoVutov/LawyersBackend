@@ -1,0 +1,4721 @@
+============================================================
+WEBSOCKET EVENTS LOG
+Conversation: conv-1766565297338-bjjwrc
+Started: 2025-12-24T10:35:03.388785
+============================================================
+
+
+[10:35:03.389] [conv-1766565297338-bjjwrc] ← MESSAGE
+    {
+      "message": "аз съм защитник на хванатия водач\nспазена ли е процедура за проверка на водача за алкохол и наркотици има ли пропуски който могат да доведът до прекратяване на делото",
+      "thread_id": "conv-1766565297338-bjjwrc",
+      "projectId": "C:\\Users\\vutov\\Documents\\NLP\\ET",
+      "model": "gemini-3-pro-preview"
+    }
+
+[10:35:24.219] [conv-1766565297338-bjjwrc] → TASK-PLAN
+    {
+      "type": "task-plan",
+      "goal": "Анализ на процедурата за проверка за алкохол и наркотици и идентифициране на процесуални нарушения за защитата.",
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Проучване на нормативната уредба (ЗДвП, Наредба № 1/2017) и съдебната практика относно процедурата за тестване за алкохол и наркотици.",
+          "status": "pending"
+        },
+        {
+          "id": "t2",
+          "description": "Идентифициране на конкретни 'пробойни' в процедурата (метрология, срокове, медицинско изследване), които водят до падане на акта в съда.",
+          "status": "pending"
+        },
+        {
+          "id": "t3",
+          "description": "Изготвяне на правно становище/списък за проверка (checklist) за защитата.",
+          "status": "pending"
+        }
+      ]
+    }
+
+[10:35:24.219] [conv-1766565297338-bjjwrc] → TASK-START
+    {
+      "type": "task-start",
+      "task_id": "t1",
+      "description": "Проучи актуалните изисквания на Наредба № 1 от 19.07.2017 г. и ЗДвП относно реда за установяване употребата на алкохол и наркотици. Фокусирай се върху: 1. Изисквания към техническите средства (техническа годност, калиброване). 2. Процедура при издаване на талон за медицинско изследване (срокове за явяване, попълване на талона). 3. Изисквания към вземането на биологични проби. 4. Често срещани процесуални нарушения в съдебната практика, които водят до отмяна на наказателни постановления или прекратяване на дела.",
+      "agent": "research_agent"
+    }
+
+[10:35:33.827] [conv-1766565297338-bjjwrc] → TASK-START
+    {
+      "type": "task-start",
+      "task_id": "t1",
+      "description": "Проучи актуалните изисквания на Наредба № 1 от 19.07.2017 г. и ЗДвП относно реда за установяване употребата на алкохол и наркотици. Фокусирай се върху: 1. Изисквания към техническите средства (техническа годност, калиброване). 2. Процедура при издаване на талон за медицинско изследване (срокове за явяване, попълване на талона). 3. Изисквания към вземането на биологични проби. 4. Често срещани процесуални нарушения в съдебната практика, които водят до отмяна на наказателни постановления или прекратяване на дела.",
+      "agent": "research_agent"
+    }
+
+[10:35:33.834] [conv-1766565297338-bjjwrc] → AGENT-START
+    {
+      "type": "agent-start",
+      "agent": "research_agent",
+      "task": "Processing delegated task"
+    }
+
+[10:35:33.836] [conv-1766565297338-bjjwrc] → STEP
+    {
+      "type": "step",
+      "agent": "research_agent",
+      "step": "analyze",
+      "description": "Analyzing request..."
+    }
+
+[10:35:54.105] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "```json\n{\n  \"queries\": [\n    \"Наредба № 1 от 19.07.2017 г. съ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:35:54.175] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "дебна практика техническо средство талон за изследване отмяна\"\n  ]\n}\n",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:35:54.219] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "```",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:35:54.238] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:03.392] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:03.398] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "get_legal_references",
+      "args": {
+        "query": "Наредба № 1 от 19.07.2017 г. и ЗДвП ред за установяване употребата на алкохол и наркотици, изисквания към техническите средства, талон за медицинско изследване, биологични проби, съдебна практика и отменителни основания"
+      },
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:16.345] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "{\n  \"applicable_laws\": [\n    {\n      \"law_name\": \"Наредба № 1 от 19.07.2017 г",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:16.490] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ". за реда за установяване употребата на алкохол и/или наркотични вещества или техни аналози\",\n      \"abbreviation\": \"Наредба № 1/2017 г.\",\n      \"articles\":",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:16.673] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " [\n        \"чл. 2\",\n        \"чл. 3\",\n        \"чл. 4\",\n        \"чл. 5\",\n        \"чл. 6\",\n        ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:16.912] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\"чл. 7\",\n        \"чл. 10\",\n        \"чл. 11\"\n      ],\n      \"summary\": \"Тази наредба регламентира подробната процедура за установ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:17.097] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "яване на употребата на алкохол и/или наркотични вещества чрез технически средства и медицински изследвания. Тя определя изискванията към техническите средства, реда за извършване на проверките, изда",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:17.338] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ването на талон за медицинско изследване, вземането и транспортирането на биологични проби, както и процедурите при отказ от страна на водача и оспорване на резултатите.\",\n      \"source_",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:17.521] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "url\": \"https://lex.bg/laws/ldoc/2136932470\"\n    },\n    {\n      \"law_name\": \"Закон за движението по пътищата",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:17.875] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\",\n      \"abbreviation\": \"ЗДвП\",\n      \"articles\": [\n        \"чл. 171, т. 1\",\n        \"чл. 174\",\n        ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:17.926] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\"чл. 175\",\n        \"чл. 178а\"\n      ],\n      \"summary\": \"ЗДвП е основният закон, който забранява управлението на моторно",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:18.247] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " превозно средство под въздействието на алкохол или наркотични вещества. Той предвижда административнонаказателна отговорност за нарушителите, включително глоби, лишаване от правоу",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:18.502] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "правление и временно отнемане на свидетелството за управление. Регламентира и възможността за отказ от проверка или изследване и произтичащите от това последици.\",\n      \"source_url\": \"https",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:18.821] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "://lex.bg/laws/ldoc/2135147817\"\n    },\n    {\n      \"law_name\": \"Наказателен кодекс\",\n      \"abbreviation\":",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:18.863] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " \"НК\",\n      \"articles\": [\n        \"чл. 343б\",\n        \"чл. 343в\"\n      ],\n      \"summary\": \"НК урежда престъпните дея",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:19.107] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ния, свързани с управлението на моторно превозно средство след употреба на алкохол над определена концентрация или на наркотични вещества. Разпоредбите предвиждат наказания лишаване от свобо",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:19.300] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "да и лишаване от право да управлява МПС. Чл. 343в НК инкриминира и отказа от извършване на проверка с техническо средство или от даване на кръв",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:19.475] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " за изследване.\",\n      \"source_url\": \"https://lex.bg/laws/ldoc/2134542385\"\n    },\n    {\n      \"law_name\":",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:19.679] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " \"Административнопроцесуален кодекс\",\n      \"abbreviation\": \"АПК\",\n      \"articles\": [\n        \"Глава Пета\"\n      ],\n      \"summary\": \"АПК урежда реда",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:19.904] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " за оспорване на индивидуални административни актове, издадени по ЗДвП и Наредба № 1/2017 г., като например наказателни постановления или заповеди за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:20.229] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " прилагане на принудителни административни мерки. Той дава възможност на водачите да обжалват тези актове пред съда, ако считат, че са издадени в нарушение на материалния или процесуалния",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:20.411] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " закон.\",\n      \"source_url\": \"https://lex.bg/laws/ldoc/2135198030\"\n    }\n  ],\n  \"relevant_case_law\": [",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:20.585] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n    \"Тълкувателно решение № 1 от 27.05.2016 г. на ВКС по тълк. д. № 1/2015 г., ОСНК",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:20.851] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " (относно елементите на съставите по чл. 343б и чл. 343в НК)\",\n    \"Решения на Върховния административен съд (В",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:21.059] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "АС) по дела, касаещи оспорване на наказателни постановления и заповеди за прилагане на принудителни административни мерки, издадени на основание ЗДвП във връзка с На",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:21.289] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "редба № 1/2017 г. (напр. относно валидност на техническите средства, спазване на процедурата по вземане на проби, отказ)\",\n    \"Пра",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:21.495] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ктика на ВКС по дела, касаещи чл. 343б и чл. 343в НК, разясняваща условията за доказване на употреба на алко",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:21.739] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "хол/наркотици и интерпретацията на отказа.\"\n  ],\n  \"key_provisions\": \"Редът за установяване употребата на алкохол и наркотици е детайлно уреден в",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:22.001] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Наредба № 1/2017 г. Първоначалната проверка се извършва с техническо средство, което трябва да е одобрен тип и с валиден документ за метрологична проверка. При",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:22.251] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " наличие на данни за употреба или отказ от проверка, се издава талон за медицинско изследване, като водачът е длъжен да даде биологична проба. Отказът от проверка с техническо средство",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:22.460] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " или от даване на кръв за медицинско изследване е самостоятелно административно нарушение по ЗДвП (чл. 175) и престъпление по НК (чл. 343",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:22.794] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "в), освен ако е налице обективна невъзможност. Съществуват строги изисквания относно реда за вземане, съхранение и транспортиране на пробите, за да са",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:23.070] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " годни те като доказателство. Административните актове (наказателни постановления, заповеди за ПАМ) подлежат на съдебен контрол по реда на АПК, като често срещани отменителни",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:23.332] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " основания са неспазване на процедурата по Наредба № 1/2017 г., негодно техническо средство, липса на достатъчно доказателства или неверни фактически констатации",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:23.764] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".\",\n  \"search_terms\": [\n    \"Наредба 1/2017 г. алкохол\",\n    \"Наредба 1/2017 г. наркотици\",\n    \"ЗДвП алкохол наказание\",\n    \"НК чл. 343б\",\n    \"НК чл. 343в\",\n    \"отказ проба алкохол",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:23.960] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\",\n    \"талон за медицинско изследване\",\n    \"техническо средство алкохол годност\",\n    \"оспорване наказателно постановление алкохол\",\n    \"ВКС Т",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:24.067] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Р 1/2015 ОСНК\"\n  ]\n}",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:24.075] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:24.077] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "get_legal_references",
+      "result": "{\n  \"applicable_laws\": [\n    {\n      \"law_name\": \"Наредба № 1 от 19.07.2017 г. за реда за установяване употребата на алкохол и/или наркотични вещества или техни аналози\",\n      \"abbreviation\": \"Наредб...",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:39.131] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Въз основа на извършеното правно проучване на **Наредба № 1 от 19.07.2017 г.**",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:39.262] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и **Закона за движението по пътищата (ЗДвП)**, както и на анализа на тра",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:39.495] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "йната съдебна практика, предоставям следната експертна справка:\n\n### 1. Изиск",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:39.718] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "вания към техническите средства (СТС)\n\nУстановяването на употребата на алкохол и нарко",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:39.987] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тични вещества се извършва с автоматизирани технически средства (за алкохол - тип \"Alcotest\", за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:40.267] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " наркотици - \"DrugTest/DrugCheck\"), одобрени по реда на Закона за измерванията.\n\n*",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:40.573] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "   **Техническа годност и проверка:** Всички технически средства за измерване на алкохол (д",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:40.779] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "регери) подлежат на **задължителна първоначална и последваща периодична проверка",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:41.040] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "**. Удостоверяването на годността се извършва от Българския институт по метрология (Б",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:41.283] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ИМ) или оправомощени лаборатории.\n    *   **Знак за годност:** В",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:41.565] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ърху средството трябва да има холограмен стикер за премината проверка.\n    *   **С",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:41.901] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "рок на валидност:** Обичайно периодичната проверка за средствата за алкохол е валидна **6 месеца**.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:42.233] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Ако проверката е извършена с изтекла валидност на средството, резултатът е незаконосъобразен",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:42.433] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и наказателното постановление (НП) пада в съда.\n*   **Калиброване:**",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:42.774] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " За тестовете за наркотици (които са полеви тестове тип \"слюнчен тест\"), крити",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:43.062] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чно е спазването на срока на годност на самия касетъчен тест и правилната работа на анализа",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:43.284] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тора (ако се използва електронен четец).\n*   **Принтиране на резултата:** За",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:43.531] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "дължително е техническото средство да издава разпечатка на хартиен носител, която се",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:43.849] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " прикрепя към АУАН. Липсата на подпис на водача върху разпечатката (ос",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:44.049] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "вен при отказ) може да се тълкува като процесуално нарушение.\n\n### 2. Про",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:44.367] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "цедура при издаване на талон за медицинско изследване\n\nТалон за изследване (по",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:44.643] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " образец съгласно Приложение № 1 към Наредбата) се издава в три случая: когато водачът **",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:44.875] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "оспорва** показанията на уреда, когато **отказва** проверка с техническо средство",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:45.189] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ", или когато физическото му състояние **не позволява** извършване на проверка с такова.\n\n*",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:45.469] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "   **Попълване на талона:** Полицейският орган попълва талона в три ек",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:45.667] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "земпляра. **Важно:** В талона задължително се вписва лечебното за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:46.001] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ведение, в което водачът следва да се яви. Неточното или непълно попълване на талона",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:46.232] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " (напр. липса на час на връчване) е съществено нарушение.\n*   ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:46.514] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "**Срокове за явяване (Чл. 10 от Наредбата):** Това е най-крити",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:46.773] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чният момент.\n    *   **До 45 минути:** Когато нарушението е констатирано на терито",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:46.983] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "рията на населеното място, където се намира лечебното заведение.\n    *   ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:47.186] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "**До 120 минути:** Когато нарушението е констатирано извън населеното място",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:47.423] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на лечебното заведение.\n*   **Транспортиране:** Ако измерената концентрация е",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:47.735] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " над 1.2 промила алкохол или тестът за наркотици е положителен, полицейският орган **",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:47.946] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "е длъжен да придружи** (транспортира) водача до лечебното заведение.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:48.254] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Ако полицаите накарат водача да отиде сам в тези случаи, това е грубо нарушение на процеду",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:48.476] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "рата.\n\n### 3. Изисквания към вземането на биологични проби\n\nМедицинското из",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:48.695] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "следване се извършва в лечебни заведения, разполагащи със специализирани звена.\n\n*",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:48.933] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "   **Вид на пробите:**\n    *   За алкохол: Вземат се **две",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:49.172] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "** проби кръв (вакутейнери) с обем не по-малък от 10 мл",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:49.380] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".\n    *   За наркотици: Вземат се проби от **кръв и урина**.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:49.629] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Кръвната проба е решаваща за доказване на употребата. Важно е да се зна",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:49.840] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "е, че наличието на метаболити в урината може да показва употреба дни назад, докато кръвта",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:50.066] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " доказва *актуално* въздействие (което е от значение за наказателната отговорност).\n*",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:50.336] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "   **Дезинфекция:** Кожата се почиства с дезинфектант, който **не съдържа алко",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:50.666] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "хол** (воден разтвор на \"Риванол\", \"Фурацилин\" и др.). Използването на",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:50.907] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " спирт е абсолютно основание за отмяна на резултата.\n*   **Съхранение и анализ:** Пробите",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:51.078] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " се съхраняват при температура +4°C до +8°C и се изпращат в специали",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:51.286] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "зирана лаборатория (ВМА, МВР и др.) не по-късно от 5 дни след",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:51.543] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " вземането (при хладилен режим).\n\n### 4. Често срещани процесуални",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:51.789] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " нарушения в съдебната практика\n\nАнализът на практиката на районните и административните съдилища показва след",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:52.061] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ните най-чести основания за отмяна на НП или оправдателни присъди:\n\n1.  **Из",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:52.321] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "текъл срок на техническата годност (ПТП) на уреда:** Ако към датата и",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:52.536] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " часа на проверката уредът не е преминал успешна периодична проверка в БИМ (или срок",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:52.798] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ът от 6 месеца е изтекъл дори с един ден), измерването е невалидно.\n2",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:53.103] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".  **Нарушен срок за явяване:** Ако полицаят е определил нереално кратък",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:53.338] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " срок за явяване в болницата (напр. 15 мин за разстояние, изискващо ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:53.545] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "30 мин), съдът приема, че правото на защита на водача е ограничено.\n3.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:53.871] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "  **Несъответствие в часовете:** Разминаване между часа на спиране, часа на теста с дре",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:54.085] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "гер, часа на издаване на талона и часа на вземане на кръвната проба.\n",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:54.334] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "4.  **Липса на \"Нулев тест\" (Blank test):** При разпечатката от",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:54.636] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " дрегера трябва да се вижда, че преди теста на водача уредът е направил самодиагностика и е",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:54.873] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " показал 0.00.\n5.  **Нарушена верига на съхранение:** До",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:55.105] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "казателства, че пробите не са съхранявани в хладилник или са транспортирани без х",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:55.364] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ладилна чанта до лабораторията.\n6.  **Неправомерен отказ за талон:** Слу",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:55.608] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чаи, в които водачът е искал кръвна проба, но полицаят не му е издал",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:55.881] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " талон или не го е отразил в АУАН.\n\n**Заключение:**\nПри защита по таки",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:56.102] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ва казуси, първата стъпка винаги е изискване на справка за **техническата го",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:56.422] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "дност на средството** към датата на нарушението и прецизно сравняване на всички часове, в",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:56.612] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "писани в АУАН, талона за изследване и протокола за медицинско изследване.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:56.630] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:36:56.635] [conv-1766565297338-bjjwrc] → STEP
+    {
+      "type": "step",
+      "agent": "research_agent",
+      "step": "synthesize",
+      "description": "Synthesizing response..."
+    }
+
+[10:37:18.618] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Ето синтезиран отговор на правния въпрос, базиран изцяло на предоставените документи и правна рамка.\n\n### ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:18.767] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "1. Резюме\nПроцедурата за установяване на употребата на алкохол и наркотични вещества е",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:18.967] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " строго формална и се регулира от Закона за движението по пътищата (ЗДвП) и На",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:19.170] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "редба № 1 от 19.07.2017 г. Тя включва първо",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:19.454] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "начална проверка с техническо средство, а при оспорване или отказ – медицинско изследване",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:19.691] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " чрез биологични проби. Законосъобразността на санкциите зависи изцяло от техническата годно",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:19.907] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ст на уредите, правилното оформяне на талона за изследване и спазването на",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:20.240] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " \"веригата на попечителство\" при пробите. Процесуалните нарушения в тези е",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:20.478] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "тапи са основно основание за отмяна на наказателни постановления от съда.\n\n### 2",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:20.635] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ". Правна рамка\n\n*   **Наредба № 1 от 19.07.2",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:20.902] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "017 г.** (обн. ДВ): Основен нормативен акт.\n    *   *",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:21.121] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Чл. 2 - 6:* Ред за извършване на проверки с технически средства.\n    *",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:21.311] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "   *Чл. 7 - 11:* Издаване на талон за изследване, вземане и транспорти",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:21.531] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ране на проби.\n*   **Закон за движението по пътищата (ЗДвП):**\n    ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:21.689] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "*   *Чл. 174:* Наказания за употреба на алкохол и отказ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:21.901] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " от проверка.\n    *   *Чл. 171, т. 1:* Принудителни административ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:22.077] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ни мерки (отнемане на СУМПС).\n*   **Наказателен ко",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:22.301] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "декс (НК):**\n    *   *Чл. 343б и 343в",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:22.605] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ":* Престъпни състави при висока концентрация на алкохол/наркотици или повтор",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:22.801] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ност/отказ.\n*   **Съдебна практика:** Тълкувателно решение № 1/20",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:23.057] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "16 г. на ВКС и практика на ВАС по административни дела.\n\n### 3. Подробен",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:23.300] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " анализ\n\nВъз основа на предоставените документи, анализът на поставените от Вас въпроси е следният:",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:23.547] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "\n\n#### 3.1. Изисквания към техническите средства\nСъгласно обобщените раз",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:23.746] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "поредби на Наредба № 1/2017 г. и ЗДвП, установ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:23.961] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "яването на употребата на алкохол и наркотици се извършва първоначално с технически средства (",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:24.305] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "дрегери/тестове). За да бъде резултатът от тях годно доказателство:\n*",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:24.533] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "   **Одобрен тип:** Средството трябва да е от одобрен тип, гарантиращ надеждни измер",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:24.774] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "вания.\n*   **Метрологична годност (Калибриране):** В \"Ключо",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:24.970] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ви разпоредби\" и съдебната практика се подчертава, че техническото средство трябва да при",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:25.268] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "тежава **валиден документ за премината метрологична проверка**. Липсата на валидна проверка към",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:25.542] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " датата и часа на спиране на водача прави показанията на уреда негодни, което води",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:25.706] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " до незаконосъобразност на последващите актове.\n\n#### 3.2. Процедура",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:25.932] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " при издаване на талон за медицинско изследване\nТалонът за изследване е ключов",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:26.114] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " документ, който се издава в хипотезите на оспорване на показанията на техническото средство",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:26.415] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " или при отказ/невъзможност за извършване на проверка с такова (Наредба № 1",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:26.636] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "/2017 г.).\n*   **Попълване:** Контролните органи са длъжни да",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:26.823] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " попълнят талона коректно, отразявайки личните данни и обстоятелствата",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:27.055] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " по проверката.\n*   **Срокове за явяване:** Наредбата определя строги правила за",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:27.354] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " времето, в което водачът трябва да се яви в медицинско заведение. Срокът се вписва в та",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:27.527] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "лона и започва да тече от момента на връчването му. Неспазването на този срок от",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:27.826] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " страна на водача прави пробата невалидна или се тълкува като отказ (според ЗДв",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:28.028] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "П и практиката на ВКС), освен при обективна невъзможност.\n\n#### 3.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:28.232] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "3. Изисквания към вземането на биологични проби\nНаредба № 1/2017",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:28.516] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " г. детайлно регламентира медицинската фаза:\n*   **Вземане на проби:**",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:28.688] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " Водачът е длъжен да даде биологична проба (кръв и/или урина",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:28.978] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ") в посоченото лечебно заведение.\n*   **Съхранение и транспорт:** Съществуват стро",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:29.172] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ги изисквания за съхранението и транспортирането на пробите до лабораторията, за да се гаранти",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:29.394] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ра, че те не са манипулирани или компрометирани. Нарушаването на реда за взе",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:29.681] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "мане (напр. дезинфекция с алкохолни разтвори при кръвна проба за алкохол)",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:29.904] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " или транспортиране опорочава резултата.\n\n#### 3.4. Често срещани процесу",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:30.156] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ални нарушения в съдебната практика\nАнализът на съдебната практика (ВКС и ВАС) пока",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:30.381] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "зва следните най-чести основания за отмяна на наказателни постановления или прекратяване на дела:",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:30.642] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "\n1.  **Негодно техническо средство:** Използване на уред с изтекъл срок",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:30.836] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " на метрологична проверка (калибрация).\n2.  **Нарушения при талона за изследване:**",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:31.105] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " Неправилно определен срок за явяване (прекалено кратък, несъобразен с дистанцията до",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:31.371] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " лечебното заведение) или липса на връчен талон, когато такъв е задължителен.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:31.636] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "\n3.  **Пороци при вземане на проби:** Нарушаване на \"веригата на",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:31.907] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " попечителство\" на пробите или неспазване на медицинските стандарти по Наредба",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:32.108] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " № 1/2017 г.\n4.  **Липса на доказателства:** Ко",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:32.407] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "гато административният орган не може да докаже спазването на процедурата при оспорване по реда на А",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:32.674] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ПК.\n\n### 4. Заключение и препоръки\nУстановяването на употреба на ал",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:32.958] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "кохол и наркотици е процес, при който формалните изисквания са гаранция за правата на водачите",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:33.156] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".\n*   **Извод:** Всяко отклонение от процедурата по Наредба № 1/2",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:33.435] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "017 г. (дори техническо) може да доведе до падане на акта в съда",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:33.689] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".\n*   **Препоръка:** При проверка е критично важно да се следи дали техническото средство е",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:33.955] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " с валидна стикер/дата за калибрация. При несъгласие с показанията, водачът",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:34.171] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " трябва стриктно да спази срока, вписан в талона за медицинско изследване, тъ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:34.463] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "й като закъснението се тълкува във вреда на водача (чл. 174",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:34.718] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ", ал. 3 ЗДвП и практика на ВКС).\n\n### 5. Източници\n1",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:34.910] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".  **Наредба № 1 от 19.07.2017 г.** за реда за установ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:35.100] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "яване употребата на алкохол и/или наркотични вещества или техни аналози (чл.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:35.299] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " 2-11).\n2.  **Закон за движението по пътищата** (чл.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:35.470] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " 171, 174, 175, 178а).\n3.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:35.643] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "  **Наказателен кодекс** (чл. 343б, 343в",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:35.830] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ").\n4.  **Тълкувателно решение № 1 от 27.05.2",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:36.002] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "016 г. на ВКС** по тълк. д. № 1/2015",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:36.201] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " г., ОСНК.\n5.  **Административнопроцесуален кодекс** (Глава Пета).",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:37:36.228] [conv-1766565297338-bjjwrc] → AGENT-END
+    {
+      "type": "agent-end",
+      "agent": "research_agent"
+    }
+
+[10:37:36.229] [conv-1766565297338-bjjwrc] → TASK-COMPLETE
+    {
+      "type": "task-complete",
+      "task_id": "t1",
+      "agent": "research_agent"
+    }
+
+[10:37:36.229] [conv-1766565297338-bjjwrc] → TASK-PLAN
+    {
+      "type": "task-plan",
+      "goal": "",
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Проучване на нормативната уредба (ЗДвП, Наредба № 1/2017) и съдебната практика относно процедурата за тестване за алкохол и наркотици.",
+          "status": "done"
+        },
+        {
+          "id": "t2",
+          "description": "Идентифициране на конкретни 'пробойни' в процедурата (метрология, срокове, медицинско изследване), които водят до падане на акта в съда.",
+          "status": "pending"
+        },
+        {
+          "id": "t3",
+          "description": "Изготвяне на правно становище/списък за проверка (checklist) за защитата.",
+          "status": "pending"
+        }
+      ]
+    }
+
+[10:37:52.727] [conv-1766565297338-bjjwrc] → TASK-START
+    {
+      "type": "task-start",
+      "task_id": "t2",
+      "description": "Анализирай съдебната практика и идентифицирай конкретни процесуални нарушения ('пробойни'), които най-често водят до отмяна на наказателни постановления за алкохол/наркотици. Фокусирай се върху детайлите: 1. Какви конкретни грешки в протоколите за метрологична проверка се зачитат от съда? 2. Как се тълкува 'необосновано къс срок' за медицинско изследване? 3. Какви са фаталните грешки при попълване на АУАН и талона за изследване? 4. Специфични нарушения при веригата на съхранение на пробите.",
+      "agent": "research_agent"
+    }
+
+[10:37:52.733] [conv-1766565297338-bjjwrc] → AGENT-START
+    {
+      "type": "agent-start",
+      "agent": "research_agent",
+      "task": "Processing delegated task"
+    }
+
+[10:37:52.736] [conv-1766565297338-bjjwrc] → STEP
+    {
+      "type": "step",
+      "agent": "research_agent",
+      "step": "analyze",
+      "description": "Analyzing request..."
+    }
+
+[10:38:07.121] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "```json\n{\n  \"queries\": [\n    \"съдебна практика отмяна наказателно постановление алкохол наркотици Наредба № 1 от ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:07.210] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "19.07.2017 г. съществени процесуални нарушения срок медицинско",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:07.360] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изследване метрологична проверка\"\n  ]\n}\n```",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:07.377] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:17.450] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:17.456] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "get_legal_references",
+      "args": {
+        "query": "Съдебна практика и процесуални нарушения при отмяна на НП за алкохол и наркотици по ЗДвП и Наредба № 1. Детайли: грешки в метрологична проверка на дрегер/drug test, тълкуване на срок за медицинско изследване, пороци в АУАН и талон за изследване, нарушения при съхранение на кръвни проби."
+      },
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:36.957] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "{\n  \"applicable_laws\": [\n    {\n      \"law_name\": \"Закон за административните нарушения и наказания\",\n      \"abbreviation\": \"З",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.059] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "АНН\",\n      \"articles\": [\"чл. 18\", \"чл. 42\", \"чл. 57\", \"чл. 59\", \"чл. 63\",",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.263] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " \"чл. 84\"],\n      \"summary\": \"Основен закон, уреждащ производството по установяване на административни нарушения и налагане на наказания, както и реда за обжалване",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.424] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на наказателните постановления. Регламентира изискванията към АУАН и НП, чиито пороци могат да доведат до отмяна.\",\n      \"source_url\": \"https://lex.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.592] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "bg/laws/ldoc/2122146904\"\n    },\n    {\n      \"law_name\": \"Закон за движение по пътищата\",\n      \"abbreviation\": \"",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.769] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ЗДвП\",\n      \"articles\": [\"чл. 171а\", \"чл. 174\"],\n      \"summary\": \"Определя забраната за управление на МПС под въз",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:37.953] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "действие на алкохол или наркотици, както и процедурите за установяване на тези нарушения, препращайки към Наредба № 1.\",\n      \"source_url\": \"https://lex.bg/",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:38.128] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "laws/ldoc/2133282436\"\n    },\n    {\n      \"law_name\": \"Наредба № 1 от 19 юли 2017 г",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:38.316] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ". за реда за установяване употребата на алкохол и/или наркотични вещества или техни аналози\",\n      \"abbreviation\": \"Наредба № 1\",\n      \"articles\": [\"чл. ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:38.493] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "2\", \"чл. 3\", \"чл. 4\", \"чл. 5\", \"чл. 6\", \"чл. 7\", \"чл. 8\", \"чл.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:38.681] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " 9\"],\n      \"summary\": \"Детайлно регламентира цялостната процедура по установяване употребата на алкохол и наркотици, включително изискванията към измервателните уреди (",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:38.856] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "метрологична проверка), сроковете за медицински изследвания, съхранението на пробите и документите, които се съставят. Всяко съществено отклонение от тези правила представля",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.039] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ва процесуално нарушение.\",\n      \"source_url\": \"https://lex.bg/laws/ldoc/2136932488\"\n    },\n    {\n      \"law_",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.245] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "name\": \"Административнопроцесуален кодекс\",\n      \"abbreviation\": \"АПК\",\n      \"articles\": [\"чл. 1, ал. 2\", \"Принципи на административния процес\"],",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.412] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n      \"summary\": \"Прилага се субсидиарно по отношение на обжалването на наказателни постановления пред съд, доколкото ЗАНН не урежда изрично определени въпроси",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.584] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на съдебното производство. Принципите на АПК за законосъобразност и обоснованост на актовете са водещи.\",\n      \"source_url\": \"https://lex.bg/laws/ld",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.776] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "oc/2135165609\"\n    }\n  ],\n  \"relevant_case_law\": [\n    \"Тълкувателно решение № 1 от 12.12",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:39.980] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".2007 г. по тълк. д. № 1/2007 г. на ОСНК на ВКС (относно съществените нарушения при съставянето на АУАН и НП)\",",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:40.148] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n    \"Тълкувателно решение № 1 от 03.12.2014 г. по тълк. д. № 1/2014 г. на ОСНК на ВК",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:40.363] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "С (относно съдебния контрол върху актовете по ЗАНН и възможността за поправяне на несъществени грешки)\",\n    \"Многобройна практика на районните и административните",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:40.606] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " съдилища, прилагаща тълкувателните решения и практиката на Върховния касационен съд по чл. 63 ЗАНН.\"\n  ],\n  \"key_provisions\": \"Нару",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:40.782] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "шенията в метрологичната проверка на техническите средства (дрегер/drug test) правят резултатите недостоверни и са съществено процесуално нарушение съгласно чл. 2 от На",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:40.962] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "редба № 1. Неспазването на императивните срокове за отвеждане за медицинско изследване и вземане на проби по чл. 6 от Наредба № 1 води до опо",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:41.146] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "рочаване на доказателствения материал. Пороците в съдържанието на АУАН (чл. 42 ЗАНН) и НП (чл. 57 ЗАНН), както",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:41.315] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и в 'талона за медицинско изследване' или протокола по Наредба № 1 (чл. 7), ако са съществени и възпрепятстват правото на защита или установ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:41.491] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "яването на обективната истина, водят до отмяна на НП. Нарушенията при съхранението на кръвни проби (чл. 8 от Наредба № 1)",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:41.683] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " поставят под съмнение тяхната автентичност и годност като доказателство. Всички тези нарушения, ако са съществени и не могат да бъдат санирани, водят до отмяна на",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:41.840] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " НП от съда, тъй като нарушават законоустановения ред за установяване и доказване на административното нарушение.\",\n  \"search_terms\": [\n    \"отмяна на НП",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:42.006] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " за алкохол\",\n    \"процесуални нарушения Наредба 1\",\n    \"метрологична заверка дрегер\",\n    \"срок медицинско изследване ЗДвП\",\n    ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:42.192] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\"съществен порок АУАН НП ЗАНН\",\n    \"нарушения съхранение проби алкохол наркотици\",\n    \"съдебна практика ЗАНН Наредба 1\"",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:42.217] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n  ]\n}",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:42.223] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:42.225] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "get_legal_references",
+      "result": "{\n  \"applicable_laws\": [\n    {\n      \"law_name\": \"Закон за административните нарушения и наказания\",\n      \"abbreviation\": \"ЗАНН\",\n      \"articles\": [\n        \"чл. 18\",\n        \"чл. 42\",\n        \"чл. ...",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:50.640] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Въз основа на анализа на съдебната практика (вкл. решения на районни и административни съдилища) и действащата нормативна уредба (ЗАН",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:50.731] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Н, ЗДвП и Наредба № 1 от 19.07.201",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:50.923] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "7 г.), ето детайлен разбор на най-честите процесуални нарушения (\"пробойни",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:51.156] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\"), водещи до отмяна на НП:\n\n### 1. Грешки в протоколите за метрологи",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:51.422] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чна проверка (Техническото средство)\nСъгласно чл. 2 и сл. от Наредба № ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:51.657] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "1, техническите средства (дрегери/Drug Test) трябва да са изправни и преминали периодична проверка",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:51.875] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".\n*   **Липса на валидна проверка:** Най-честата \"пробойна\". В",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:52.196] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "сяко средство подлежи на периодична проверка (обикновено на 6 или 12 месеца). Ако към",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:52.545] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " момента на теста проверката е изтекла дори с един ден, измерването е невалидно.\n*   **Не",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:52.775] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "съответствие в идентификацията:** В АУАН е записан един фабричен номер на уреда, а в прило",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:53.069] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "жената по делото справка за метрологична годност – друг. Това прекъсва доказателствената връ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:53.388] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "зка.\n*   **Липса на \"Self-Test\" разпечатка:** За новите модели дрегери съ",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:53.610] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "дебната практика често изисква първата разпечатка да показва успешна самодиагностика на уреда и",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:53.902] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " нулев резултат на въздуха преди пробата. Липсата на този компонент може да се т",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:54.136] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ълкува като неустановена изправност.\n\n### 2. Тълкуване на \"не",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:54.383] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "обосновано къс срок\" за медицинско изследване\nТова е една от най-успешните защи",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:54.635] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тни тези при обжалване. Полицейският орган е длъжен да определи срок за явяване в",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:54.879] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " медицинско заведение (чл. 6 от Наредба № 1).\n*   **Физическа невъз",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:55.144] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "можност:** Съдилищата масово отменят НП, ако срокът е обективно недостатъчен за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:55.384] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " придвижване (напр. дадени са 20 минути, а разстоянието до болницата",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:55.631] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изисква 35 минути при спазване на ЗДвП).\n*   **Липса на от",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:55.868] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "разен час на връчване:** В талона за изследване трябва да има точен час на връчване и",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:56.044] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " точен час на явяване. Ако часът на връчване липсва, съдът не може",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:56.319] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " да прецени дали срокът е бил адекватен (дори да е бил 2 часа), което се",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:56.559] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " счита за съществено нарушение на правото на защита.\n\n### 3. Фатални грешки при",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:56.792] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " попълване на АУАН и Талона за изследване\nНарушенията тук касаят чл.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:57.010] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " 42 и чл. 57 от ЗАНН, както и спец. изисквания на Наредбата",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:57.291] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".\n*   **Непредлагане на талон:** Ако водачът не е съгласен с показанията",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:57.770] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на дрегера, органът е *длъжен* да му връчи талон за медицинско изследване.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:57.828] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Невръчването на талон (или попълването на такъв, но непредставянето му за подпис",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:58.128] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ") лишава водача от единствената възможност да обори техническото средство.\n*   **Грешна",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:58.415] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " правна квалификация:** Честа грешка е объркването на ал. 1 (алкохол)",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:58.588] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и ал. 3 (наркотици) на чл. 174 ЗДвП или",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:58.875] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " неправилно посочване на концентрацията, което води до неяснота в обвинението.\n*   **",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:59.170] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Разминаване в часовете:** Ако в АУАН пише, че нарушението е извършено в 22:",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:59.406] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "30, а разпечатката от дрегера е с час 22:45, това раз",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:59.634] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "минаване може да бъде фатално, тъй като поставя под съмнение дали тестът е на лицето, посо",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:38:59.844] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чено в акта.\n\n### 4. Нарушения при веригата на съхранение на пробите (",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:00.140] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Chain of Custody)\nТова са \"скритите\" нарушения, които се установяват само чрез експерти",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:00.472] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "за в съдебна фаза.\n*   **Температурен режим:** Кръвните проби трябва да се",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:00.851] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " съхраняват при температура +4°C до +8°C. Доказването (чрез пътни ли",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:01.053] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "сти или свидетели), че пробите са возени в багажник на патрулка през лятото в",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:01.222] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " продължение на часове, води до компрометиране на пробата и отмяна на НП.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:01.494] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n*   **Повторна проба:** Липсата на контролна \"Б\" проба или недоста",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:01.743] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тъчното количество кръв във вакутейнера за извършване на контролен анализ също е основание за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:02.025] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " отмяна, тъй като се нарушава правото на защита при оспорване на химическата екс",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:02.280] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "пертиза.\n*   **Закъснение при транспортиране:** Наредба № 1 изисква проби",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:02.569] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "те да се изпратят в лаборатория не по-късно от 3 дни (или 5 дни за",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:02.845] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " наркотици, според спецификата). Значителното просрочване създава риск от ферментация или",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.088] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " разпад на веществата.\n\n**Препоръка:** При обжалване е ключово да се изискат",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.334] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ": 1) Справка за метрологична годност на уреда; 2) Прото",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.601] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "кола за химическа експертиза и 3) Дневника на лечебното заведение за пост",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.717] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ъпили проби, за да се засекат часовете.",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.737] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "research_agent",
+      "step": "analyze"
+    }
+
+[10:39:03.742] [conv-1766565297338-bjjwrc] → STEP
+    {
+      "type": "step",
+      "agent": "research_agent",
+      "step": "synthesize",
+      "description": "Synthesizing response..."
+    }
+
+[10:39:23.318] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Въз основа на предоставените документи, изготвих следния правен анализ относно процесуалните нарушения, водещи до отмя",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:23.462] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "на на наказателни постановления (НП) за управление на МПС след употреба на алкохол или наркотични",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:23.650] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " вещества.\n\n### 1. Резюме\nСъдебната практика отменя наказателни постановления за алкохол и",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:23.872] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " наркотици основно при наличие на **съществени процесуални нарушения**, които накърняват",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:24.138] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " правото на защита на дееца или правят резултатите от изследването недостоверни. Най-честите основания",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:24.379] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " (\"пробойни\") са свързани с липса или изтекла валидност на метрологичната",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:24.578] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " проверка на техническите средства, определяне на обективно невъзможни срокове за медицинско изследване",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:24.772] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ", пороци в попълването на талона за изследване и нарушаване на веригата за",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:25.018] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " съхранение на биологичните проби съгласно Наредба № 1 от 2017 г.\n\n",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:25.231] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "### 2. Правна рамка\n\n*   **Закон за административните нарушения и наказания (ЗАН",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:25.416] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Н):**\n    *   **Чл. 42 и Чл. 57:** Изисквания към",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:25.666] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " реквизитите на Акта за установяване на административно нарушение (АУАН) и Наказателното постанов",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:25.885] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ление (НП).\n    *   **Чл. 59 и Чл. 63:** Про",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:26.115] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "цедура по обжалване и съдебен контрол.\n*   **Закон за движение по пъ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:26.309] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "тищата (ЗДвП):**\n    *   **Чл. 174:** Състави",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:26.520] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " на административните нарушения за шофиране след употреба на алкохол/наркотици.\n*   **На",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:26.713] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "редба № 1 от 19 юли 2017 г. за реда за установяване",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:26.900] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " употребата на алкохол и/или наркотични вещества или техни аналози:**\n    *   **",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:27.073] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Чл. 2:** Изисквания към техническите средства (метрологична проверка).\n    ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:27.295] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "*   **Чл. 6:** Срокове за явяване в медицинско заведение.\n    *",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:27.454] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "   **Чл. 7:** Съставяне на талон за изследване.\n    *   ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:27.710] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "**Чл. 8 - 9:** Вземане, съхранение и транспорт на проби.\n*   ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:27.943] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "**Съдебна практика:** Тълкувателни решения № 1/2007 г. и №",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:28.079] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " 1/2014 г. на ОСНК на ВКС (относно критериите за съще",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:28.331] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ствени нарушения и възможността за санирането им).\n\n### 3. Подробен анализ\n\nСъдили",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:28.577] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "щата прилагат строго формален подход при проверката на спазването на Наредба № 1. Идентифицира",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:28.819] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ните \"пробойни\" се класифицират както следва:\n\n#### 1. Грешки в протоко",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:29.035] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "лите за метрологична проверка (Техническа годност)\nСъгласно **чл. 2 от Наред",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:29.259] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ба № 1**, употребата на алкохол се установява с технически средства, преминали *успешна*",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:29.482] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " метрологична проверка.\n*   **Конкретни нарушения:**\n    *   **Изтекъл срок на вали",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:29.706] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "дност:** Ако към датата и часа на проверката на пътя, знакът за периодична проверка на дреге",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:30.022] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ра (стикер/холограма) или удостоверението за такава е с изтекъл срок (",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:30.254] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "обикновено 6 или 12 месеца), показанията на уреда са **правно и",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:30.486] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "релевантни**. Съдът приема резултата за недостоверен.\n    *   **Несъ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:30.666] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ответствие в идентификацията:** Разминаване между серийния номер на устройството, вписан в АУ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:30.911] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "АН, и номера в протокола за метрологична проверка.\n    *   **Липса на данни в",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:31.148] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " АУАН:** Ако в акта не е посочен фабричният номер на устройството или номерът на про",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:31.470] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "бата, не може да се установи дали представената в съда разпечатка (клише) е точно",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:31.743] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " от тази проверка.\n\n#### 2. Тълкуване на \"необосновано къс срок\" за медицинско из",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:32.031] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "следване\n**Чл. 6 от Наредба № 1** изисква контролните органи да определят",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:32.244] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " срок за явяване в медицинско заведение.\n*   **Съдебна интерпретация:** Нарушението е",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:32.474] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " налице, когато определеният от полицая срок (в минути) е обективно недостатъчен за физи",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:32.707] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ческото придвижване на лицето от мястото на проверката до посоченото лечебно заведение",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:33.025] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".\n*   **Ефект:** Ако водачът не успее да се яви навреме поради \"необосно",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:33.350] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "вано къс срок\", това се тълкува като възпрепятстване на правото му да опроверга",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:33.621] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "е показанията на техническото средство чрез кръвна проба. В тези случаи съдът отменя НП, тъ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:33.824] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "й като невъзможността за даване на проба не е по вина на водача, а е резултат от проце",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:33.996] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "суално нарушение на органа.\n\n#### 3. Фатални грешки при попълване на А",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:34.229] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "УАН и талона за изследване\nДокументирането е критичен етап. Грешките ту",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:34.462] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "к се оценяват през призмата на **чл. 42 от ЗАНН** и **чл",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:34.624] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ". 7 от Наредба № 1**.\n*   **В АУАН:**\n    *   ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:34.881] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Липса на подпис на нарушителя или на свидетел (освен при надлежно оформен отказ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:35.147] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ").\n    *   Неясно описание на нарушението или липса на конкретизация на концентрацията (про",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:35.514] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "милите).\n*   **В Талона за изследване (Чл. 7 от Наредба №",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:35.756] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " 1):**\n    *   **Непопълване на талон:** Ако водачът не е съгласен",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:35.936] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " с показанията на дрегера, но не му е издаден талон за медицинско изследване,",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:36.279] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " това е абсолютно основание за отмяна (лишаване от право на защита).\n    *   **Неточно по",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:36.692] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "пълване:** Липса на час на връчване или час на явяване в болницата. Без",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:36.915] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " тези реквизити съдът не може да прецени спазен ли е срокът по чл. 6.\n",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:37.166] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "    *   **Неправилен формуляр:** Използване на стари бланки на талони,",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:37.356] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " които не отговарят на актуалните изисквания на Наредба № 1.\n\n#### 4.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:37.529] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " Специфични нарушения при веригата на съхранение на пробите\nСъгласно **ч",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:37.832] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "л. 8 и сл. от Наредба № 1**, процедурата по вземане и съхранение е",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:38.090] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " строго регламентирана, за да се гарантира автентичността.\n*   **Нарушения на ве",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:38.379] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ригата (Chain of Custody):**\n    *   Всяко съмнение, че пробата е мани",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:38.597] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "пулирана, разменена или неправилно съхранявана (напр. извън хладилни",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:38.870] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " условия, водещо до процеси на ферментация и промяна на алкохолния градус), прави",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:39.093] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " химическата експертиза негодна.\n    *   Липса на подписи на медицинското",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:39.388] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " лице или водача върху опаковката/протокола за вземане на пробата.\n    *   Забавя",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:39.644] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "не в транспортирането на пробите до специализираната лаборатория извън регламентираните срокове,",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:39.835] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " което може да компрометира качеството на биологичния материал.\n\n### 4. Заключение и",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:40.136] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " препоръки\n\nАнализът на предоставените документи показва, че успешната защита срещу Н",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:40.400] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "П за алкохол и наркотици се гради не върху оспорване на самото деяние, а върху",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:40.617] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " атакуване на процедурата по **Наредба № 1**.\n\n**Основни изводи:**\n1.  **",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:40.873] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "Същественост:** Нарушението е съществено, ако, ако не беше допуснато, би могло",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:41.104] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " да доведе до различен правен резултат или ако ограничава правото на защита (Тълкува",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:41.352] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "телно решение № 1/2014).\n2.  **Автоматична отмяна:** Липсата",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:41.657] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " на валидна метрологична проверка на дрегера/теста прави установяването на нарушението изначално недоказано",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:41.854] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".\n3.  **Правото на контра-доказателство:** Възпрепятстването на водача",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:42.081] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " да даде кръвна проба (чрез даване на невъзможен срок или неиздаване на та",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:42.349] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "лон) е фатален порок на процеса.\n\n**Препоръка:** При обжалване след",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:42.641] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ва да се изискат служебно справки за метрологичната годност на уреда, както и п",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:42.938] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "ълната документация по движението на биологичните проби от момента на вземането им до анализа в лабораторията",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:43.223] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ".\n\n### 5. Източници\n*   Закон за административните нарушения и наказания (ЗАНН",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:43.474] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": ") – чл. 42, 57, 59, 63.\n*   На",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:43.709] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "редба № 1 от 19 юли 2017 г. за реда за установяване",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:43.917] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": " употребата на алкохол и/или наркотични вещества – чл. 2, 6, ",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:44.084] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "7, 8.\n*   Закон за движение по пътищата (ЗДвП) – ч",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:44.307] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "л. 174.\n*   Тълкувателни решения на ВКС (№ 1/20",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:44.495] [conv-1766565297338-bjjwrc] → CONTENT
+    {
+      "type": "content",
+      "text": "07 и № 1/2014) относно процесуалните нарушения.",
+      "agent": "research_agent",
+      "step": "synthesize"
+    }
+
+[10:39:44.519] [conv-1766565297338-bjjwrc] → AGENT-END
+    {
+      "type": "agent-end",
+      "agent": "research_agent"
+    }
+
+[10:39:44.519] [conv-1766565297338-bjjwrc] → TASK-COMPLETE
+    {
+      "type": "task-complete",
+      "task_id": "t2",
+      "agent": "research_agent"
+    }
+
+[10:39:44.520] [conv-1766565297338-bjjwrc] → TASK-PLAN
+    {
+      "type": "task-plan",
+      "goal": "",
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Проучване на нормативната уредба (ЗДвП, Наредба № 1/2017) и съдебната практика относно процедурата за тестване за алкохол и наркотици.",
+          "status": "done"
+        },
+        {
+          "id": "t2",
+          "description": "Идентифициране на конкретни 'пробойни' в процедурата (метрология, срокове, медицинско изследване), които водят до падане на акта в съда.",
+          "status": "done"
+        },
+        {
+          "id": "t3",
+          "description": "Изготвяне на правно становище/списък за проверка (checklist) за защитата.",
+          "status": "pending"
+        }
+      ]
+    }
+
+[10:39:55.050] [conv-1766565297338-bjjwrc] → TASK-START
+    {
+      "type": "task-start",
+      "task_id": "t3",
+      "description": "Изготви структуриран списък за проверка (checklist) за защитата, базиран на Наредба № 1/2017 и съдебната практика. Списъкът трябва да служи като ръководство за адвоката при преглед на материалите по делото. Включи секции за: 1. Проверка на АУАН (реквизити, подписи). 2. Проверка на техническото средство (метрология, фабрични номера). 3. Проверка на Талона за изследване (срок за явяване, часове). 4. Проверка на протоколите за медицинско изследване и химическа експертиза (верига на съхранение). За всяка точка посочи какво точно да се търси като нарушение.",
+      "agent": "drafting_agent"
+    }
+
+[10:39:55.057] [conv-1766565297338-bjjwrc] → AGENT-START
+    {
+      "type": "agent-start",
+      "agent": "drafting_agent",
+      "task": "Processing delegated task"
+    }
+
+[10:39:55.060] [conv-1766565297338-bjjwrc] → STEP
+    {
+      "type": "step",
+      "agent": "drafting_agent",
+      "step": "analyze",
+      "description": "Analyzing request..."
+    }
+
+[10:40:07.945] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "```json\n{\n  \"intent\": \"Списък за проверка (Checklist) за защитата по На",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:08.100] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "редба № 1/2017\",\n  \"properties\": {\n    \"правно_о",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:08.258] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "снование\": \"Наредба № 1/2017 и съдебна практика\",\n    \"",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:08.484] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "цел_на_документа\": \"Ръководство за адвокат при преглед на материали по",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:08.699] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " делото\",\n    \"структура_раздел_1\": \"Проверка на АУАН (реквизити",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:08.877] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ", подписи)\",\n    \"структура_раздел_2\": \"Проверка на техническото средство (",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.084] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "метрология, фабрични номера)\",\n    \"структура_раздел_3\": \"Проверка на Та",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.244] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "лона за изследване (срок за явяване, часове)\",\n    \"структура_",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.419] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "раздел_4\": \"Проверка на протоколите за медицинско изследване и химическа експерти",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.609] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "за (верига на съхранение)\",\n    \"специфично_изискване\": \"За",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.769] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " всяка точка да се посочи какво конкретно нарушение да се търси\"\n  }\n}\n```",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:09.783] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:14.274] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:14.280] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "list_directory",
+      "args": {
+        "dir_path": "/templates/"
+      },
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:14.282] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "list_directory",
+      "result": "content='Contents of /templates/:\\n📄 /templates/Rental Agreement.docx\\n📄 /templates/Rental Agreement.docx.html\\n📄 /templates/Tpl_with_bad_name_.docx\\n📄 /templates/Tpl_with_bad_name_.docx.html\\n📄 /templates/rental_agreement.docx\\n📄 /templates/rental_agreement.docx.html\\n📄 /templates/Договор за наем на УПИ - Слънчев бряг.docx\\n📄 /templates/Договор за наем на УПИ - Слънчев бряг.docx.html\\n📄 /templates/Договор за наем на УПИ и Самостоятелен обект.docx\\n📄 /templates/Договор за наем на УПИ и Самостоятелен обект.docx.html' name='list_directory' tool_call_id='776fda2e-41c1-4c70-a5eb-40b577d3355c'",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:21.540] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:21.547] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "glob",
+      "args": {
+        "base_dir": "/templates/",
+        "pattern": "*Наредба*"
+      },
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:21.549] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "glob",
+      "result": "content='No files found matching pattern: *Наредба* in /templates/' name='glob' tool_call_id='3bcb9956-24c0-450e-b09e-61d4841adcdc'",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:24.587] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:24.594] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "glob",
+      "args": {
+        "base_dir": "/templates/",
+        "pattern": "*Списък*"
+      },
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:24.596] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "glob",
+      "result": "content='No files found matching pattern: *Списък* in /templates/' name='glob' tool_call_id='3dac22d4-3d25-4405-b202-41eeac381b6f'",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:29.130] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Съжалявам, но не успях да намеря шаблон със заглавие \"Списък за проверка (Checklist) за защитата по Наред",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:29.267] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ба № 1/2017\" в директорията с шаблони.\n\nНаличните шабло",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:29.491] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ни в момента са:\n*   `Rental Agreement.docx`\n*   `Tpl_with_bad_",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:29.699] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "name_.docx`\n*   `Договор за наем на УПИ - Слънчев б",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:30.162] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ряг.docx`\n*   `Договор за наем на УПИ и Самостоятелен",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:30.179] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " обект.docx`\n\nМоля, проверете дали името е правилно или качете съответния",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:30.268] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " файл, ако разполагате с него.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:30.277] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:47.014] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "СПИСЪК ЗА ПРОВЕРКА (CHECKLIST)\nЗА АНАЛИЗ НА МАТЕРИ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:47.211] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "АЛИ ПО ДЕЛА ЗА УПРАВЛЕНИЕ НА МПС СЛЕД УПОТРЕБА НА",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:47.532] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " АЛКОХОЛ ИЛИ НАРКОТИЧНИ ВЕЩЕСТВА\n\n**ВЪТРЕШ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:47.720] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ЕН ДОКУМЕНТ ЗА ЗАЩИТАТА**\n\n**ДОСИЕ №:** ........................",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:47.937] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " / ........................ г.\n**КЛИЕНТ:** ................................................................\n**ДАТА НА П",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:48.158] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "РЕГЛЕД:** ...........................................\n\n---\n\n### I. ПРЕДМЕТ И ЦЕЛ\n",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:48.409] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Настоящият списък за проверка е изготвен на основание Наредба № 1 от 19 ю",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:48.615] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ли 2017 г. за реда за установяване употребата на алкохол и/или нарко",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:48.911] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тични вещества или техни аналози и съответната съдебна практика. Целта е систематичен преглед на",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:49.157] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " доказателствения материал за идентифициране на съществени процесуални нарушения, които биха могли",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:49.413] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " да доведат до отмяна на НП или оправдателна присъда.\n\n---\n\n### II. Р",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:49.651] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "АЗДЕЛ 1: ПРОВЕРКА НА АУАН (АКТ ЗА УСТАНОВЯВ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:49.840] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "АНЕ НА АДМИНИСТРАТИВНО НАРУШЕНИЕ)\n\n**Цел:** У",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:50.131] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "становяване на формалната и материална законосъобразност на акта съгласно ЗАНН и ЗДвП.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:50.381] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n\n| № | Елемент за проверка | Какво нарушение (порок) да се търси | Статус |\n|",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:50.673] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "---|---|---|---|\n| 1.1 | **Компетентност на актосъставителя** |",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:50.956] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Липса на приложена Заповед на Министъра на МВР, оправомощаваща д",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:51.125] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "лъжностното лице да издава АУАН и да работи с конкретното техническо средство.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:51.344] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " | [ ] |\n| 1.2 | **Свидетели по акта** | Липса на подпис",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:51.638] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на свидетел; свидетелят не е присъствал при установяване на нарушението (тестването), а",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:51.936] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " е повикан само за оформяне на акта; несъответствие между имената в обстоятелствената част",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:52.147] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и подписалите се. | [ ] |\n| 1.3 | **Описание на нарушението** | Не",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:52.435] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "пълно или неясно описание на фактическата обстановка; липса на посочено място, дата и час",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:52.606] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "; несъответствие между описанието в АУАН и показанията на техническото средство. | [",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:52.811] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ] |\n| 1.4 | **Връчване и подписи** | Липса на подпис",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:53.023] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на нарушителя в графата за връчване на препис; липса на отбелязване",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:53.455] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " за възражения; подписът не принадлежи на лицето (нужда от графологична експертиза).",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:53.734] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " | [ ] |\n| 1.5 | **Правни квалификации** | Погрешно посочена нару",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:54.021] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "шена разпоредба (напр. цитиране на стара редакция на чл. 5 или чл. ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:54.218] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "174 ЗДвП). | [ ] |\n\n---\n\n### III. РАЗДЕЛ 2",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:54.426] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ": ПРОВЕРКА НА ТЕХНИЧЕСКОТО СРЕДСТВО (АЛКОТЕ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:54.656] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "СТ / DRUG TEST)\n\n**Цел:** Установяване на годността на средството за измер",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:54.894] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ване и правилността на експлоатацията му.\n\n| № | Елемент за проверка | Какво нарушение (по",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:55.078] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "рок) да се търси | Статус |\n|---|---|---|---|\n| 2.1 | **",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:55.377] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Идентификация на уреда** | Несъответствие между фабричния номер на уреда, вписан в",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:55.615] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " АУАН, и този в разпечатката (чека) от устройството. | [ ] |\n|",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:55.846] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " 2.2 | **Метрологична проверка (Калибрация)** | Изтекъл срок на валидно",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:56.120] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ст на знака за периодична проверка (холограмен стикер) към датата на деянието. Ли",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:56.394] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "пса на протокол за премината проверка (обичайно на всеки 6 или 12 месеца). | [",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:56.641] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ] |\n| 2.3 | **Разпечатка (Принтиран резултат)** | Липса на раз",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:56.922] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "печатка по делото; нечетима разпечатка; разминаване в часа на теста върху разпечатката",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:57.169] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " и часа на проверката в АУАН (несъответствие над допустимия технологичен минимум). | [ ]",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:57.359] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " |\n| 2.4 | **Температурен режим** | Използване на уреда",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:57.568] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " извън работния температурен диапазон (напр. при екстремно ниски температури, ако специ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:57.788] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "фикацията на уреда не го позволява). | [ ] |\n| 2.5 | **В",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:58.085] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тора проба (за алкохол)** | Отказ на служителите да направят втора проба при наличие на оста",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:58.266] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "тъчен алкохол в устната кухина (изчакване на 15 мин. съ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:58.499] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "гласно инструкцията за експлоатация). | [ ] |\n\n---\n\n### IV. РАЗДЕЛ ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:58.676] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "3: ПРОВЕРКА НА ТАЛОНА ЗА ИЗСЛЕДВАНЕ (МЕД",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:58.970] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ИЦИНСКО ОСВИДЕТЕЛСТВАНЕ)\n\n**Цел:** Проверка за спазване на",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:59.178] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " стриктната процедура по Наредба № 1/2017.\n\n| № | Елемент за",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:59.367] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " проверка | Какво нарушение (порок) да се търси | Статус |\n|---|---|---|---|\n",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:59.602] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "| 3.1 | **Връчване на талона** | Талонът не е връчен лично",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:40:59.900] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " срещу подпис; не е попълнен в три екземпляра; липсва пореден номер.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:00.060] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " | [ ] |\n| 3.2 | **Срок за явяване (Чл. 6",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:00.249] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ", ал. 3 от Наредбата)** | Определеният срок е по-кратък от 4",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:00.469] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "5 минути (когато лечебното заведение е в същото населено място) или 120 минути",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:00.730] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " (когато е в друго). Срокът е физически невъзможен за спазване с оглед разстояние",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:00.923] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "то и трафика. | [ ] |\n| 3.3 | **Вписване на часове** |",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:01.177] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Липса на вписан час на връчване на талона; липса на вписан час на",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:01.455] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " явяване в лечебното заведение; поправки и задрасквания без подпис на лицето. | [",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:01.643] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ] |\n| 3.4 | **Отказ от медицинско изследване** | Неправилно",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:01.897] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " документиран отказ – ако лицето се е явило, но лекарят е отказал проба поради не",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:02.258] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "плащане или други административни пречки (това не е отказ по вина на дееца). |",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:02.418] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " [ ] |\n\n---\n\n### V. РАЗДЕЛ 4: ПРОВЕРКА НА ПРОТО",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:02.627] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "КОЛИТЕ ЗА МЕДИЦИНСКО ИЗСЛЕДВАНЕ И ХИМИЧЕС",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:02.888] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "КА ЕКСПЕРТИЗА\n\n**Цел:** Проверка на веригата на съхранение (chain of custody",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:03.101] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ") и стерилността на пробите.\n\n| № | Елемент за проверка | Какво нарушение (",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:03.271] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "порок) да се търси | Статус |\n|---|---|---|---|\n| 4.1 |",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:03.525] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " **Дезинфекция при вземане на кръв** | В Протокола за медицинско изследване е записа",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:03.787] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "но използване на спирт, йод или тинктури, съдържащи алкохол (забранено при",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:03.970] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изследване за алкохол – трябва да е воден разтвор). | [ ] |\n| 4",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:04.189] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".2 | **Количество и опаковка на пробите** | Взета е само една вакуумна е",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:04.450] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "пруветка (задължително са две за алкохол); пробите не са запечатани",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:04.746] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " пред изследваното лице; нарушена цялост на опаковката при приемане в лабораторията. | [",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:05.023] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ] |\n| 4.3 | **Съхранение и транспорт** | Липса на данни за съхранение",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:05.267] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " в хладилник (4°C - 8°C); забавяне на транспортирането до",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:05.572] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " специализираната лаборатория повече от регламентирания срок (обичайно до 5 дни, съгл. Наредбата",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:05.867] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "). | [ ] |\n| 4.4 | **Идентификация на пробите** | Разминаване между номера",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:06.156] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на талона за изследване и номера, вписан върху етикетите на епруветките или",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:06.350] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " в химическата експертиза. | [ ] |\n| 4.5 | **Акредитация на лабора",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:06.556] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "торията** | Изследването е извършено в лаборатория, която не фигурира в списъка на ото",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:06.733] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ризираните лечебни заведения съгласно Наредба № 1. | [ ] |\n\n---\n\n",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:06.931] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "### VI. ЗАКЛЮЧИТЕЛНИ КОНСТАТАЦИИ И ПРЕПОРЪ",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:07.134] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "КИ ЗА ЗАЩИТАТА\n\n**Обобщение на откритите нарушения:**\n................................................................................",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:07.358] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".......................................................................\n.......................................................................................................................................................\n................................................................................................................................",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:07.571] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ".......................\n\n**Препоръчителни процесуални действия:**\n[ ] Искане за разпит",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:07.788] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на актосъставителя/свидетелите.\n[ ] Искане за разпит на лекаря, взе",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.004] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "л пробата.\n[ ] Искане за назначаване на съдебно-метрологична експертиза",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.264] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " на уреда.\n[ ] Искане за повторна химическа експертиза на контролната про",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.549] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ба (ако е приложимо).\n[ ] Възражение срещу АУАН в 3-дне",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.750] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "вен срок (ако е в този етап).\n\n**Изготвил (Адвокат):** .................................................",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.828] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "...\n\n**Подпис:** ....................................................",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.849] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.855] [conv-1766565297338-bjjwrc] → TOOL-CALL
+    {
+      "type": "tool-call",
+      "tool": "create_docx_file",
+      "args": {
+        "file_name": "Списък_за_проверка_(Checklist)_за_защитата_по_Наредба_№_1/2017_draft.docx",
+        "content": "СПИСЪК ЗА ПРОВЕРКА (CHECKLIST)\nЗА АНАЛИЗ НА МАТЕРИАЛИ ПО ДЕЛА ЗА УПРАВЛЕНИЕ НА МПС СЛЕД УПОТРЕБА НА АЛКОХОЛ ИЛИ НАРКОТИЧНИ ВЕЩЕСТВА\n\n**ВЪТРЕШЕН ДОКУМЕНТ ЗА ЗАЩИТАТА**\n\n**ДОСИЕ №:** ........................ / ........................ г.\n**КЛИЕНТ:** ................................................................\n**ДАТА НА ПРЕГЛЕД:** ...........................................\n\n---\n\n### I. ПРЕДМЕТ И ЦЕЛ\nНастоящият списък за проверка е изготвен на основание Наредба № 1 от 19 юли 2017 г. за реда за установяване употребата на алкохол и/или наркотични вещества или техни аналози и съответната съдебна практика. Целта е систематичен преглед на доказателствения материал за идентифициране на съществени процесуални нарушения, които биха могли да доведат до отмяна на НП или оправдателна присъда.\n\n---\n\n### II. РАЗДЕЛ 1: ПРОВЕРКА НА АУАН (АКТ ЗА УСТАНОВЯВАНЕ НА АДМИНИСТРАТИВНО НАРУШЕНИЕ)\n\n**Цел:** Установяване на формалната и материална законосъобразност на акта съгласно ЗАНН и ЗДвП.\n\n| № | Елемент за проверка | Какво нарушение (порок) да се търси | Статус |\n|---|---|---|---|\n| 1.1 | **Компетентност на актосъставителя** | Липса на приложена Заповед на Министъра на МВР, оправомощаваща длъжностното лице да издава АУАН и да работи с конкретното техническо средство. | [ ] |\n| 1.2 | **Свидетели по акта** | Липса на подпис на свидетел; свидетелят не е присъствал при установяване на нарушението (тестването), а е повикан само за оформяне на акта; несъответствие между имената в обстоятелствената част и подписалите се. | [ ] |\n| 1.3 | **Описание на нарушението** | Непълно или неясно описание на фактическата обстановка; липса на посочено място, дата и час; несъответствие между описанието в АУАН и показанията на техническото средство. | [ ] |\n| 1.4 | **Връчване и подписи** | Липса на подпис на нарушителя в графата за връчване на препис; липса на отбелязване за възражения; подписът не принадлежи на лицето (нужда от графологична експертиза). | [ ] |\n| 1.5 | **Правни квалификации** | Погрешно посочена нарушена разпоредба (напр. цитиране на стара редакция на чл. 5 или чл. 174 ЗДвП). | [ ] |\n\n---\n\n### III. РАЗДЕЛ 2: ПРОВЕРКА НА ТЕХНИЧЕСКОТО СРЕДСТВО (АЛКОТЕСТ / DRUG TEST)\n\n**Цел:** Установяване на годността на средството за измерване и правилността на експлоатацията му.\n\n| № | Елемент за проверка | Какво нарушение (порок) да се търси | Статус |\n|---|---|---|---|\n| 2.1 | **Идентификация на уреда** | Несъответствие между фабричния номер на уреда, вписан в АУАН, и този в разпечатката (чека) от устройството. | [ ] |\n| 2.2 | **Метрологична проверка (Калибрация)** | Изтекъл срок на валидност на знака за периодична проверка (холограмен стикер) към датата на деянието. Липса на протокол за премината проверка (обичайно на всеки 6 или 12 месеца). | [ ] |\n| 2.3 | **Разпечатка (Принтиран резултат)** | Липса на разпечатка по делото; нечетима разпечатка; разминаване в часа на теста върху разпечатката и часа на проверката в АУАН (несъответствие над допустимия технологичен минимум). | [ ] |\n| 2.4 | **Температурен режим** | Използване на уреда извън работния температурен диапазон (напр. при екстремно ниски температури, ако спецификацията на уреда не го позволява). | [ ] |\n| 2.5 | **Втора проба (за алкохол)** | Отказ на служителите да направят втора проба при наличие на остатъчен алкохол в устната кухина (изчакване на 15 мин. съгласно инструкцията за експлоатация). | [ ] |\n\n---\n\n### IV. РАЗДЕЛ 3: ПРОВЕРКА НА ТАЛОНА ЗА ИЗСЛЕДВАНЕ (МЕДИЦИНСКО ОСВИДЕТЕЛСТВАНЕ)\n\n**Цел:** Проверка за спазване на стриктната процедура по Наредба № 1/2017.\n\n| № | Елемент за проверка | Какво нарушение (порок) да се търси | Статус |\n|---|---|---|---|\n| 3.1 | **Връчване на талона** | Талонът не е връчен лично срещу подпис; не е попълнен в три екземпляра; липсва пореден номер. | [ ] |\n| 3.2 | **Срок за явяване (Чл. 6, ал. 3 от Наредбата)** | Определеният срок е по-кратък от 45 минути (когато лечебното заведение е в същото населено място) или 120 минути (когато е в друго). Срокът е физически невъзможен за спазване с оглед разстоянието и трафика. | [ ] |\n| 3.3 | **Вписване на часове** | Липса на вписан час на връчване на талона; липса на вписан час на явяване в лечебното заведение; поправки и задрасквания без подпис на лицето. | [ ] |\n| 3.4 | **Отказ от медицинско изследване** | Неправилно документиран отказ – ако лицето се е явило, но лекарят е отказал проба поради неплащане или други административни пречки (това не е отказ по вина на дееца). | [ ] |\n\n---\n\n### V. РАЗДЕЛ 4: ПРОВЕРКА НА ПРОТОКОЛИТЕ ЗА МЕДИЦИНСКО ИЗСЛЕДВАНЕ И ХИМИЧЕСКА ЕКСПЕРТИЗА\n\n**Цел:** Проверка на веригата на съхранение (chain of custody) и стерилността на пробите.\n\n| № | Елемент за проверка | Какво нарушение (порок) да се търси | Статус |\n|---|---|---|---|\n| 4.1 | **Дезинфекция при вземане на кръв** | В Протокола за медицинско изследване е записано използване на спирт, йод или тинктури, съдържащи алкохол (забранено при изследване за алкохол – трябва да е воден разтвор). | [ ] |\n| 4.2 | **Количество и опаковка на пробите** | Взета е само една вакуумна епруветка (задължително са две за алкохол); пробите не са запечатани пред изследваното лице; нарушена цялост на опаковката при приемане в лабораторията. | [ ] |\n| 4.3 | **Съхранение и транспорт** | Липса на данни за съхранение в хладилник (4°C - 8°C); забавяне на транспортирането до специализираната лаборатория повече от регламентирания срок (обичайно до 5 дни, съгл. Наредбата). | [ ] |\n| 4.4 | **Идентификация на пробите** | Разминаване между номера на талона за изследване и номера, вписан върху етикетите на епруветките или в химическата експертиза. | [ ] |\n| 4.5 | **Акредитация на лабораторията** | Изследването е извършено в лаборатория, която не фигурира в списъка на оторизираните лечебни заведения съгласно Наредба № 1. | [ ] |\n\n---\n\n### VI. ЗАКЛЮЧИТЕЛНИ КОНСТАТАЦИИ И ПРЕПОРЪКИ ЗА ЗАЩИТАТА\n\n**Обобщение на откритите нарушения:**\n.......................................................................................................................................................\n.......................................................................................................................................................\n.......................................................................................................................................................\n\n**Препоръчителни процесуални действия:**\n[ ] Искане за разпит на актосъставителя/свидетелите.\n[ ] Искане за разпит на лекаря, взел пробата.\n[ ] Искане за назначаване на съдебно-метрологична експертиза на уреда.\n[ ] Искане за повторна химическа експертиза на контролната проба (ако е приложимо).\n[ ] Възражение срещу АУАН в 3-дневен срок (ако е в този етап).\n\n**Изготвил (Адвокат):** ....................................................\n\n**Подпис:** ...................................................."
+      },
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.894] [conv-1766565297338-bjjwrc] → TOOL-RESULT
+    {
+      "type": "tool-result",
+      "tool": "create_docx_file",
+      "result": "✅ DOCX file created successfully!\n📄 DOCX: /output/Списък_за_проверка_(Checklist)_за_защитата_по_Наредба_№_1_2017_draft.docx\n📄 HTML: /output/Списък_за_проверка_(Checklist)_за_защитата_по_Наредба_№_1_20...",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:08.898] [conv-1766565297338-bjjwrc] → AGENT-END
+    {
+      "type": "agent-end",
+      "agent": "drafting_agent"
+    }
+
+[10:41:08.898] [conv-1766565297338-bjjwrc] → TASK-COMPLETE
+    {
+      "type": "task-complete",
+      "task_id": "t3",
+      "agent": "drafting_agent"
+    }
+
+[10:41:08.898] [conv-1766565297338-bjjwrc] → TASK-PLAN
+    {
+      "type": "task-plan",
+      "goal": "",
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Проучване на нормативната уредба (ЗДвП, Наредба № 1/2017) и съдебната практика относно процедурата за тестване за алкохол и наркотици.",
+          "status": "done"
+        },
+        {
+          "id": "t2",
+          "description": "Идентифициране на конкретни 'пробойни' в процедурата (метрология, срокове, медицинско изследване), които водят до падане на акта в съда.",
+          "status": "done"
+        },
+        {
+          "id": "t3",
+          "description": "Изготвяне на правно становище/списък за проверка (checklist) за защитата.",
+          "status": "done"
+        }
+      ]
+    }
+
+[10:41:18.758] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "Ето детайлен **Списък за проверка (Checklist) за защитата**, изготвен въз основа на Наредба",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:18.987] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " № 1 от 19.07.2017 г. и актуалната съдебна практика.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:19.227] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Този списък е предназначен да ви помогне да идентифицирате процесуални нарушения (\"пробойни\"),",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:19.490] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " които могат да послужат като основание за отмяна на наказателното постановление или прекратяване на делото.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:19.745] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n\n### 🛑 I. Проверка на Акт за установяване на адм. нарушение (АУАН)",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:20.028] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "\n\n| Елемент | Какво да търсите (Възможни нарушения) |\n| :--- | :",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:20.263] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "--- |\n| **Свидетели** | Липса на подпис на поне един свидетел (освен ако",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:20.520] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " нарушението не е установено с техническо средство, записващо всичко, но практиката често",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:20.777] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изисква свидетел при оспорване). |\n| **Отказ на водача** | Ако водачът",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:21.008] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " е отказал да подпише АУАН, има ли подпис на *един* свидетел на отказа? Ли",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:21.218] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "псата на свидетел на отказа е съществено нарушение. |\n| **Описание на нарушението**",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:21.579] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " | Ясно ли са посочени обстоятелствата (място, час, посока на движение)? Съв",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:21.788] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "падат ли с данните от техническото средство? |\n| **Възражения** | Дадена",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:21.985] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ли е възможност на водача да впише възражения на място? (Липсата на поле",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:22.236] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "/възможност е нарушение на правото на защита). |\n\n### 📟 II. Проверка на Техниче",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:22.426] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ското средство (Дрегер/Drug Test)\n\n| Елемент | Какво да търсите (Въз",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:22.642] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "можни нарушения) |\n| :--- | :--- |\n| **Метрологична годност** |",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:22.888] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " **КРИТИЧНО:** Изискайте справка за последната метрологична проверка на уреда. Ва",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:23.166] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "лидна ли е била към *датата и часа* на спирането? (Обикновено валидността",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:23.361] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " е 6 или 12 месеца). |\n| **Идентификация** | Съвпада ли фабри",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:23.583] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "чният номер на уреда, вписан в АУАН, с този в разпечатката от",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:23.812] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " уреда и в протокола за метрологична проверка? |\n| **Час на пробата** | И",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:24.092] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ма ли разминаване между часа на спиране и часа на теста? (Голямо забавяне без",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:24.524] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " причина може да е аргумент). |\n| **Нулева проба** | При дрегерите: направена ли",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:24.600] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " е \"нулева проба\" (blank test) преди теста на водача, за да се гарантира, че няма остат",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:24.817] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ъчен алкохол в мундщука? |\n\n### 📝 III. Проверка на Талона за медицинско",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:25.027] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изследване (ТМИ)\n\n| Елемент | Какво да търсите (Възможни нарушения)",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:25.250] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " |\n| :--- | :--- |\n| **Издаване** | Издаден ли е изобщо талон",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:25.507] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "? (Задължително е при оспорване на показанията или отказ от тест на място). Не",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:25.775] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "издаването е абсолютно основание за отмяна. |\n| **Срок за явяване** | **К",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:25.990] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "РИТИЧНО:** Какъв срок е даден за явяване в лечебното заведение? (",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:26.262] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "По Наредба: до 45 мин за населено място, до 120 мин извън).",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:26.459] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Реалистичен ли е този срок спрямо разстоянието и трафика? (\"Необосновано къс срок\"",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:26.673] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " е често основание за отмяна). |\n| **Връчване** | Вписан ли е",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:26.960] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " точният час на връчване на талона? (Без него не може да се изчисли тече",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:27.202] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ли срокът). |\n| **Попълване** | Попълнен ли е четливо и пълно?",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:27.477] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " Има ли подпис на връчителя и получателя? |\n\n### 💉 IV. Проверка на Медицинско",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:27.651] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " изследване и Лаборатория\n\n| Елемент | Какво да търсите (Възможни нарушения",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:27.882] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": ") |\n| :--- | :--- |\n| **Вземане на пробата** | Спазена",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:28.180] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " ли е процедурата по дезинфекция? (Забранено е ползването на спирт/йод при про",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:28.395] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ба за алкохол – може да компрометира резултата). |\n| **Протокол за из",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:28.696] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "следване** | Подписан ли е от лекаря и от изследваното лице? Вписан ли е час",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:28.950] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ът на вземане на пробата? (Трябва да е в рамките на срока от талона). |\n",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:29.215] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "| **Верига на съхранение** | Как и къде са съхранявани пробите до анализа?",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:29.497] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " (Хладилник, заключен шкаф). Колко време е минало до анализа? (Преко",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:29.694] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "мерно забавяне може да доведе до ферментация/разпад). |\n| **Втора про",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:29.968] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": "ба** | Взети ли са две проби (А и Б)? Изследвана ли е контролната проба при",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:30.215] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " поискване? |\n\n**Препоръка за действие:**\nПрепоръчвам да изискате",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:30.497] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " чрез съда пълната административна преписка, включително **удостоверението за одобрен",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:30.702] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " тип** на техническото средство и **дневника за метрологична проверка**. Ако установите несъответствие в",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:31.052] [conv-1766565297338-bjjwrc] → THINKING
+    {
+      "type": "thinking",
+      "text": " т. II или т. III от списъка, шансовете за успешна защита са значителни.",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:31.070] [conv-1766565297338-bjjwrc] → THINKING-COMPLETE
+    {
+      "type": "thinking-complete",
+      "agent": "drafting_agent",
+      "step": "analyze"
+    }
+
+[10:41:31.076] [conv-1766565297338-bjjwrc] → DONE
+    {
+      "type": "done",
+      "agent": "orchestrator",
+      "run_id": null
+    }
+
+[10:41:31.077] [conv-1766565297338-bjjwrc] → DONE
+    {
+      "type": "done"
+    }
+
+[10:42:55.490] [conv-1766565297338-bjjwrc] ← MESSAGE
+    {
+      "message": "добре, провери файловете по делото сега",
+      "thread_id": "conv-1766565297338-bjjwrc",
+      "projectId": "C:\\Users\\vutov\\Documents\\NLP\\ET",
+      "model": "gemini-3-pro-preview"
+    }
+
+[10:43:17.517] [conv-1766565297338-bjjwrc] → TASK-PLAN
+    {
+      "type": "task-plan",
+      "goal": "Анализ на конкретните документи по делото в папка /project/ за откриване на процесуални нарушения.",
+      "tasks": [
+        {
+          "id": "t1",
+          "description": "Преглед на файловете в директория /project/, прочитане на съдържанието на АУАН, Талон за изследване и Протоколи, и извличане на фактология (дати, часове, номера на уреди).",
+          "status": "pending"
+        },
+        {
+          "id": "t2",
+          "description": "Сравнителен анализ на извлечените факти спрямо списъка за проверка (checklist) за идентифициране на конкретни нарушения (срок за явяване, валидност на техническото средство).",
+          "status": "pending"
+        },
+        {
+          "id": "t3",
+          "description": "Изготвяне на финално становище с откритите 'пробойни' по конкретния казус.",
+          "status": "pending"
+        }
+      ]
+    }
+
+[10:43:17.517] [conv-1766565297338-bjjwrc] → TASK-START
+    {
+      "type": "task-start",
+      "task_id": "t1",
+      "description": "Отиди в директория /project/. 1. Изброй наличните файлове. 2. Прочети детайлно съдържанието на всички документи (АУАН, Талон за изследване, Протоколи). 3. Извлечи и ми докладвай следните конкретни данни: - Дата и час на спиране/проверка. - Сериен номер на техническото средство и показания. - Дали е издаден талон за изследване и какъв срок е даден (час на връчване vs. час на явяване). - Има ли данни за метрологична проверка (валидност).",
+      "agent": "research_agent"
+    }
+
+[10:43:17.524] [conv-1766565297338-bjjwrc] → DONE
+    {
+      "type": "done",
+      "agent": "orchestrator",
+      "run_id": null
+    }
+
+[10:43:17.524] [conv-1766565297338-bjjwrc] → DONE
+    {
+      "type": "done"
+    }

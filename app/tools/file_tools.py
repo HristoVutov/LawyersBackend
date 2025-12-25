@@ -68,10 +68,18 @@ def get_output_path() -> Path:
     return resolve_path("/output/")
 
 
-async def ensure_output_folder() -> Path | None:
-    """Ensure /output/ folder exists."""
+async def ensure_output_folder(subdir: str = "") -> Path | None:
+    """
+    Ensure /output/[subdir] folder exists.
+    
+    Args:
+        subdir: Optional subdirectory (e.g., thread_id)
+    """
     try:
         output_path = get_output_path()
+        if subdir:
+            output_path = output_path / subdir
+            
         output_path.mkdir(parents=True, exist_ok=True)
         return output_path
     except Exception as e:
@@ -283,7 +291,7 @@ async def grep(
 
 
 @tool
-async def create_docx_file(file_name: str, content: str) -> str:
+async def create_docx_file(file_name: str, content: str, subdir: str = "") -> str:
     """
     Create a new DOCX file in /output/ folder.
     Use this for generating legal documents, contracts, letters, etc.
@@ -291,12 +299,13 @@ async def create_docx_file(file_name: str, content: str) -> str:
     Args:
         file_name: Name for the file (e.g., 'contract', 'letter'). Will be saved as .docx
         content: The document content in HTML format
+        subdir: Optional subdirectory within /output/ to save to (e.g. thread_id)
     """
     try:
         from docx import Document
         import re
         
-        output_path = await ensure_output_folder()
+        output_path = await ensure_output_folder(subdir)
         if not output_path:
             return "Error: Could not access /output/ folder. Is a project selected?"
         
@@ -339,9 +348,12 @@ async def create_docx_file(file_name: str, content: str) -> str:
         
         doc.save(str(docx_path))
         
+        # Return path relative to output root if subdir is used, or virtual path
+        virtual_path = f"/output/{subdir}/{base_name}.docx".replace("//", "/")
+        
         return f"""✅ DOCX file created successfully!
-📄 DOCX: /output/{base_name}.docx
-📄 HTML: /output/{base_name}.docx.html"""
+📄 DOCX: {virtual_path}
+📄 HTML: {virtual_path}.html"""
     except ImportError:
         return "Error: python-docx not installed. Run: pip install python-docx"
     except Exception as e:

@@ -1,0 +1,74 @@
+============================================================
+TERMINAL LOG
+Conversation: conv-1766565297338-bjjwrc
+Started: 2025-12-24T10:35:03.388489
+============================================================
+
+[10:35:03.389] 📨 [conv-1766565297338-bjjwrc] Received: аз съм защитник на хванатия водач
+спазена ли е про... (thread: conv-176...)
+[10:35:07.749] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:35:24.220] [Orchestrator] 📋 Plan Update: Анализ на процедурата за проверка за алкохол и наркотици и идентифициране на процесуални нарушения за защитата.
+[10:35:24.221] [Orchestrator] 📝 Created 3 tasks: ['t1', 't2', 't3']
+[10:35:24.806] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:35:27.012] [Orchestrator] ⚠️ Autonomy Guard: 3 pending tasks, forcing delegation of t1 (Attempt 1/3)
+[10:35:27.611] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:35:33.828] [Orchestrator] 👉 Delegating to research_agent: Проучи актуалните изисквания на Наредба № 1 от 19.07.2017 г. и ЗДвП относно реда за установяване употребата на алкохол и наркотици. Фокусирай се върху: 1. Изисквания към техническите средства (техническа годност, калиброване). 2. Процедура при издаване на талон за медицинско изследване (срокове за явяване, попълване на талона). 3. Изисквания към вземането на биологични проби. 4. Често срещани процесуални нарушения в съдебната практика, които водят до отмяна на наказателни постановления или прекратяване на дела. (task: t1)
+[10:35:33.836] [research_agent] 🔍 Analyzing request: Проучи актуалните изисквания на Наредба № 1 от 19....
+[10:35:33.836] [research_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:35:54.238] [research_agent] ⚠️ JSON parse failed, falling back to raw
+[10:35:54.239] [research_agent] 📝 Generated 1 queries
+[10:35:54.244] [research_agent] 🔄 Gather iteration 1...
+[10:36:03.392] [research_agent] 🔧 Tool calls: ['get_legal_references']
+[10:36:03.397] [research_agent] ⚙️ Executing: get_legal_references
+[10:36:03.398] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:36:24.079] [research_agent] 🔄 Gather iteration 2...
+[10:36:56.630] [research_agent] ✅ Gathering complete, moving to synthesize
+[10:36:56.635] [research_agent] ✍️ Synthesizing answer...
+[10:37:36.227] [Orchestrator] ✅ Task t1 completed by research_agent
+[10:37:36.806] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:37:39.462] [Orchestrator] ⚠️ Autonomy Guard: 2 pending tasks, forcing delegation of t2 (Attempt 1/3)
+[10:37:40.069] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:37:52.728] [Orchestrator] 👉 Delegating to research_agent: Анализирай съдебната практика и идентифицирай конкретни процесуални нарушения ('пробойни'), които най-често водят до отмяна на наказателни постановления за алкохол/наркотици. Фокусирай се върху детайлите: 1. Какви конкретни грешки в протоколите за метрологична проверка се зачитат от съда? 2. Как се тълкува 'необосновано къс срок' за медицинско изследване? 3. Какви са фаталните грешки при попълване на АУАН и талона за изследване? 4. Специфични нарушения при веригата на съхранение на пробите. (task: t2)
+[10:37:52.736] [research_agent] 🔍 Analyzing request: Анализирай съдебната практика и идентифицирай конк...
+[10:37:52.737] [research_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:38:07.377] [research_agent] ⚠️ JSON parse failed, falling back to raw
+[10:38:07.377] [research_agent] 📝 Generated 1 queries
+[10:38:07.382] [research_agent] 🔄 Gather iteration 1...
+[10:38:17.450] [research_agent] 🔧 Tool calls: ['get_legal_references']
+[10:38:17.455] [research_agent] ⚙️ Executing: get_legal_references
+[10:38:17.456] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:38:42.228] [research_agent] 🔄 Gather iteration 2...
+[10:39:03.737] [research_agent] ✅ Gathering complete, moving to synthesize
+[10:39:03.742] [research_agent] ✍️ Synthesizing answer...
+[10:39:44.518] [Orchestrator] ✅ Task t2 completed by research_agent
+[10:39:45.086] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:39:47.345] [Orchestrator] ⚠️ Autonomy Guard: 1 pending tasks, forcing delegation of t3 (Attempt 1/3)
+[10:39:47.929] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:39:55.051] [Orchestrator] 👉 Delegating to drafting_agent: Изготви структуриран списък за проверка (checklist) за защитата, базиран на Наредба № 1/2017 и съдебната практика. Списъкът трябва да служи като ръководство за адвоката при преглед на материалите по делото. Включи секции за: 1. Проверка на АУАН (реквизити, подписи). 2. Проверка на техническото средство (метрология, фабрични номера). 3. Проверка на Талона за изследване (срок за явяване, часове). 4. Проверка на протоколите за медицинско изследване и химическа експертиза (верига на съхранение). За всяка точка посочи какво точно да се търси като нарушение. (task: t3)
+[10:39:55.060] [drafting_agent] 🔍 Analyzing drafting request: Изготви структуриран списък за проверка (checklist...
+[10:40:09.784] [drafting_agent] 📋 Intent: Списък за проверка (Checklist) за защитата по Наредба № 1/2017
+[10:40:09.789] [drafting_agent] 📂 Asking TemplateAgent for 'Списък за проверка (Checklist) за защитата по Наредба № 1/2017'...
+[10:40:09.790] [template_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:40:14.274] [template_agent] Response: []...
+[10:40:14.274] [template_agent] Tool calls: ['list_directory']
+[10:40:14.281] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:40:14.284] [template_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:40:21.540] [template_agent] Response: []...
+[10:40:21.541] [template_agent] Tool calls: ['glob']
+[10:40:21.547] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:40:21.550] [template_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:40:24.587] [template_agent] Response: []...
+[10:40:24.588] [template_agent] Tool calls: ['glob']
+[10:40:24.594] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:40:24.599] [template_agent] 🔄 Switching to requested model: gemini-3-pro-preview
+[10:40:30.278] [template_agent] Response: [{'type': 'text', 'text': 'Съжалявам, но не успях да намеря шаблон със заглавие "Списък за проверка ...
+[10:40:30.283] [drafting_agent] 📂 TemplateAgent said: [{'type': 'text', 'text': 'Съжалявам, но не успях ...
+[10:40:30.284] [drafting_agent] ✍️ Drafting document...
+[10:41:08.853] [drafting_agent] 💾 Saving to Списък_за_проверка_(Checklist)_за_защитата_по_Наредба_№_1/2017_draft.docx...
+[10:41:08.855] 🔧 [conv-1766565297338-bjjwrc] Tool calls: []
+[10:41:08.896] [Orchestrator] ✅ Task t3 completed by drafting_agent
+[10:41:09.516] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:42:55.491] 📨 [conv-1766565297338-bjjwrc] Received: добре, провери файловете по делото сега (thread: conv-176...)
+[10:42:56.109] [Orchestrator] 🔄 Supervisor using model: gemini-3-pro-preview
+[10:43:17.518] [Orchestrator] ⏭️ Skipping PlanTask - already have 3 tasks
+[10:43:17.518] [Orchestrator] ✅ All tasks complete, finishing
