@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
     
+    # Search settings
+    search_result_default_number: int = 5
+    
     @property
     def project_root(self) -> Path:
         """Project root directory (LawyersDashboard/)."""

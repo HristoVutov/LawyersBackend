@@ -131,7 +131,7 @@ async def get_query_embedding(query: str) -> list[float] | None:
 async def search_indexed(
     query: str,
     search_type: str = "hybrid",
-    limit: int = 10,
+    limit: int | None = None,
     conversation_id: str = "default"
 ) -> str:
     """
@@ -141,11 +141,16 @@ async def search_indexed(
     Args:
         query: Search query - keywords or description of what you're looking for
         search_type: Search type: 'keyword', 'vector', or 'hybrid' (default)
-        limit: Max results to return (default 10)
+        limit: Max results to return (default None - uses system config)
         conversation_id: Conversation ID for caching
     """
     try:
         settings = get_settings()
+        
+        # Determine limit from config if not provided
+        if limit is None:
+            limit = settings.search_result_default_number
+
         
         # ========== CHECK CACHE FIRST ==========
         cached = await get_cached_search(session_store, conversation_id, query)
@@ -202,6 +207,11 @@ Use add_to_context with these files for more details."""
         for index_file in index_files:
             try:
                 data = json.loads(index_file.read_text(encoding="utf-8"))
+                
+                # Skip files that have been splitted into segments
+                if data.get("splitted"):
+                    continue
+                    
                 keyword_score = 0
                 semantic_score = 0.0
                 matched_fields = []

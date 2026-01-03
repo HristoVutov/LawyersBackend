@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.api.routes import router as api_router
 from app.api.websocket import router as ws_router
-from app.api import indexing, feedback
+from app.api import indexing, feedback, files
 from app.agents import initialize_agent_registry
 from app.services.conversation_logger import get_conversation_logger
 
@@ -24,6 +24,9 @@ async def lifespan(app: FastAPI):
     
     # Initialize conversation logger early
     logger = get_conversation_logger()
+    
+    # Speed up OCR initialization
+    os.environ["DISABLE_MODEL_SOURCE_CHECK"] = "True"
     
     # Startup
     print("🚀 Starting Lawyers Dashboard Agent Backend...")
@@ -106,6 +109,7 @@ app.add_middleware(RequestLoggingMiddleware)
 app.include_router(api_router, prefix="/api", tags=["api"])
 app.include_router(ws_router, prefix="/ws", tags=["websocket"])
 app.include_router(indexing.router, prefix="/api", tags=["indexing"])
+app.include_router(files.router, prefix="/api", tags=["files"])
 app.include_router(feedback.router, prefix="/api", tags=["feedback"])
 
 

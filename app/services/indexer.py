@@ -5,6 +5,7 @@ from pathlib import Path
 from app.config import get_settings
 from app.services.file_readers import read_any_file
 from app.agents.analysis_agent import AnalysisAgent
+from app.agents.schemas.analysis_schemas import DocumentSegment
 # You might reuse the embedding logic from search_tools or centralized it
 import google.generativeai as genai
 
@@ -68,23 +69,18 @@ async def index_file(file_path: Path, project_root: Path):
 
     # 2. Analyze (Using the AnalysisAgent we created)
     analysis_agent = AnalysisAgent()
-    # BaseAgent.invoke returns the final string response
-    analysis_json_str = await analysis_agent.invoke(
-        f"Analyze this document:\n\n{content[:15000]}" # Truncate for safety
-    )
     
     try:
-        analysis_data = json.loads(analysis_json_str)
-    except json.JSONDecodeError:
-        # Agent returned text instead of JSON - use the text as the summary
-        print(f"[Indexer] Agent returned text (not JSON), using as summary")
-        # Extract basic keywords from the first few sentences
-        import re
-        words = re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b', analysis_json_str[:1000])
-        keywords = list(set(words))[:10]  # Unique, max 10
+        # Use structured output method
+        analysis_result = await analysis_agent.analyze(content[:200000])
+        # Convert Pydantic model to dict
+        analysis_data = analysis_result.model_dump()
+    except Exception as e:
+        print(f"[Indexer] Analysis failed: {e}")
+        # Fallback
         analysis_data = {
-            "summary": analysis_json_str[:5000],  # Use response as summary (truncate if needed)
-            "keywords": keywords,
+            "summary": "Analysis failed", 
+            "keywords": [], 
             "documentType": "Unknown"
         }
 
@@ -204,26 +200,48 @@ async def index_directory(directory_path: str):
         
         print(f"[Indexer] Analyzing {f_path.name}...")
         try:
-            # -- Analysis --
-            analysis_json_str = await analysis_agent.invoke(
-                f"Analyze this document:\n\n{content[:15000]}"
-            )
+            # -- PRE-SAVE (Pending) --
+            # Save a placeholder so the file exists even if analysis crashes/hangs
+            print(f"[Indexer] Saving pending index for {f_path.name}...")
+            pending_index_data = {
+                "documentType": "Analyzing",
+                "containsMultipleDocuments": False,
+                "documentSegments": [],
+                "summary": "Analysis in progress... (Process started)",
+                "keywords": [],
+                "parties": [],
+                "keyClauses": [],
+                "risks": [],
+                "missingElements": [],
+                "indexFields": {},
+                "overallScore": 0,
+                "content": content,
+                "embedding": embedding,
+                "original_file": f_path.name,
+                "last_modified": item["start_mtime"]
+            }
             
+            index_dir = settings.indexed_files_dir
+            index_dir.mkdir(parents=True, exist_ok=True)
+            out_path = index_dir / f"{f_path.name}.index.json"
+            
+            async with aiofiles.open(out_path, 'w', encoding='utf-8') as out_f:
+                await out_f.write(json.dumps(pending_index_data, ensure_ascii=False, indent=2))
+
+            # -- Analysis --
             try:
-                analysis_data = json.loads(analysis_json_str)
-            except json.JSONDecodeError:
-                print(f"[Indexer] Agent returned text (not JSON), using as summary for {f_path.name}")
-                import re
-                words = re.findall(r'\\b[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)*\\b', analysis_json_str[:1000])
-                keywords = list(set(words))[:10]
+                analysis_result = await analysis_agent.analyze(content[:200000])
+                analysis_data = analysis_result.model_dump()
+            except Exception as e:
+                print(f"[Indexer] Analysis failed for {f_path.name}: {e}")
                 analysis_data = {
-                    "summary": analysis_json_str[:5000],
-                    "keywords": keywords,
+                    "summary": "Analysis failed",
+                    "keywords": [],
                     "documentType": "Unknown"
                 }
 
-            # -- Save --
-            print(f"[Indexer] Saving {f_path.name}...")
+            # -- Save Final --
+            print(f"[Indexer] Saving final index for {f_path.name}...")
             index_data = {
                 **analysis_data,
                 "content": content,
@@ -245,6 +263,186 @@ async def index_directory(directory_path: str):
             print(f"[Indexer] Analysis/Save failed for {f_path.name}: {e}")
 
     print("[Indexer] Batch processing complete.")
+
+
+def find_best_match_location(content: str, query: str) -> int:
+    """
+    Finds the best starting index of 'query' inside 'content' using heuristics.
+    Returns -1 if completely lost.
+    """
+    if not query:
+        return -1
+        
+    # 1. Exact Match
+    idx = content.find(query)
+    if idx != -1:
+        return idx
+        
+    # 2. Normalized Match (ignore whitespace noise)
+    # This is expensive to map back, so we use it just to check existence mostly,
+    # but let's try a simpler approach: splitting into chunks.
+    
+    # 3. Chunk Match (Try finding the first 20 chars, or middle 20, etc)
+    # Often the LLM hallucinates the end of the phrase but gets the start right, or vice versa.
+    
+    # Try first 30 chars
+    if len(query) > 30:
+        chunk = query[:30]
+        idx = content.find(chunk)
+        if idx != -1:
+            return idx
+            
+    # Try last 30 chars
+    if len(query) > 30:
+        chunk = query[-30:]
+        idx = content.find(chunk)
+        if idx != -1:
+            # We found the end of the query string.
+            # We want the start, so we subtract length (approx)
+            return max(0, idx - (len(query) - 30))
+
+    # Try middle
+    if len(query) > 60:
+        mid = len(query) // 2
+        chunk = query[mid:mid+30]
+        idx = content.find(chunk)
+        if idx != -1:
+            return max(0, idx - mid)
+            
+    # 4. Words Match (First 5 words)
+    words = query.split()
+    if len(words) > 5:
+        chunk = " ".join(words[:5])
+        idx = content.find(chunk)
+        if idx != -1:
+            return idx
+            
+    return -1
+
+
+async def create_virtual_index(parent_file_path: str, segment_index: int, segment_data: DocumentSegment):
+    """
+    Create a virtual index file for a segment of a document.
+    
+    Args:
+        parent_file_path: The name of the original file (e.g. Contract.pdf)
+        segment_index: The index of the segment (1-based)
+        segment_data: The segment data (summary, type, start/end text)
+    """
+    settings = get_settings()
+    index_dir = settings.indexed_files_dir
+    
+    # 1. Load Parent Index to get content context
+    parent_index_path = index_dir / f"{parent_file_path}.index.json"
+    if not parent_index_path.exists():
+        raise FileNotFoundError(f"Parent index not found: {parent_index_path}")
+        
+    async with aiofiles.open(parent_index_path, 'r', encoding='utf-8') as f:
+        parent_data = json.loads(await f.read())
+        
+    full_content = parent_data.get("content", "")
+    
+    # 2. Extract Segment Content
+    # We use startText and endText to find the slice.
+    # This is a heuristic: finding the first occurrence of startText 
+    # and the last occurrence of endText after startText.
+    
+    # Strategy 0: Page-Based Slicing (Priority)
+    start_idx = -1
+    end_idx = -1
+    
+    if segment_data.segmentStartPage is not None:
+        page_marker = f"[Page {segment_data.segmentStartPage}]"
+        start_idx = full_content.find(page_marker)
+        if start_idx == -1:
+             print(f"[Indexer] Warning: Start page {segment_data.segmentStartPage} marker not found.")
+    
+    # Strategy 1: Text-Based Slicing (Fallback)
+    if start_idx == -1:
+        start_idx = find_best_match_location(full_content, segment_data.startText)
+        if start_idx == -1:
+            print(f"[Indexer] Warning: Start text not found for segment {segment_index}, defaulting to 0")
+            start_idx = 0
+
+    # Determine End Index
+    if segment_data.segmentEndPage is not None:
+         # Try to find the start of the NEXT page to include the full end page
+         next_page_marker = f"[Page {segment_data.segmentEndPage + 1}]"
+         end_idx = full_content.find(next_page_marker, start_idx)
+         
+         if end_idx == -1:
+             # If next page not found (maybe last page), try finding the marker of the end page itself
+             # But that would cut the content of the end page unless we go to next marker.
+             # So we might fallback to finding the end of the file or text match.
+             pass
+
+    if end_idx == -1:
+         # Search for end text AFTER start text
+        if segment_data.endText:
+            end_match = find_best_match_location(full_content[start_idx:], segment_data.endText)
+            if end_match != -1:
+                end_idx = start_idx + end_match + len(segment_data.endText)
+            else:
+                 end_idx = len(full_content)
+        else:
+            end_idx = len(full_content)
+            
+    segment_content = full_content[start_idx:end_idx]
+    
+    # 3. Generate Embedding for the segment
+    # (Optional: we could re-use parent embedding or portions, but new is better)
+    try:
+        embedding = await generate_embedding(segment_content[:20000])
+    except Exception:
+        embedding = []
+
+    analysis_agent = AnalysisAgent()
+    try:
+        print(f"[Indexer] Running full analysis on segment {segment_index}...")
+        segment_analysis = await analysis_agent.analyze(segment_content[:200000])
+        # Convert pydantic to dict
+        segment_analysis_dict = segment_analysis.model_dump()
+        
+        # Override fields with analysis results
+        keywords = segment_analysis_dict.get("keywords", [])
+        parties = segment_analysis_dict.get("parties", [])
+        risks = segment_analysis_dict.get("risks", [])
+        summary = segment_analysis_dict.get("summary") or segment_data.summary
+        doc_type = segment_analysis_dict.get("documentType") or segment_data.segmentType
+        
+    except Exception as e:
+        print(f"[Indexer] Warning: Segment analysis failed: {e}")
+        # Fallback to basic data
+        keywords = []
+        parties = []
+        risks = []
+        summary = segment_data.summary
+        doc_type = segment_data.segmentType
+
+    # 4. Create Virtual Index Data
+    virtual_filename = f"{parent_file_path}.segment{segment_index}"
+    
+    virtual_index_data = {
+        "documentType": doc_type,
+        "summary": summary,
+        "keywords": keywords, 
+        "parties": parties, 
+        "risks": risks,
+        "content": segment_content,
+        "embedding": embedding,
+        "original_file": parent_file_path, 
+        "is_virtual": True,
+        "virtual_source": virtual_filename,
+        "last_modified": parent_data.get("last_modified")
+    }
+    
+    # 5. Save
+    virtual_index_path = index_dir / f"{virtual_filename}.index.json"
+    
+    async with aiofiles.open(virtual_index_path, 'w', encoding='utf-8') as f:
+        await f.write(json.dumps(virtual_index_data, ensure_ascii=False, indent=2))
+        
+    return str(virtual_index_path)
 
 
 SUPPORTED_EXTENSIONS = ('.txt', '.pdf', '.docx', '.doc', '.png', '.jpg', '.jpeg')

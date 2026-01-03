@@ -18,6 +18,7 @@ from langgraph.prebuilt import ToolNode
 
 from app.agents.base_agent import BaseAgent, AgentConfig
 from app.tools.research_tools import get_legal_references, search_documents
+from app.tools.analysis_tools import compare_compliance
 from app.middleware import TodoListMiddleware
 from app.services.conversation_logger import print_and_log
 from app.agents.document_agent import DocumentAgent
@@ -54,7 +55,7 @@ from app.agents.prompts.research_prompt import (
 
 # Research tools for gather_info node
 # We will add consult_document_agent dynamically in __init__
-RESEARCH_GATHER_TOOLS = [get_legal_references, search_documents]
+RESEARCH_GATHER_TOOLS = [get_legal_references, search_documents, compare_compliance]
 
 
 class ResearchAgent(BaseAgent):
@@ -256,9 +257,14 @@ class ResearchAgent(BaseAgent):
                     if tool_name == "get_legal_references":
                         result = await get_legal_references.ainvoke(tool_args)
                         legal_refs += f"\n{result}"
-                    elif tool_name == "search_documents":
                         result = await search_documents.ainvoke(tool_args)
                         found_docs += f"\n{result}"
+                    elif tool_name == "compare_compliance":
+                        result = await compare_compliance.ainvoke(tool_args)
+                        # Append comparison result to legal_references or found_documents? 
+                        # Comparison is a synthesis of both, so maybe legal_references fits better as "analysis"
+                        # or just append to found_docs so it's part of the context for synthesis.
+                        found_docs += f"\n=== COMPARISON REPORT ===\n{result}"
                     elif tool_name == "consult_document_agent":
                         # This tool is defined dynamically in __init__
                         # We need to find it in self.tools to invoke it, 
