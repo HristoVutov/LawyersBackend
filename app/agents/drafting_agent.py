@@ -245,12 +245,13 @@ class DraftingAgent(BaseAgent):
             
             try:
                 # 1. Save Markdown for internal context
-                from app.tools.file_tools import write_file
+                write_file_tool = self.get_tool("write_file")
                 md_path = f"/output/{thread_id}/{safe_intent}_{timestamp}.md"
-                await write_file.ainvoke({"file_path": md_path, "content": content})
+                await write_file_tool.ainvoke({"file_path": md_path, "content": content})
                 
                 # 2. Save DOCX for client delivery
-                result = await create_docx_file.ainvoke({
+                create_docx_tool = self.get_tool("create_docx_file")
+                result = await create_docx_tool.ainvoke({
                     "file_name": filename, 
                     "content": content,
                     "subdir": thread_id

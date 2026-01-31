@@ -55,72 +55,9 @@ async def get_index_file_content(file_path: Path) -> str | None:
 async def read_document(file_path: str, conversation_id: str = "default") -> str:
     """
     Read text from document files (.docx, .pdf, .txt, .md).
-    Use this for reading specific legal documents.
-    
-    Supports virtual paths:
-    - /project/document.pdf - Read from current project
-    - /templates/contract.docx - Read from templates
-    
-    Args:
-        file_path: Path to the file (virtual or absolute)
-        conversation_id: Conversation ID for tracking
+    NOTE: This tool must be executed on the client-side via the Remote Bridge.
     """
-    try:
-        # Handle virtual paths
-        if file_path.startswith("/"):
-            try:
-                path = resolve_path(file_path)
-            except ValueError as e:
-                return f"Error: {str(e)}"
-        else:
-            path = Path(file_path)
-        
-        file_name = path.name
-        
-        # Check if already read/cached in this session
-        cached = await get_cached_document_content(session_store, conversation_id, file_name)
-        if cached:
-            return cached
-        
-        # Check for pre-indexed content
-        indexed_content = await get_index_file_content(path)
-        if indexed_content:
-            await mark_document_as_read(session_store, conversation_id, file_name)
-            await cache_document_content(session_store, conversation_id, file_name, indexed_content)
-            return indexed_content
-        
-        # Fallback to raw parsing
-        ext = path.suffix.lower()
-        
-        if ext == ".docx":
-            from docx import Document
-            doc = Document(str(path))
-            content = "\n".join(para.text for para in doc.paragraphs if para.text.strip())
-            result = content or "Empty DOCX file"
-        
-        elif ext == ".pdf":
-            import fitz  # PyMuPDF
-            doc = fitz.open(str(path))
-            text_parts = []
-            for page in doc:
-                text_parts.append(page.get_text())
-            content = "\n".join(text_parts)
-            result = content or "Empty PDF file"
-        
-        else:
-            # Default to text read
-            result = path.read_text(encoding="utf-8", errors="ignore")
-        
-        # Mark as read and CACHE CONTENT
-        await mark_document_as_read(session_store, conversation_id, file_name)
-        await cache_document_content(session_store, conversation_id, file_name, result)
-        
-        return result
-        
-    except ImportError as e:
-        return f"Missing dependency: {str(e)}. Install with pip."
-    except Exception as e:
-        return f"Error reading document: {str(e)}"
+    return f"Error: read_document must be executed on the client-side. Tool bridge not active for {file_path}."
 
 
 @tool

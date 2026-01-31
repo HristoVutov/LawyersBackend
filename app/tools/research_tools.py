@@ -115,7 +115,12 @@ async def search_documents(query: str, thread_id: str = "default") -> str:
         Content from found documents with file paths
     """
     try:
-        doc_agent = _get_document_agent()
+        from app.agents.orchestrator import get_agent
+        doc_agent = get_agent("document_agent")
+        
+        if not doc_agent:
+            print("[search_documents] ❌ Document Agent not registered.")
+            return "Error: Document Agent not available in registry."
         
         print(f"[search_documents] 🔍 Searching for: {query[:50]}...")
         
@@ -146,8 +151,23 @@ async def search_documents(query: str, thread_id: str = "default") -> str:
         return f"Error searching documents: {str(e)}"
 
 
+@tool
+async def get_project_overview(include_summaries: bool = True) -> str:
+    """
+    Get a summary of all files, their pre-computed summaries, and project metadata from the client UI.
+    
+    Use this tool at the START of a project or when you need a high-level overview
+    of all documents in the folder without searching them one-by-one.
+    
+    Returns:
+        JSON/Text containing file list, summaries, and meta info.
+    """
+    return "Error: get_project_overview must be executed on the client-side via Remote Bridge."
+
+
 # Export all research tools
 RESEARCH_TOOLS = [
     get_legal_references,
     search_documents,
+    get_project_overview,
 ]

@@ -21,6 +21,7 @@ from app.config import get_settings
 from app.tracing import get_run_callbacks, get_current_run_id
 from app.services.conversation_logger import print_and_log
 from app.services.context_manager import ContextManager
+from app.services.telemetry import track_token_usage
 
 
 
@@ -97,6 +98,29 @@ class BaseAgent:
             self._graph = self._build_graph()
         return self._graph
     
+    def get_tool(self, tool_name: str) -> Any:
+        """
+        Get a tool instance by name from the agent's current tools.
+        Use this for manual tool invocations in nodes to ensure 
+        we use the remote version if patched.
+        """
+        for t in self.tools:
+            if hasattr(t, "name") and t.name == tool_name:
+                return t
+        
+        # Fallback to importing from tools modules if not found in self.tools 
+        # (though this should be avoided in remote mode)
+        import importlib
+        for module_path in ["app.tools.file_tools", "app.tools.legal_tools", "app.tools.search_tools", "app.tools.research_tools"]:
+            try:
+                mod = importlib.import_module(module_path)
+                if hasattr(mod, tool_name):
+                    return getattr(mod, tool_name)
+            except ImportError:
+                continue
+                
+        raise ValueError(f"Tool '{tool_name}' not found in agent {self.name} tools or modules.")
+
     def _build_graph(self):
         """Build the LangGraph workflow."""
         tool_node = ToolNode(self.tools) if self.tools else None
@@ -157,6 +181,19 @@ class BaseAgent:
                     messages,
                     config={"configurable": {"system_instruction": self.system_prompt}}
                 )
+                
+                # Track token usage
+                thread_id = config.get("configurable", {}).get("thread_id", "default")
+                actual_model = model_name or self.model_name
+                if hasattr(response, 'usage_metadata') and response.usage_metadata:
+                    usage = response.usage_metadata
+                    await track_token_usage(
+                        thread_id=thread_id,
+                        agent_name=self.name,
+                        model_name=actual_model,
+                        input_tokens=usage.get("input_tokens", 0),
+                        output_tokens=usage.get("output_tokens", 0),
+                    )
                 
                 print_and_log(f"[{self.name}] Response: {str(response.content)[:100]}...")
                 

@@ -1,0 +1,14 @@
+{
+    "gemini-2.5-flash": {
+        "input_cost_per_m": 0.075,
+        "output_cost_per_m": 0.30
+    },
+    "gemini-3.0-pro": {
+        "input_cost_per_m": 1.25,
+        "output_cost_per_m": 5.00
+    },
+    "default": {
+        "input_cost_per_m": 0.075,
+        "output_cost_per_m": 0.30
+    }
+}

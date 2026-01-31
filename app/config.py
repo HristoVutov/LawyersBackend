@@ -28,8 +28,16 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
     
+    # Remote Bridge
+    remote_tool_mode: bool = False  # Set to True for server deployment
+    
     # Search settings
     search_result_default_number: int = 5
+    
+    # Telemetry (analytics)
+    telemetry_enabled: bool = False  # Opt-in only
+    telemetry_endpoint: str = "http://localhost:8001"
+    telemetry_api_key: str = ""
     
     @property
     def project_root(self) -> Path:

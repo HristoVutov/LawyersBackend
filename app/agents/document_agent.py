@@ -152,13 +152,15 @@ class DocumentAgent(BaseAgent):
                 if strategy == "filename":
                     # glob
                     patterns = query if isinstance(query, list) else [query]
+                    glob_tool = self.get_tool("glob")
                     for pattern in patterns:
-                        res = await glob.ainvoke({"pattern": str(pattern)})
+                        res = await glob_tool.ainvoke({"pattern": str(pattern)})
                         found.extend([f for f in res.split("\n") if f.strip() and not f.startswith("No files") and not f.startswith("Error")])
                     
                 elif strategy == "keyword":
                     # grep
-                    res = await grep.ainvoke({"search_text": str(query)})
+                    grep_tool = self.get_tool("grep")
+                    res = await grep_tool.ainvoke({"search_text": str(query)})
                     # Grep returns file:line:content. We just want unique files.
                     paths = set()
                     for line in res.split("\n"):
@@ -173,19 +175,48 @@ class DocumentAgent(BaseAgent):
                     
                 elif strategy == "list":
                      # list dir
-                    res = await list_directory.ainvoke({"dir_path": "/project/"})
+                    list_tool = self.get_tool("list_directory")
+                    res = await list_tool.ainvoke({"dir_path": "/project/"})
                     found = [line.split(" ")[1] for line in res.split("\n") if "📄" in line]
                     
                 else: 
                     # hybrid (default) - combines semantic + keyword for best results
-                    search_results = await search_indexed.ainvoke({
+                    search_tool = self.get_tool("search_indexed")
+                    search_results = await search_tool.ainvoke({
                         "query": str(query), 
                         "search_type": "hybrid",
                         "limit": 5  # Top 5 results only
                     })
                     
-                    # Extract paths from the formatted search results
-                    if isinstance(search_results, str):
+                    # Extract paths from the search results
+                    if isinstance(search_results, list):
+                        # Handle structured remote results (list of dicts)
+                        for item in search_results:
+                            if isinstance(item, dict) and "path" in item:
+                                found.append(item["path"])
+                    elif isinstance(search_results, dict) and "result" in search_results:
+                         # Handle UI payload wrapper
+                         for item in search_results["result"]:
+                            if isinstance(item, dict) and "path" in item:
+                                found.append(item["path"])
+                    elif isinstance(search_results, str):
+                        # Handle string output (legacy or formatted)
+                        if "[" in search_results and "{" in search_results:
+                            # Try parsing as JSON string
+                            try:
+                                data = json.loads(search_results)
+                                if isinstance(data, list):
+                                    for item in data:
+                                        if isinstance(item, dict) and "path" in item:
+                                            found.append(item["path"])
+                                elif isinstance(data, dict) and "result" in data:
+                                    for item in data["result"]:
+                                        if isinstance(item, dict) and "path" in item:
+                                            found.append(item["path"])
+                            except json.JSONDecodeError:
+                                pass # Fallback to text scraping
+                        
+                        # Fallback: Scrape text lines
                         for line in search_results.split("\n"):
                             if line.strip().startswith("📄"):
                                 # Extract path after the emoji
@@ -217,6 +248,8 @@ class DocumentAgent(BaseAgent):
             thread_id = config.get("configurable", {}).get("thread_id", "default")
             
             new_reads = 0
+            read_doc_tool = self.get_tool("read_document")
+            
             for path in paths:
                 path = path.strip()
                 if path and path not in cache_read:
@@ -224,7 +257,7 @@ class DocumentAgent(BaseAgent):
                         print_and_log(f"[{self.name}] 📖 Reading: {path} (CID: {thread_id})")
                         
                         # ALways use read_document which now supports caching and all file types
-                        content = await read_document.ainvoke({
+                        content = await read_doc_tool.ainvoke({
                             "file_path": path,
                             "conversation_id": thread_id
                         })
@@ -275,7 +308,8 @@ class DocumentAgent(BaseAgent):
             
             # Directly invoke add_to_context tool (no LLM decision needed)
             try:
-                context_result = add_to_context.invoke({
+                add_to_context_tool = self.get_tool("add_to_context")
+                context_result = add_to_context_tool.invoke({
                     "files": file_paths,
                     "summary": f"Намерени документи по заявка: {task[:100]}"
                 })

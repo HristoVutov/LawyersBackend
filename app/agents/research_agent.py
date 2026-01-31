@@ -17,11 +17,11 @@ from langgraph.types import Command
 from langgraph.prebuilt import ToolNode
 
 from app.agents.base_agent import BaseAgent, AgentConfig
-from app.tools.research_tools import get_legal_references, search_documents
+from app.tools.research_tools import get_legal_references, search_documents, get_project_overview
 from app.tools.analysis_tools import compare_compliance
 from app.middleware import TodoListMiddleware
 from app.services.conversation_logger import print_and_log
-from app.agents.document_agent import DocumentAgent
+# Avoid direct imports to prevent circularity, names used as strings
 from langchain_core.tools import tool
 
 # --- Structured State Definition ---
@@ -43,6 +43,9 @@ class ResearchState(TypedDict):
     # Loop guard
     gather_iterations: int
     
+    # Proactive info
+    project_context: list[dict] | None
+    
     # Outputs
     draft_answer: str
 
@@ -55,7 +58,7 @@ from app.agents.prompts.research_prompt import (
 
 # Research tools for gather_info node
 # We will add consult_document_agent dynamically in __init__
-RESEARCH_GATHER_TOOLS = [get_legal_references, search_documents, compare_compliance]
+RESEARCH_GATHER_TOOLS = [get_legal_references, search_documents, compare_compliance, get_project_overview]
 
 
 class ResearchAgent(BaseAgent):
@@ -81,9 +84,6 @@ class ResearchAgent(BaseAgent):
         )
         super().__init__(config)
         
-        # Initialize Document Agent as a sub-agent
-        self.document_agent = DocumentAgent()
-        
         # Create a tool to consult the document agent
         @tool
         async def consult_document_agent(query: str) -> str:
@@ -92,13 +92,15 @@ class ResearchAgent(BaseAgent):
             Use this for ANY request involving local project files, searching, or reading documents.
             """
             print_and_log(f"[{self.name}] 📞 Calling Document Agent with: {query}")
-            # Identify the current thread from some context if possible, or pass "default"
-            # In a real scenario, we'd want to propagate the thread_id.
-            # BaseAgent.invoke doesn't easily accept thread_id from here unless we bind it.
-            # For now, we'll rely on the fact that DocumentAgent uses 'default' or we can update invoke.
             
+            # Get document_agent from registry to ensure we use the patched instance
+            from app.agents.orchestrator import get_agent
+            doc_agent = get_agent("document_agent")
+            if not doc_agent:
+                return "Error: Document Agent not registered."
+                
             # Since we are inside an async tool, we can await
-            result = await self.document_agent.invoke(query)
+            result = await doc_agent.invoke(query)
             return result
 
         # Update tools list
@@ -142,10 +144,18 @@ class ResearchAgent(BaseAgent):
             else:
                 llm = self.llm
 
+            # Include project context in the analysis prompt if available
+            context_str = ""
+            project_context = state.get("project_context")
+            if project_context:
+                context_str = "\n\nAvailable Project Overview (Summaries & Metadata):\n"
+                for doc in project_context:
+                    context_str += f"- {doc.get('path', 'Unknown')}: {doc.get('summary', 'No summary')} (Type: {doc.get('documentType', 'Unknown')})\n"
+
             # The LLM response will be streamed via astream_events in orchestrator
-            response = await llm.ainvoke(
-                [HumanMessage(content=ANALYZE_PROMPT.format(task_description=task_desc))]
-            )
+            # Include context of previous messages
+            full_messages = messages + [HumanMessage(content=ANALYZE_PROMPT.format(task_description=task_desc) + context_str)]
+            response = await llm.ainvoke(full_messages)
             
             queries = []
             try:
@@ -161,7 +171,8 @@ class ResearchAgent(BaseAgent):
             # Initialize gather_info with the prompt
             gather_prompt = GATHER_INFO_PROMPT.format(
                 task_description=task_desc,
-                search_queries=", ".join(queries) if queries else task_desc
+                search_queries=", ".join(queries) if queries else task_desc,
+                project_context=context_str if context_str else "Няма заредени документи."
             )
             
             return Command(
@@ -254,40 +265,23 @@ class ResearchAgent(BaseAgent):
                 print_and_log(f"[{self.name}] ⚙️ Executing: {tool_name}")
                 
                 try:
+                    target_tool = self.get_tool(tool_name)
+                    result = await target_tool.ainvoke(tool_args)
+                    
                     if tool_name == "get_legal_references":
-                        result = await get_legal_references.ainvoke(tool_args)
                         legal_refs += f"\n{result}"
-                        result = await search_documents.ainvoke(tool_args)
-                        found_docs += f"\n{result}"
+                        # Fallback/Legacy search
+                        try:
+                            search_doc_tool = self.get_tool("search_documents")
+                            search_res = await search_doc_tool.ainvoke(tool_args)
+                            found_docs += f"\n{search_res}"
+                        except:
+                            pass
                     elif tool_name == "compare_compliance":
-                        result = await compare_compliance.ainvoke(tool_args)
-                        # Append comparison result to legal_references or found_documents? 
-                        # Comparison is a synthesis of both, so maybe legal_references fits better as "analysis"
-                        # or just append to found_docs so it's part of the context for synthesis.
                         found_docs += f"\n=== COMPARISON REPORT ===\n{result}"
-                    elif tool_name == "consult_document_agent":
-                        # This tool is defined dynamically in __init__
-                        # We need to find it in self.tools to invoke it, 
-                        # OR since we bound it to the LLM, LangGraph's ToolNode can handle it 
-                        # IF we used the standard ToolNode. 
-                        # But here we are manually executing in 'tools_node'.
-                        
-                        # We need to execute the wrapper function we created.
-                        # It's a local function closure in __init__, so we can't easily access it here 
-                        # UNLESS we stored it or use the tool instance from self.tools.
-                        
-                        target_tool = next((t for t in self.tools if t.name == "consult_document_agent"), None)
-                        if target_tool:
-                             # Tool invocation
-                             result = await target_tool.ainvoke(tool_args)
-                        else:
-                             result = "Error: consult_document_agent tool not found."
-                             
+                    elif tool_name in ["consult_document_agent", "search_documents"]:
                         found_docs += f"\n{result}"
 
-                    else:
-                        result = f"Unknown tool: {tool_name}"
-                    
                     tool_results.append(ToolMessage(
                         content=str(result),
                         tool_call_id=tool_call["id"],
@@ -345,9 +339,10 @@ class ResearchAgent(BaseAgent):
                 llm = self.llm
 
             # The LLM response will be streamed via astream_events in orchestrator
-            response = await llm.ainvoke(
-                [HumanMessage(content=SYNTHESIZE_PROMPT.format(task_description=task, context=context_str))]
-            )
+            # Include context of previous messages
+            messages = state.get("messages", [])
+            full_messages = messages + [HumanMessage(content=SYNTHESIZE_PROMPT.format(task_description=task, context=context_str))]
+            response = await llm.ainvoke(full_messages)
             
             final_answer = response.content
             
