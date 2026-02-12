@@ -1,0 +1,6 @@
+Experiment                               | Faithfulness | Relevance    | Coherence    | Runs 
+------------------------------------------------------------------------------------------
+lawyers-comprehensive-eval-4c7f6ffc      | 0.25         | 1.00         | 1.00         | 7
+lawyers-comprehensive-eval-51188a4c      | 0.47         | 0.81         | 1.00         | 17
+lawyers-comprehensive-eval-c5d4a1af      | 1.00         | 0.24         | 0.24         | 17
+lawyers-comprehensive-eval-211f615e      | 1.00         | 0.24         | 0.20         | 17

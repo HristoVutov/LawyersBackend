@@ -1,0 +1,5 @@
+Experiment                               | Faithful | Relevance | Coherence | SearchQual | Runs 
+----------------------------------------------------------------------------------------------------
+lawyers-comprehensive-eval-c1f15663      | 0.81     | 0.72      | 1.00      | 0.44       | 17
+lawyers-comprehensive-eval-71b6af92      | 0.29     | 0.70      | 1.00      | 0.53       | 17
+lawyers-comprehensive-eval-4c7f6ffc      | 0.25     | 1.00      | 1.00      | N/A        | 7

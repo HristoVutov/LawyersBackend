@@ -1,0 +1,114 @@
+Analysis of 17 runs with search quality scores.
+
+=== HIGH Search Quality (> 0.8) ===
+Input: N/A
+Scores -> Search: 1.0, Faith: 1.0, Rel: 1.0
+Search Comment: The 'User Question' field is empty in the prompt. However, evaluating the executed search query in context: the tool used is `get_legal_references` and the query is `правни въпроси и приложимо право България` (which translates to 'legal questions and applicable law Bulgaria'). Given this highly specific and relevant query executed with a legal reference tool, it is inferred that the original User Question was directly related to legal inquiries concerning applicable law in Bulgaria. Assuming an aligned User Question (e.g., 'What are the legal questions and applicable law in Bulgaria?', or 'Information on legal aspects and law in Bulgaria'), the executed query is perfectly relevant, specific, and highly likely to yield the correct information. It directly addresses the topic and geographical scope implied by such a user intent.
+Faith Comment: The generated answer is fully supported by the retrieved context. All details regarding the Constitutional articles (e.g., чл. 5, ал. 4 and its content, чл. 19, ал. 1 and its content), ZNA articles, hierarchy of norms, collision rules, EU law supremacy, and role of case law are explicitly mentioned or are accurate, standard legal elaborations of the information provided in the context (e.g., the specific content of a listed article). The 'Potential risks or неясноти' section comments on a potential lack of detail *in the context* itself, rather than introducing new information as if it were present.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 1.0
+Search Comment: The 'User Question' field is empty. Assuming this implies either the user directly input this query string, or the executed query accurately reflects a very specific underlying user intent for a legal search, the quality of the executed query for the specified tool is excellent. The query `отмяна на наредба противоречие с закон съдебна практика` (annulment of an ordinance, contradiction with a law, court practice/jurisprudence) uses precise and highly relevant legal terminology in Bulgarian. It is specific, well-formed, and perfectly suited for the `get_legal_references` tool to retrieve relevant legal statutes, articles, and judicial precedents concerning the conflict between an ordinance and a law, and how such conflicts are resolved through court practice.
+Faith Comment: The generated answer contains several pieces of information not explicitly present in the retrieved context: 
+1.  **Description of КРБ, чл. 8**: The context only lists 'чл. 8' but does not provide a summary or explanation linking it to 'принципа на разделение на властите' or 'контрол за законосъобразност на актовете, издавани от изпълнителната власт'.
+2.  **Description of АПК, чл. 195**: The context lists 'чл. 195' but does not provide its content regarding the effect of the court's decision (res judicata).
+3.  **Examples of issuing bodies**: While 'общински съвет, кмет' are mentioned in the context (under Art. 187 АПК), 'министър, областен управител' are not explicitly stated as bodies issuing regulations.
+4.  **Hierarchy of normative acts including 'международните договори, ратифицирани по конституционен ред'**: The context only mentions the Constitution, laws, and normative acts of higher degree, but not international treaties in this specific hierarchy.
+5.  **Specific types of contradiction**: The detailed bullet points under 'Противоречието може да се изрази в' (e.g., 'Излизане извън обхвата на делегираната компетентност', 'Създаване на нови ограничения или тежести', 'Нарушаване на основни конституционни права', 'Различна уредба на един и същ въпрос') are elaborations not explicitly listed in the context's 'key_provisions' which states 'противоречие с нормативен акт от по-висока степен, съществено нарушение на административнопроизводствените правила или несъответствие с целта на закона'.
+6.  **Recommendation for 'детайлен правен анализ'**: The first recommendation under 'Препоръки' is not explicitly supported by the context.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 1.0
+Search Comment: The executed search queries are highly relevant, specific, and comprehensive in addressing the implied user question. They cover the hierarchy of normative acts in Bulgaria, the principles of legality for sub-statutory acts (like 'наредби'), the specific scenario of a 'наредба' conflicting with higher laws (constitution, law, code), and the procedure for challenging such a 'наредба' under the Administrative Procedure Code (АПК). Each query directly contributes to providing a complete answer to a user seeking information on this legal topic.
+Faith Comment: The generated answer contains information not explicitly present in the retrieved context regarding the specific content of certain legal articles. Specifically: 
+1.  For 'Конституция на Република България', the answer states 'чл. 117: Определя мястото на съдебната власт за защита на законността.' While 'чл. 117' is listed in the context under KРБ, its specific content is not provided in the KРБ summary or key provisions.
+2.  For 'Закон за нормативните актове', the answer states 'чл. 22: Задължение за обнародване.' While 'чл. 22' is listed and the ZNA summary mentions 'обнародване', the context does not explicitly link 'чл. 22' directly to the 'Задължение за обнародване' as its specific content. The ZNA summary mentions 'чл. 7' in relation to 'обнародване' but not 'чл. 22'.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 0.9
+Search Comment: The executed search query is highly relevant and specific. It correctly identifies the key legal terms: 'ВАС' (Supreme Administrative Court), 'отмяна' (annulment), 'наредба' (regulation), 'противоречие' (contradiction), 'закон' (law), 'Конституция' (Constitution), and 'съдебна практика' (judicial practice). This combination of terms directly addresses the likely user intent of finding information about the Supreme Administrative Court annulling regulations due to conflicts with higher legal norms. The query is well-formed and highly likely to yield accurate and relevant legal references.
+Faith Comment: The generated answer contains several pieces of information not present in the retrieved context. 
+1. **Meta-comment on missing document**: The recurring theme in the answer (Rезиуме, Подробен анализ, Заключение) stating that 'the text of *this regulation* (тази наредба) was not provided' is not derived from the retrieved context. The context is a legal framework, not a response to a query about a specific, missing regulation.
+2. **Explanation of чл. 5, ал. 2**: The context lists 'чл. 5, ал. 2' but does not provide a summary or explanation for it. The generated answer states 'Посочва, че разпоредбите на Конституцията имат непосредствено действие', which is an addition.
+3. **Burden of proof under чл. 193**: The context for 'чл. 193' only states 'урежда доказването на недействителността'. The generated answer adds 'като тежестта за доказване на законосъобразността на акта е върху административния орган', which is not found in the context.
+4. **Specific grounds for unlawfulness**: While the context mentions 'противоречие с нормативен акт от по-висока степен (закон) или с Конституцията' as grounds for oспорване (чл. 187), the generated answer enumerates specific types of unlawfulness ('Материална незаконосъобразност', 'Процесуална незаконосъобразност', 'Некомпетентност', 'Нарушение на целта на закона') which are not detailed or explicitly mentioned in the retrieved context.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 1.0
+Search Comment: The User Question is not provided, making it impossible to directly assess relevance against an explicit user need. However, evaluating the executed query in isolation, and inferring the likely user intent based on the query content and the tool used (`get_legal_references`), the query is exceptionally well-formed.
+
+-   **Query Breakdown**: The query `ЗЗД нищожност договори добри нрави съдебна практика` contains highly specific and relevant legal terms in Bulgarian:
+    -   `ЗЗД`: Закон за задълженията и договорите (Law on Obligations and Contracts) - a specific Bulgarian legal act.
+    -   `нищожност`: Nullity (a legal concept).
+    -   `договори`: Contracts.
+    -   `добри нрави`: Good morals (a specific legal ground for nullity or invalidity of contracts).
+    -   `съдебна практика`: Case law / Jurisprudence (indicating a request for legal precedents).
+
+-   **Tool Appropriateness**: The tool `get_legal_references` is perfectly suited for a query seeking specific legal information, including statutes and case law.
+
+-   **Specificity and Relevance (inferred)**: Assuming the user's unstated question was related to the nullity of contracts under the Bulgarian Law on Obligations and Contracts, specifically concerning 'good morals' and relevant case law, this query is highly relevant, specific, and comprehensive. It directly targets all key aspects of such a legal inquiry. It is designed to yield precise legal references.
+
+Given its specificity, correct legal terminology, and appropriateness for the tool, this query is excellent for the implied legal research task.
+Faith Comment: The generated answer contains information not explicitly present in the retrieved context. Specifically, the following statements are not directly supported by the context: 
+1.  'Нищожността възниква по право, т.е. още със сключването на договора, и няма нужда от конститутивно съдебно решение.' (Under 'Подробен анализ') - While implied by 'абсолютна нищожност', the specific phrasing and legal concept are not stated.
+2.  'Договорът, който е нищожен поради противоречие с добрите нрави, не поражда правни последици от момента на сключването си.' (Under 'Подробен анализ') - This is a fundamental consequence of nullity, but not explicitly mentioned in the context.
+3.  'При сключване на договори, страните следва внимателно да съобразяват съдържанието им с общоприетите морални норми и принципи, за да избегнат риска от нищожност.' (Under 'Препоръки') - This is a recommendation/advice, not a factual statement or summary derived from the context.
+4.  'Предвид липсата на легална дефиниция за 'добри нрави', винаги съществува потенциална неяснота относно конкретното приложение на принципа в нови или сложни казуси. Въпреки богатата съдебна практика, всеки случай се оценява индивидуално от съда, което налага внимателен анализ.' (Under 'Препоръки') - While the lack of definition is in the context, the detailed interpretation of 'potential uncertainty', 'individual evaluation', and 'careful analysis' are not explicitly stated.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 1.0
+Search Comment: The executed search query 'Правна рамка България' (Legal framework Bulgaria) is highly relevant and specific for the 'get_legal_references' tool. It directly translates to the kind of information the tool is designed to provide (legal references related to Bulgaria's legal framework). Assuming the user's intent was to find information about the legal framework in Bulgaria, this query is optimal.
+Faith Comment: The generated answer contains information not present in the retrieved context. Specifically, in Section 2 ('Правна рамка'), the answer provides specific summaries or descriptions for each individual article listed under the laws (e.g., 'КРБ, чл. 1: Установява Република България като правова, демократична и социална държава.'). The retrieved context only lists the article numbers (e.g., 'чл. 1', 'чл. 4', 'чл. 6', 'чл. 17') for each law, without any additional explanatory text for what those specific articles entail.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 0.5
+Search Comment: Although the original User Question is missing, the executed search query 'Оспорване наредба противоречие закон конституция ВАС съдебна практика' (Challenging ordinance contradiction law constitution Supreme Administrative Court case law) is exceptionally well-formulated. It uses precise legal terminology and covers all critical aspects of a query seeking information on the procedure and judicial practice for challenging a municipal ordinance that conflicts with higher legal norms (laws, constitution) before the Bulgarian Supreme Administrative Court. The selection of the `get_legal_references` tool is also perfectly appropriate for this type of inquiry. This query is highly relevant, specific, and very likely to retrieve comprehensive and accurate legal information matching the implied user intent.
+Faith Comment: The generated answer includes specific legal details not explicitly present in the retrieved context. Specifically, it states 'Основанията за оспорване включват противоречие с акт от по-висока степен ... неспазване на установената форма, съществено нарушение на административнопроизводствените правила, противоречие с материалноправни разпоредби или несъответствие с целта на закона (чл. 146, приложим и за нормативни актове по силата на чл. 180)'. While the context lists general grounds like 'неспазване на формата или процедурата', the explicit reference to 'съществено нарушение на административнопроизводствените правила', 'противоречие с материалноправни разпоредби', and the cross-reference to 'чл. 146, приложим и за нормативни актове по силата на чл. 180' is not found in the provided summaries or key provisions for AПК, which only outline the grounds as 'противоречие с акт от по-висока степен (включително Конституцията и закон) или с целта на закона' and 'неспазване на формата или процедурата, или несъответствие с целта на закона'.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 0.0, Rel: 1.0
+Search Comment: The executed search query `Съдебна практика отмяна наредба противоречие с по-висок нормативен акт` (Court practice annulment ordinance contradiction with a higher normative act) is highly relevant and specific. It precisely captures a complex legal concept regarding the annulment of lower-level legal acts (like ordinances) that contradict higher-level normative acts, and specifically seeks 'court practice' (case law) on the matter. Given that the tool is `get_legal_references`, this query uses appropriate legal terminology and is structured to directly address such a legal question, making it highly likely to yield accurate and relevant results.
+Faith Comment: The generated answer contains specific details that are not explicitly present in the retrieved context. For example: 
+1.  Under 'Правна рамка', regarding Чл. 186 АПК, the answer specifies 'граждани, организации, прокурори' as those who can challenge the act, while the context only states 'Чл. 186 определя кой може да оспори такъв акт'.
+2.  Under 'Правна рамка', regarding Чл. 196 АПК, the answer details that 'отмененият акт престава да прилага от деня на влизане в сила на съдебното решение', whereas the context only says 'Чл. 196 урежда последиците от отмяната'.
+3.  Under 'Заключение и препоръки', the answer mentions 'друго лице, чиито права или законни интереси са засегнати' as a party that can challenge, which is a common legal principle but not explicitly stated in the context's summary of who can challenge under Чл. 186 АПК.
+----------------------------------------
+Input: N/A
+Scores -> Search: 1.0, Faith: 1.0, Rel: 0.0
+Search Comment: The executed search query 'Наредба противоречие закон съдебна практика' is highly relevant and specific to a legal context. It precisely targets the issue of a regulation (Наредба) contradicting a law (закон) and how this is addressed in court practice (съдебна практика). This is a common and important legal question regarding the hierarchy of legal acts and their application. Given the tool 'get_legal_references', the query is excellently formulated to retrieve specific legal references, analyses, and case law pertaining to this exact problem.
+Faith Comment: The generated answer is fully faithful to the retrieved context. All legal references, summaries of articles, descriptions of legal principles (hierarchy of norms, right to challenge, competent court, grounds for annulment, effect of court decisions), and mentions of relevant case law are directly supported by the provided text. The additional explanatory sentences (e.g., 'Това е основен принцип на правото в България', 'Това подчертава подчинения характер на наредбата спрямо закона', 'т.е. разпоредбите се премахват от правния мир и не могат да се прилагат от никого') are accurate and reasonable interpretations of the legal provisions mentioned in the context, enhancing clarity without introducing new, un-evidenced information. The disclaimers and recommendations are logical and appropriate given the presented legal framework.
+----------------------------------------
+
+=== LOW Search Quality (< 0.5) ===
+Input: N/A
+Scores -> Search: 0.0, Faith: 0.0, Rel: 0.5
+Search Comment: No search tools were called. The agent attempted to answer without gathering information.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 1.0, Rel: 0.0
+Search Comment: No search tools were called. The agent attempted to answer without gathering information.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 1.0, Rel: 0.75
+Search Comment: The user question is missing. Without the user question, it is impossible to evaluate the relevance and quality of the executed search query 'Съдебна практика ВАС отмяна наредба незаконосъобразност закон'. Therefore, a score of 0.0 is assigned as the evaluation cannot be completed.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 0.0, Rel: 0.5
+Search Comment: No search tools were called. The agent attempted to answer without gathering information.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 0.0, Rel: 1.0
+Search Comment: No search tools were called. The agent attempted to answer without gathering information.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 0.0, Rel: 0.0
+Search Comment: No search tools were called. The agent attempted to answer without gathering information.
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 1.0, Rel: 0.8
+Search Comment: The User Question is missing. Without the original user's intent, it is impossible to evaluate the relevance and quality of the executed search query 'Практика ВАС отмяна наредба противоречие закон' (Practice VASS cancellation ordinance contradiction law).
+----------------------------------------
+Input: N/A
+Scores -> Search: 0.0, Faith: 0.0, Rel: 1.0
+Search Comment: The 'User Question' field is empty, indicating that no explicit question was posed by the user. Therefore, the executed search query, 'общи принципи на българското право' (general principles of Bulgarian law), cannot be relevant to a non-existent user input. While the query itself is well-formed and specific, it fails the primary criterion of being relevant to the user's question.
+----------------------------------------

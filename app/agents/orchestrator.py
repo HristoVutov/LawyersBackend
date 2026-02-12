@@ -306,7 +306,7 @@ class OrchestratorAgent(BaseAgent):
                     ]
                  }
 
-            print_and_log(f"[Orchestrator] ⏭️ Skipping PlanTask - {len(pending_tasks)} tasks still pending (Autonomous Guard)")
+            print_and_log(f"[Orchestrator] ⏭️ Skipping PlanTask - {len(pending_tasks)} tasks still pending, force-delegating")
             # Check if all tasks are done
             all_done = all(t.get("status") == "done" for t in existing_tasks)
             if all_done:
@@ -318,15 +318,30 @@ class OrchestratorAgent(BaseAgent):
                     ]
                 }
             else:
-                # Some tasks remain, let supervisor delegate next one
+                # Force-delegate the first pending task instead of looping back to supervisor
+                next_task = pending_tasks[0]
+                agent_name = self._pick_agent_for_task(next_task["description"])
+                
+                # Mark task as in_progress
+                updated_tasks = []
+                for t in existing_tasks:
+                    if t["id"] == next_task["id"]:
+                        updated_tasks.append({**t, "status": "in_progress"})
+                    else:
+                        updated_tasks.append(t)
+                
+                print_and_log(f"[Orchestrator] 🔀 Force-delegating '{next_task['id']}' to {agent_name}")
                 return {
-                    "next": "supervisor", 
+                    "next": agent_name, 
                     "messages": [
                         ToolMessage(
-                            content=f"Plan already exists with {len(existing_tasks)} tasks. Continue delegating pending tasks.",
+                            content=f"Plan exists. Force-delegating task {next_task['id']} to {agent_name}.",
                             tool_call_id=tc["id"]
-                        )
-                    ]
+                        ),
+                        HumanMessage(content=next_task["description"], name="supervisor")
+                    ],
+                    "task_list": updated_tasks,
+                    "current_task_id": next_task["id"],
                 }
         
         # First time planning or Re-planning requested by user
@@ -367,17 +382,47 @@ class OrchestratorAgent(BaseAgent):
                  **extra_state_updates
              }
 
+        # Auto-delegate the first task immediately (bypass supervisor LLM to prevent PlanTask loop)
+        first_task = new_tasks[0]
+        agent_name = self._pick_agent_for_task(first_task["description"])
+        
+        # Mark first task as in_progress
+        for t in new_tasks:
+            if t["id"] == first_task["id"]:
+                t["status"] = "in_progress"
+        
+        print_and_log(f"[Orchestrator] 🚀 Plan created, auto-delegating '{first_task['id']}' to {agent_name}")
+        
         messages_to_add = [
             ToolMessage(
-                content=f"Plan created with {len(new_tasks)} tasks. stopping for user review.",
+                content=f"Plan created with {len(new_tasks)} tasks. Auto-delegating task {first_task['id']} to {agent_name}.",
                 tool_call_id=tc["id"]
             ),
-            AIMessage(content="I have created a plan based on your request (see above). To proceed with execution, please type **'Proceed'**. If you'd like to make changes, just let me know.")
+            HumanMessage(content=first_task["description"], name="supervisor")
         ]
         
-        print_and_log(f"[Orchestrator] ⏸️ Pausing for user plan approval...")
-        # HITL Pattern: Stop after planning to allow user feedback
-        return {"next": "FINISH", "messages": messages_to_add, "task_list": new_tasks, **extra_state_updates}
+        return {
+            "next": agent_name,
+            "messages": messages_to_add,
+            "task_list": new_tasks,
+            "current_task_id": first_task["id"],
+            **extra_state_updates
+        }
+
+    def _pick_agent_for_task(self, description: str) -> str:
+        """Pick the best agent for a task based on keyword matching."""
+        desc_lower = description.lower()
+        
+        drafting_keywords = ["изготви", "генерирай", "създай документ", "напиши", "draft", "generate", "write"]
+        template_keywords = ["шаблон", "template"]
+        
+        if any(kw in desc_lower for kw in template_keywords):
+            return "template_agent"
+        if any(kw in desc_lower for kw in drafting_keywords):
+            return "drafting_agent"
+        
+        # Default to research_agent for analysis, search, read, etc.
+        return "research_agent"
 
     def _handle_delegate_task(self, state: AgentState, tc, args, extra_state_updates: dict) -> dict:
         """Handle execution of DelegateTask."""

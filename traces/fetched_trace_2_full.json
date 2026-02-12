@@ -1,11 +1,11 @@
 {
-  "root_run_id": "019c1403-4ff6-7732-96ed-0121ee18fc61",
-  "trace_id": "019c1403-4ff6-7732-96ed-0121ee18fc61",
+  "root_run_id": "019c1945-0c03-7820-b0ae-8c724957138c",
+  "trace_id": "019c1945-0c03-7820-b0ae-8c724957138c",
   "runs": [
     {
-      "id": "019c1403-5bcc-74c0-b716-1a298285b068",
+      "id": "019c1945-166b-7262-9ca3-1cf4c90b69ce",
       "name": "Unnamed",
-      "parent_run_id": "019c1403-5174-7b51-abb3-2826df84324f",
+      "parent_run_id": "019c1945-0dac-7693-a9ce-54f0d089d938",
       "type": "chain",
       "status": "success",
       "error": null,
@@ -23,7 +23,7 @@
             "content": "Plan created with 1 tasks. stopping for user review.",
             "response_metadata": {},
             "status": "success",
-            "tool_call_id": "30b04862-d4f1-4878-88e4-6da35de12ca9",
+            "tool_call_id": "d2c05814-1b80-48e4-8271-63fe3c96c441",
             "type": "tool"
           },
           {
@@ -105,7 +105,7 @@
         ],
         "task_list": [
           {
-            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0438 \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435 (\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438).",
+            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u044a\u043b\u0435\u043d \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043d\u0430\u043b\u0438\u0447\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u0442\u0430, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438.",
             "id": "t1",
             "status": "pending"
           }
@@ -114,23 +114,23 @@
       "outputs": {
         "output": "FINISH"
       },
-      "start_time": "2026-01-31 12:24:50.380497",
-      "end_time": "2026-01-31 12:24:50.383253",
+      "start_time": "2026-02-01 12:54:44.075121",
+      "end_time": "2026-02-01 12:54:44.077772",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:50.380497+00:00"
+          "time": "2026-02-01T12:54:44.075121+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:50.383253+00:00"
+          "time": "2026-02-01T12:54:44.077772+00:00"
         }
       ],
       "metadata": {
         "LANGSMITH_PROJECT": "lawyers-dashboard",
         "agent": "orchestrator",
         "has_context_files": true,
-        "langgraph_checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "langgraph_checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "langgraph_node": "supervisor",
         "langgraph_path": [
           "__pregel_pull",
@@ -143,22 +143,22 @@
         "ls_run_depth": 2,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
-        "seq:step:3",
         "multi-agent",
-        "lawyers-dashboard",
+        "seq:step:3",
         "orchestrator",
+        "lawyers-dashboard",
         "supervisor"
       ]
     },
     {
-      "id": "019c1403-5541-7853-a690-099906851276",
+      "id": "019c1945-11b7-7bc3-b223-d99c4c2c5aae",
       "name": "ChatGoogleGenerativeAI",
-      "parent_run_id": "019c1403-553e-7b40-a3c6-6cb19c89bb0f",
+      "parent_run_id": "019c1945-11b3-75f1-a4bb-88a3e8f62cf7",
       "type": "llm",
       "status": "success",
       "error": null,
@@ -215,15 +215,15 @@
                 "kwargs": {
                   "additional_kwargs": {
                     "__gemini_function_call_thought_signatures__": {
-                      "30b04862-d4f1-4878-88e4-6da35de12ca9": "CiQBcsjafFy/3I5ks3aw1IGxGi/Z6bFko5TFGJHVrsug5w9eBtAKewFyyNp8/bc3t2yzEgVSO8i+X6wKBzRaEJvosthosbrdKIHeH2mgbTdUCVu4rleLBgZAvHZGFlskYHFtq4noy87rBTlQ4shAGCfb6dCat4dGoNfMDuJ0mPaDQ1DVGbewc03J8PejImO6AmJ5R8uf8Ve2jaIXD5XoYcv35gqYAgFyyNp8IQzUnTe/ewpzIGYm4WlboOkW4k/aPxQqBX5NEpAuE4/tUeE9ugSNeHJJcHavVZ+uKkwdQ4CViMzVcOw7oG89N1eWcYqvUgY7zPxOtM8TZWZXUr2X4O0XCqTuHX6E/jWvSmj2/1zDW7zqZmALMuO7qeYHsAX8ijgSrjovOYXk+iGlrit4OBu6EKAeQdUx+LffxN1hEKnjc1QNGF975AGy0Tl55QlrAs82qOXkZqsR2oZxLWnrH7QTipdHnZ3T7hNbHSGisPS6YB8truc+1DYKaPfVE47pp4+E8TOiZcACeWVcdGnM/yezJzjloCDhLiCYDQDJFsu2r4eaRwK8+eGUL9XviTGnuEIGG1KfeuXJvGlMJOoKtgIBcsjafN03yow43jLaexWrWWUVo8XLuIsS82XffiVqBFe5THViFm/9aKxFx/VVdsblOqpIRIIT6EswlU7PHiCkNN7sQf55QPlF3xic/gREGb48EmvZFcJ6C0WiSE4m75hPCbWP7/Pi3d6XKwUvdxSV+h+qTdlW2+tq+xXgnMNgniT2GmlvSmlrdj/73hQ6QDAQh2CrYec0cPSVbcXKqd56m/Vu0GQWAuwQ7t3vJ7H8qXe0M0xhbju22+VGaSWPlTdHPPx8HO60IMdd3OhzskR6LMTbCq9aIJjCM0RgXLQizFWwJBIxlhHXMU6Ti6QBijM6SgUVkve/Wp8+sdu9pbQf9UatjqtLy4x6lJtzw5iDo5Z2R6cnACkuGpfZY/YHB7hzAPjusLNak+EtAvNy9TySq9/6bZi7ClMBcsjafL9dvXbCLfeQklpHpsRSbn5NYMYNB+DXaA727cBcrU/QJMppQDFjB1B2a05W7hzd4yyH49C0dQ3R9bxd/2OE8JlOWhGnASV46pIiZIlEtw=="
+                      "d2c05814-1b80-48e4-8271-63fe3c96c441": "CiQBcsjafIu7iqyvVcev9NODGDn3jc6gCCx9B/HyLQHyT9Y3DKYKdgFyyNp8acIAbsiCEoVO6G95BzySuLqezmf1alI2oYXisZgnnx+EVFwhLCMnYBevh0Kmb1uqjE4iZ4hEFfkuQ3r8YkSXe5z8OdG9CmOSX+XATYv86LVNZzajnzXuYOsYaaodYozSC+NyzwbPgcAF5pf9C/wnp74KhwIBcsjafKVJgPlWqilnJtNwAQS7KVNnYPGPt+60q3VqLm+yJBCkzI/lehf6GkXG8ciax/WSmrrA+xsx7ibDg7dcZqvmi1XBJN5SzsyBR6uP0yxZbHwW6XBvksmvBBBqhhWOJPIAq9vDkHGvJxu74s0qDIKX6wHpsvdl3+UQghsM8KIWmLku1FweblBMJV/GtXsOG2x6tHEc8Kml7m1rMHuxagxFKEC/2FtHZxpUr+P2pbYsL7coCtclE9jZWP1iaGUmqVgarDCEF81PCMcozBO+6G11sAxr9a67FeC0SrX7gdXOc96EAqWNI+v7kd0z0Bu2OR1yp+lOfTQmsksnH/DuEUmrSL9vtw=="
                     },
                     "function_call": {
-                      "arguments": "{\"goal\": \"\\u0410\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430 \\u0437\\u0430 \\u0441\\u044a\\u043e\\u0442\\u0432\\u0435\\u0442\\u0441\\u0442\\u0432\\u0438\\u0435 \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435\", \"tasks\": [{\"status\": \"pending\", \"description\": \"\\u0418\\u0437\\u0432\\u044a\\u0440\\u0448\\u0438 \\u043f\\u0440\\u0430\\u0432\\u0435\\u043d \\u0430\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430\\u0442\\u0430 \\u0437\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435 (\\u041a\\u043e\\u043d\\u0441\\u0442\\u0438\\u0442\\u0443\\u0446\\u0438\\u044f, \\u043a\\u043e\\u0434\\u0435\\u043a\\u0441\\u0438 \\u0438 \\u0437\\u0430\\u043a\\u043e\\u043d\\u0438).\", \"id\": \"t1\"}]}",
+                      "arguments": "{\"tasks\": [{\"description\": \"\\u0418\\u0437\\u0432\\u044a\\u0440\\u0448\\u0432\\u0430\\u043d\\u0435 \\u043d\\u0430 \\u043f\\u044a\\u043b\\u0435\\u043d \\u043f\\u0440\\u0430\\u0432\\u0435\\u043d \\u0430\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430\\u0442\\u0430 \\u0437\\u0430 \\u043d\\u0430\\u043b\\u0438\\u0447\\u0438\\u0435 \\u043d\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u041a\\u043e\\u043d\\u0441\\u0442\\u0438\\u0442\\u0443\\u0446\\u0438\\u044f\\u0442\\u0430, \\u043a\\u043e\\u0434\\u0435\\u043a\\u0441\\u0438 \\u0438 \\u0437\\u0430\\u043a\\u043e\\u043d\\u0438.\", \"status\": \"pending\", \"id\": \"t1\"}], \"goal\": \"\\u0410\\u043d\\u0430\\u043b\\u0438\\u0437\\u0438\\u0440\\u0430\\u043d\\u0435 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430 \\u0437\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435.\"}",
                       "name": "PlanTask"
                     }
                   },
                   "content": "",
-                  "id": "lc_run--019c1403-5541-7853-a690-099906851276",
+                  "id": "lc_run--019c1945-11b7-7bc3-b223-d99c4c2c5aae",
                   "invalid_tool_calls": [],
                   "response_metadata": {
                     "finish_reason": "STOP",
@@ -234,16 +234,16 @@
                   "tool_calls": [
                     {
                       "args": {
-                        "goal": "\u0410\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430 \u0437\u0430 \u0441\u044a\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0438\u0435 \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435",
+                        "goal": "\u0410\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u0430\u043d\u0435 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435.",
                         "tasks": [
                           {
-                            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0438 \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435 (\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438).",
+                            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u044a\u043b\u0435\u043d \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043d\u0430\u043b\u0438\u0447\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u0442\u0430, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438.",
                             "id": "t1",
                             "status": "pending"
                           }
                         ]
                       },
-                      "id": "30b04862-d4f1-4878-88e4-6da35de12ca9",
+                      "id": "d2c05814-1b80-48e4-8271-63fe3c96c441",
                       "name": "PlanTask",
                       "type": "tool_call"
                     }
@@ -255,10 +255,10 @@
                     },
                     "input_tokens": 1623,
                     "output_token_details": {
-                      "reasoning": 127
+                      "reasoning": 66
                     },
-                    "output_tokens": 215,
-                    "total_tokens": 1838
+                    "output_tokens": 149,
+                    "total_tokens": 1772
                   }
                 },
                 "lc": 1,
@@ -273,31 +273,31 @@
         "run": null,
         "type": "LLMResult"
       },
-      "start_time": "2026-01-31 12:24:48.705521",
-      "end_time": "2026-01-31 12:24:50.377332",
+      "start_time": "2026-02-01 12:54:42.871776",
+      "end_time": "2026-02-01 12:54:44.070900",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:48.705521+00:00"
+          "time": "2026-02-01T12:54:42.871776+00:00"
         },
         {
           "kwargs": {
             "token": ""
           },
           "name": "new_token",
-          "time": "2026-01-31T12:24:50.376780+00:00"
+          "time": "2026-02-01T12:54:44.070125+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:50.377332+00:00"
+          "time": "2026-02-01T12:54:44.070900+00:00"
         }
       ],
       "metadata": {
         "LANGSMITH_PROJECT": "lawyers-dashboard",
         "agent": "orchestrator",
-        "checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "has_context_files": true,
-        "langgraph_checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "langgraph_checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "langgraph_node": "supervisor",
         "langgraph_path": [
           "__pregel_pull",
@@ -314,22 +314,22 @@
         "ls_temperature": 0.7,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
         "multi-agent",
-        "lawyers-dashboard",
         "orchestrator",
-        "supervisor",
-        "seq:step:2"
+        "lawyers-dashboard",
+        "seq:step:2",
+        "supervisor"
       ]
     },
     {
-      "id": "019c1403-5540-7c82-8cea-1b12c1d9e4be",
+      "id": "019c1945-11b5-7d20-863d-5c45175eb3bb",
       "name": "ChatPromptTemplate",
-      "parent_run_id": "019c1403-553e-7b40-a3c6-6cb19c89bb0f",
+      "parent_run_id": "019c1945-11b3-75f1-a4bb-88a3e8f62cf7",
       "type": "prompt",
       "status": "success",
       "error": null,
@@ -428,24 +428,24 @@
           ]
         }
       },
-      "start_time": "2026-01-31 12:24:48.704377",
-      "end_time": "2026-01-31 12:24:48.704981",
+      "start_time": "2026-02-01 12:54:42.869661",
+      "end_time": "2026-02-01 12:54:42.870606",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:48.704377+00:00"
+          "time": "2026-02-01T12:54:42.869661+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:48.704981+00:00"
+          "time": "2026-02-01T12:54:42.870606+00:00"
         }
       ],
       "metadata": {
         "LANGSMITH_PROJECT": "lawyers-dashboard",
         "agent": "orchestrator",
-        "checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "has_context_files": true,
-        "langgraph_checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "langgraph_checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "langgraph_node": "supervisor",
         "langgraph_path": [
           "__pregel_pull",
@@ -458,22 +458,22 @@
         "ls_run_depth": 3,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
         "multi-agent",
+        "orchestrator",
         "lawyers-dashboard",
         "seq:step:1",
-        "orchestrator",
         "supervisor"
       ]
     },
     {
-      "id": "019c1403-553e-7b40-a3c6-6cb19c89bb0f",
+      "id": "019c1945-11b3-75f1-a4bb-88a3e8f62cf7",
       "name": "RunnableSequence",
-      "parent_run_id": "019c1403-5174-7b51-abb3-2826df84324f",
+      "parent_run_id": "019c1945-0dac-7693-a9ce-54f0d089d938",
       "type": "chain",
       "status": "success",
       "error": null,
@@ -558,15 +558,15 @@
         "output": {
           "additional_kwargs": {
             "__gemini_function_call_thought_signatures__": {
-              "30b04862-d4f1-4878-88e4-6da35de12ca9": "CiQBcsjafFy/3I5ks3aw1IGxGi/Z6bFko5TFGJHVrsug5w9eBtAKewFyyNp8/bc3t2yzEgVSO8i+X6wKBzRaEJvosthosbrdKIHeH2mgbTdUCVu4rleLBgZAvHZGFlskYHFtq4noy87rBTlQ4shAGCfb6dCat4dGoNfMDuJ0mPaDQ1DVGbewc03J8PejImO6AmJ5R8uf8Ve2jaIXD5XoYcv35gqYAgFyyNp8IQzUnTe/ewpzIGYm4WlboOkW4k/aPxQqBX5NEpAuE4/tUeE9ugSNeHJJcHavVZ+uKkwdQ4CViMzVcOw7oG89N1eWcYqvUgY7zPxOtM8TZWZXUr2X4O0XCqTuHX6E/jWvSmj2/1zDW7zqZmALMuO7qeYHsAX8ijgSrjovOYXk+iGlrit4OBu6EKAeQdUx+LffxN1hEKnjc1QNGF975AGy0Tl55QlrAs82qOXkZqsR2oZxLWnrH7QTipdHnZ3T7hNbHSGisPS6YB8truc+1DYKaPfVE47pp4+E8TOiZcACeWVcdGnM/yezJzjloCDhLiCYDQDJFsu2r4eaRwK8+eGUL9XviTGnuEIGG1KfeuXJvGlMJOoKtgIBcsjafN03yow43jLaexWrWWUVo8XLuIsS82XffiVqBFe5THViFm/9aKxFx/VVdsblOqpIRIIT6EswlU7PHiCkNN7sQf55QPlF3xic/gREGb48EmvZFcJ6C0WiSE4m75hPCbWP7/Pi3d6XKwUvdxSV+h+qTdlW2+tq+xXgnMNgniT2GmlvSmlrdj/73hQ6QDAQh2CrYec0cPSVbcXKqd56m/Vu0GQWAuwQ7t3vJ7H8qXe0M0xhbju22+VGaSWPlTdHPPx8HO60IMdd3OhzskR6LMTbCq9aIJjCM0RgXLQizFWwJBIxlhHXMU6Ti6QBijM6SgUVkve/Wp8+sdu9pbQf9UatjqtLy4x6lJtzw5iDo5Z2R6cnACkuGpfZY/YHB7hzAPjusLNak+EtAvNy9TySq9/6bZi7ClMBcsjafL9dvXbCLfeQklpHpsRSbn5NYMYNB+DXaA727cBcrU/QJMppQDFjB1B2a05W7hzd4yyH49C0dQ3R9bxd/2OE8JlOWhGnASV46pIiZIlEtw=="
+              "d2c05814-1b80-48e4-8271-63fe3c96c441": "CiQBcsjafIu7iqyvVcev9NODGDn3jc6gCCx9B/HyLQHyT9Y3DKYKdgFyyNp8acIAbsiCEoVO6G95BzySuLqezmf1alI2oYXisZgnnx+EVFwhLCMnYBevh0Kmb1uqjE4iZ4hEFfkuQ3r8YkSXe5z8OdG9CmOSX+XATYv86LVNZzajnzXuYOsYaaodYozSC+NyzwbPgcAF5pf9C/wnp74KhwIBcsjafKVJgPlWqilnJtNwAQS7KVNnYPGPt+60q3VqLm+yJBCkzI/lehf6GkXG8ciax/WSmrrA+xsx7ibDg7dcZqvmi1XBJN5SzsyBR6uP0yxZbHwW6XBvksmvBBBqhhWOJPIAq9vDkHGvJxu74s0qDIKX6wHpsvdl3+UQghsM8KIWmLku1FweblBMJV/GtXsOG2x6tHEc8Kml7m1rMHuxagxFKEC/2FtHZxpUr+P2pbYsL7coCtclE9jZWP1iaGUmqVgarDCEF81PCMcozBO+6G11sAxr9a67FeC0SrX7gdXOc96EAqWNI+v7kd0z0Bu2OR1yp+lOfTQmsksnH/DuEUmrSL9vtw=="
             },
             "function_call": {
-              "arguments": "{\"goal\": \"\\u0410\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430 \\u0437\\u0430 \\u0441\\u044a\\u043e\\u0442\\u0432\\u0435\\u0442\\u0441\\u0442\\u0432\\u0438\\u0435 \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435\", \"tasks\": [{\"status\": \"pending\", \"description\": \"\\u0418\\u0437\\u0432\\u044a\\u0440\\u0448\\u0438 \\u043f\\u0440\\u0430\\u0432\\u0435\\u043d \\u0430\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430\\u0442\\u0430 \\u0437\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435 (\\u041a\\u043e\\u043d\\u0441\\u0442\\u0438\\u0442\\u0443\\u0446\\u0438\\u044f, \\u043a\\u043e\\u0434\\u0435\\u043a\\u0441\\u0438 \\u0438 \\u0437\\u0430\\u043a\\u043e\\u043d\\u0438).\", \"id\": \"t1\"}]}",
+              "arguments": "{\"tasks\": [{\"description\": \"\\u0418\\u0437\\u0432\\u044a\\u0440\\u0448\\u0432\\u0430\\u043d\\u0435 \\u043d\\u0430 \\u043f\\u044a\\u043b\\u0435\\u043d \\u043f\\u0440\\u0430\\u0432\\u0435\\u043d \\u0430\\u043d\\u0430\\u043b\\u0438\\u0437 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430\\u0442\\u0430 \\u0437\\u0430 \\u043d\\u0430\\u043b\\u0438\\u0447\\u0438\\u0435 \\u043d\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u041a\\u043e\\u043d\\u0441\\u0442\\u0438\\u0442\\u0443\\u0446\\u0438\\u044f\\u0442\\u0430, \\u043a\\u043e\\u0434\\u0435\\u043a\\u0441\\u0438 \\u0438 \\u0437\\u0430\\u043a\\u043e\\u043d\\u0438.\", \"status\": \"pending\", \"id\": \"t1\"}], \"goal\": \"\\u0410\\u043d\\u0430\\u043b\\u0438\\u0437\\u0438\\u0440\\u0430\\u043d\\u0435 \\u043d\\u0430 \\u043d\\u0430\\u0440\\u0435\\u0434\\u0431\\u0430 \\u0437\\u0430 \\u043f\\u0440\\u043e\\u0442\\u0438\\u0432\\u043e\\u0440\\u0435\\u0447\\u0438\\u044f \\u0441 \\u0432\\u0438\\u0441\\u043e\\u043a\\u043e\\u0441\\u0442\\u043e\\u044f\\u0449\\u0438 \\u043d\\u043e\\u0440\\u043c\\u0430\\u0442\\u0438\\u0432\\u043d\\u0438 \\u0430\\u043a\\u0442\\u043e\\u0432\\u0435.\"}",
               "name": "PlanTask"
             }
           },
           "content": "",
-          "id": "lc_run--019c1403-5541-7853-a690-099906851276",
+          "id": "lc_run--019c1945-11b7-7bc3-b223-d99c4c2c5aae",
           "invalid_tool_calls": [],
           "response_metadata": {
             "finish_reason": "STOP",
@@ -577,16 +577,16 @@
           "tool_calls": [
             {
               "args": {
-                "goal": "\u0410\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430 \u0437\u0430 \u0441\u044a\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0438\u0435 \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435",
+                "goal": "\u0410\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u0430\u043d\u0435 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435.",
                 "tasks": [
                   {
-                    "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0438 \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435 (\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438).",
+                    "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u044a\u043b\u0435\u043d \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043d\u0430\u043b\u0438\u0447\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u0442\u0430, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438.",
                     "id": "t1",
                     "status": "pending"
                   }
                 ]
               },
-              "id": "30b04862-d4f1-4878-88e4-6da35de12ca9",
+              "id": "d2c05814-1b80-48e4-8271-63fe3c96c441",
               "name": "PlanTask",
               "type": "tool_call"
             }
@@ -598,31 +598,31 @@
             },
             "input_tokens": 1623,
             "output_token_details": {
-              "reasoning": 127
+              "reasoning": 66
             },
-            "output_tokens": 215,
-            "total_tokens": 1838
+            "output_tokens": 149,
+            "total_tokens": 1772
           }
         }
       },
-      "start_time": "2026-01-31 12:24:48.702341",
-      "end_time": "2026-01-31 12:24:50.378995",
+      "start_time": "2026-02-01 12:54:42.867965",
+      "end_time": "2026-02-01 12:54:44.073548",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:48.702341+00:00"
+          "time": "2026-02-01T12:54:42.867965+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:50.378995+00:00"
+          "time": "2026-02-01T12:54:44.073548+00:00"
         }
       ],
       "metadata": {
         "LANGSMITH_PROJECT": "lawyers-dashboard",
         "agent": "orchestrator",
-        "checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "has_context_files": true,
-        "langgraph_checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "langgraph_checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "langgraph_node": "supervisor",
         "langgraph_path": [
           "__pregel_pull",
@@ -635,22 +635,22 @@
         "ls_run_depth": 2,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
         "multi-agent",
+        "orchestrator",
         "lawyers-dashboard",
         "seq:step:1",
-        "orchestrator",
         "supervisor"
       ]
     },
     {
-      "id": "019c1403-5174-7b51-abb3-2826df84324f",
+      "id": "019c1945-0dac-7693-a9ce-54f0d089d938",
       "name": "supervisor",
-      "parent_run_id": "019c1403-4ff6-7732-96ed-0121ee18fc61",
+      "parent_run_id": "019c1945-0c03-7820-b0ae-8c724957138c",
       "type": "chain",
       "status": "success",
       "error": null,
@@ -739,7 +739,7 @@
             "content": "Plan created with 1 tasks. stopping for user review.",
             "response_metadata": {},
             "status": "success",
-            "tool_call_id": "30b04862-d4f1-4878-88e4-6da35de12ca9",
+            "tool_call_id": "d2c05814-1b80-48e4-8271-63fe3c96c441",
             "type": "tool"
           },
           {
@@ -754,29 +754,29 @@
         "next": "FINISH",
         "task_list": [
           {
-            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0438 \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435 (\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438).",
+            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u044a\u043b\u0435\u043d \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043d\u0430\u043b\u0438\u0447\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u0442\u0430, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438.",
             "id": "t1",
             "status": "pending"
           }
         ]
       },
-      "start_time": "2026-01-31 12:24:47.732863",
-      "end_time": "2026-01-31 12:24:50.383586",
+      "start_time": "2026-02-01 12:54:41.836818",
+      "end_time": "2026-02-01 12:54:44.078122",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:47.732863+00:00"
+          "time": "2026-02-01T12:54:41.836818+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:50.383586+00:00"
+          "time": "2026-02-01T12:54:44.078122+00:00"
         }
       ],
       "metadata": {
         "LANGSMITH_PROJECT": "lawyers-dashboard",
         "agent": "orchestrator",
         "has_context_files": true,
-        "langgraph_checkpoint_ns": "supervisor:6864e0f5-a1ce-4791-b725-5e8140374ca2",
+        "langgraph_checkpoint_ns": "supervisor:820f9be6-878a-44fd-9701-768e2bfb9750",
         "langgraph_node": "supervisor",
         "langgraph_path": [
           "__pregel_pull",
@@ -789,20 +789,20 @@
         "ls_run_depth": 1,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
-        "lawyers-dashboard",
         "multi-agent",
-        "graph:step:1",
         "orchestrator",
-        "supervisor"
+        "lawyers-dashboard",
+        "supervisor",
+        "graph:step:1"
       ]
     },
     {
-      "id": "019c1403-4ff6-7732-96ed-0121ee18fc61",
+      "id": "019c1945-0c03-7820-b0ae-8c724957138c",
       "name": "LangGraph",
       "parent_run_id": null,
       "type": "chain",
@@ -899,7 +899,7 @@
             "content": "Plan created with 1 tasks. stopping for user review.",
             "response_metadata": {},
             "status": "success",
-            "tool_call_id": "30b04862-d4f1-4878-88e4-6da35de12ca9",
+            "tool_call_id": "d2c05814-1b80-48e4-8271-63fe3c96c441",
             "type": "tool"
           },
           {
@@ -981,22 +981,22 @@
         ],
         "task_list": [
           {
-            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0438 \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u0432\u0438\u0441\u043e\u043a\u043e\u0441\u0442\u043e\u044f\u0449\u0438 \u043d\u043e\u0440\u043c\u0430\u0442\u0438\u0432\u043d\u0438 \u0430\u043a\u0442\u043e\u0432\u0435 (\u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438).",
+            "description": "\u0418\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u044a\u043b\u0435\u043d \u043f\u0440\u0430\u0432\u0435\u043d \u0430\u043d\u0430\u043b\u0438\u0437 \u043d\u0430 \u043d\u0430\u0440\u0435\u0434\u0431\u0430\u0442\u0430 \u0437\u0430 \u043d\u0430\u043b\u0438\u0447\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0442\u0438\u0432\u043e\u0440\u0435\u0447\u0438\u044f \u0441 \u041a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u0442\u0430, \u043a\u043e\u0434\u0435\u043a\u0441\u0438 \u0438 \u0437\u0430\u043a\u043e\u043d\u0438.",
             "id": "t1",
             "status": "pending"
           }
         ]
       },
-      "start_time": "2026-01-31 12:24:47.350917",
-      "end_time": "2026-01-31 12:24:50.384183",
+      "start_time": "2026-02-01 12:54:41.411927",
+      "end_time": "2026-02-01 12:54:44.078664",
       "events": [
         {
           "name": "start",
-          "time": "2026-01-31T12:24:47.350917+00:00"
+          "time": "2026-02-01T12:54:41.411927+00:00"
         },
         {
           "name": "end",
-          "time": "2026-01-31T12:24:50.384183+00:00"
+          "time": "2026-02-01T12:54:44.078664+00:00"
         }
       ],
       "metadata": {
@@ -1006,15 +1006,15 @@
         "ls_run_depth": 0,
         "model_name": "gemini-2.5-flash",
         "project_context_count": 1,
-        "revision_id": "bbe1a36-dirty",
-        "thread_id": "conv-1769862279034-wcbwhc",
-        "timestamp": "2026-01-31T12:24:47.341046"
+        "revision_id": "13086ef-dirty",
+        "thread_id": "conv-1769950469586-i3b4o",
+        "timestamp": "2026-02-01T12:54:41.387135"
       },
       "tags": [
+        "lawyers-dashboard",
         "supervisor",
-        "orchestrator",
         "multi-agent",
-        "lawyers-dashboard"
+        "orchestrator"
       ]
     }
   ],
